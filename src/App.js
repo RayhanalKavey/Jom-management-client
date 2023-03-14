@@ -5,6 +5,8 @@ import router from "./routing/routers/routers";
 import { RouterProvider } from "react-router-dom";
 
 function App() {
+  // For checking if the firebase configured properly
+  // console.log(process.env);
   /* ======================
      Dark mood system start
      ======================*/
