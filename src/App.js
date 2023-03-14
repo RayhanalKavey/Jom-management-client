@@ -1,8 +1,13 @@
 import logo from "./logo.svg";
 import "./App.css";
 import { useEffect, useState } from "react";
+import router from "./routing/routers/routers";
+import { RouterProvider } from "react-router-dom";
 
 function App() {
+  /* ======================
+     Dark mood system start
+     ======================*/
   const [theme, setTheme] = useState(null);
 
   // Check the system preference. It will check this once.
@@ -23,12 +28,12 @@ function App() {
   const handleThemeSwitch = () => {
     setTheme(theme === "dark" ? "light" : "dark");
   };
-
+  /* ======================
+     Dark mood system end
+     ======================*/
   return (
-    <div className=" bg-green-500 dark:bg-slate-500">
-      <button className=" bg-green-300" onClick={handleThemeSwitch}>
-        Theme switcher
-      </button>
+    <div>
+      <RouterProvider router={router} />
     </div>
   );
 }
