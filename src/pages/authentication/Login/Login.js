@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { loginUser } from "../../../features/auth/authSlice";
+import { googleLogin, loginUser } from "../../../features/auth/authSlice";
 import useTitle from "../../../hooks/useTitle/useTitle";
 
 const Login = () => {
@@ -31,6 +31,12 @@ const Login = () => {
     dispatch(loginUser({ email, password }));
     // console.log("handleOnSubmit data", data);
   };
+
+  //-------- Google login
+  const handleGoogleLogin = () => {
+    dispatch(googleLogin());
+  };
+
   // If loading false and email arrived then redirect user
   useEffect(() => {
     if (!isLoading && email) {
@@ -38,12 +44,6 @@ const Login = () => {
       reset();
     }
   }, [isLoading, email]);
-
-  //-------- Google login
-  const handleGoogleLogin = () => {
-    // dispatch(loginUserWithGoogle());
-    // console.log("hangle google login clicked");
-  };
   // useEffect(() => {
   //   if (!isLoading && email) {
   //     navigate("/");

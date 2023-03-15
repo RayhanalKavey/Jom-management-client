@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useForm, useWatch } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { createUser } from "../../../features/auth/authSlice";
+import { createUser, googleLogin } from "../../../features/auth/authSlice";
 import useTitle from "../../../hooks/useTitle/useTitle";
 
 const Registration = () => {
@@ -57,8 +57,7 @@ const Registration = () => {
 
   //-------- Google login
   const handleGoogleLogin = () => {
-    // dispatch(loginUserWithGoogle());
-    // console.log("hangle google login clicked");
+    dispatch(googleLogin());
   };
   useEffect(() => {
     if (!isLoading && email) {
