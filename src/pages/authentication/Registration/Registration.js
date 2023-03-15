@@ -15,7 +15,9 @@ const Registration = () => {
   const navigate = useNavigate();
 
   //------ Take isError , Errors from useSelector of REDUX
-  const { isError, error } = useSelector((state) => state?.auth);
+  const { isError, error, isLoading, email } = useSelector(
+    (state) => state?.auth
+  );
   const dispatch = useDispatch();
 
   //------- React hook form user form and error
@@ -50,7 +52,6 @@ const Registration = () => {
   const handleOnSubmit = (data) => {
     const { email, password } = data;
     dispatch(createUser({ email, password }));
-    // reset();
     console.log("handleOnSubmit data", data);
   };
 
@@ -59,11 +60,12 @@ const Registration = () => {
     // dispatch(loginUserWithGoogle());
     console.log("hangle google login clicked");
   };
-  // useEffect(() => {
-  //   if (!isLoading && email) {
-  //     navigate("/");
-  //   }
-  // }, [isLoading, email, navigate]);
+  useEffect(() => {
+    if (!isLoading && email) {
+      navigate("/");
+      reset();
+    }
+  }, [isLoading, email]);
 
   // ----------------------------///--------------------------------//
   return (

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
@@ -12,7 +12,9 @@ const Login = () => {
   const navigate = useNavigate();
 
   //------ Take isError , Errors from useSelector of REDUX
-  const { isError, error } = useSelector((state) => state?.auth);
+  const { isError, error, isLoading, email } = useSelector(
+    (state) => state?.auth
+  );
   const dispatch = useDispatch();
 
   //------- React hook form user form and error
@@ -20,7 +22,6 @@ const Login = () => {
     register,
     handleSubmit,
     reset,
-    control,
     formState: { errors },
   } = useForm();
 
@@ -28,9 +29,15 @@ const Login = () => {
   const handleOnSubmit = (data) => {
     const { email, password } = data;
     dispatch(loginUser({ email, password }));
-    // reset();
     console.log("handleOnSubmit data", data);
   };
+  // If loading false and email arrived then redirect user
+  useEffect(() => {
+    if (!isLoading && email) {
+      navigate("/");
+      reset();
+    }
+  }, [isLoading, email]);
 
   //-------- Google login
   const handleGoogleLogin = () => {
