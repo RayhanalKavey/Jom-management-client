@@ -1,9 +1,14 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  // Get information from the REDUX store
+  const { user } = useSelector((state) => state.auth);
+  console.log("user in the navbar from the redux store", user);
 
+  // Open and close the hamburger menu
+  const [isOpen, setIsOpen] = useState(false);
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
@@ -19,8 +24,8 @@ const Navbar = () => {
             {/* Hamburger button */}
             <button
               className="text-white ml-4 sm:hidden"
+              onClick={toggleMenu}
               onMouseEnter={toggleMenu}
-              onMouseLeave={toggleMenu}
             >
               <svg className="h-6 w-6 fill-current" viewBox="0 0 24 24">
                 <path
@@ -73,8 +78,11 @@ const Navbar = () => {
       </div>
 
       {/* Mobile menu, show/hide based on menu state. */}
-      <div className={`sm:hidden ${isOpen ? "block" : "hidden"}`}>
-        <div className="px-2 pt-2 pb-3 space-y-1">
+      <div
+        className={`sm:hidden ${isOpen ? "block" : "hidden"}`}
+        onMouseLeave={toggleMenu}
+      >
+        <div className="flex flex-col text-center px-2 pt-2 pb-3 space-y-1">
           <Link
             to="#"
             className="text-gray-300 hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium"

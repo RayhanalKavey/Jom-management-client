@@ -11,6 +11,7 @@ const initialState = {
   isLoading: true,
   isError: false,
   error: "",
+  user: {},
 };
 
 // Firebase related functions are basically async function thats why I use async thunk here(with createAsyncThunk)
@@ -19,9 +20,18 @@ export const createUser = createAsyncThunk(
   "auth/createUser",
   async ({ email, password }) => {
     const data = await createUserWithEmailAndPassword(auth, email, password);
-    console.log("Data after create user with email and password", data.user);
+
+    const { displayName, emailVerified, photoUrl, uid } = data.user;
+    const user = {
+      displayName,
+      userEmail: data.user.email,
+      emailVerified,
+      photoUrl,
+      uid,
+    };
+    console.log("Data after create user with email and password", user);
     // We get this returned data in addCase's action.payload
-    return data.user.email;
+    return user;
   }
 );
 // Async thunk for Login user
@@ -29,8 +39,16 @@ export const loginUser = createAsyncThunk(
   "auth/loginUser",
   async ({ email, password }) => {
     const data = await signInWithEmailAndPassword(auth, email, password);
-    console.log("Data after sign in with email and password", data.user);
-    return data.user.email;
+    const { displayName, emailVerified, photoUrl, uid } = data.user;
+    const user = {
+      displayName,
+      userEmail: data.user.email,
+      emailVerified,
+      photoUrl,
+      uid,
+    };
+    console.log("Data after sign in with email and password", user);
+    return user;
   }
 );
 
@@ -39,7 +57,7 @@ const authSlice = createSlice({
   initialState,
   extraReducers: (builder) => {
     builder
-      //Cases for create user
+      //Cases for create user (this values replace the initial state)
       .addCase(createUser.pending, (state) => {
         state.isLoading = true;
         state.isError = false;
@@ -49,7 +67,8 @@ const authSlice = createSlice({
         state.isLoading = false;
         state.isError = false;
         state.error = "";
-        state.email = action.payload;
+        state.email = action.payload.userEmail;
+        state.user = action.payload;
       })
       .addCase(createUser.rejected, (state, action) => {
         state.isLoading = false;
@@ -57,7 +76,7 @@ const authSlice = createSlice({
         state.isError = true;
         state.error = action.error.message;
       })
-      //Cases for Login user
+      //Cases for Login user (this values replace the initial state)
       .addCase(loginUser.pending, (state) => {
         state.isLoading = true;
         state.isError = false;
@@ -67,7 +86,8 @@ const authSlice = createSlice({
         state.isLoading = false;
         state.isError = false;
         state.error = "";
-        state.email = action.payload;
+        state.email = action.payload.userEmail;
+        state.user = action.payload;
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.isLoading = false;
