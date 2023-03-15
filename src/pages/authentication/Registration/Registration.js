@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useForm, useWatch } from "react-hook-form";
+import { toast } from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { createUser, googleLogin } from "../../../features/auth/authSlice";
@@ -32,8 +33,6 @@ const Registration = () => {
   //------- Check for confirm password
   const password = useWatch({ control, name: "password" });
   const confirmPassword = useWatch({ control, name: "confirmPassword" });
-  // console.log("password", password);
-  // console.log("confirmPassword", confirmPassword);
   useEffect(() => {
     if (
       password !== undefined &&
@@ -66,6 +65,12 @@ const Registration = () => {
     }
   }, [isLoading, email]);
 
+  // If failed to register then error message
+  useEffect(() => {
+    if (isError) {
+      toast.error(error);
+    }
+  }, [isError, error]);
   // ----------------------------///--------------------------------//
   return (
     <div className="flex items-center justify-center mx-5 my-12">

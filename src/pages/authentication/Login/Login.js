@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { googleLogin, loginUser } from "../../../features/auth/authSlice";
@@ -44,11 +45,12 @@ const Login = () => {
       reset();
     }
   }, [isLoading, email]);
-  // useEffect(() => {
-  //   if (!isLoading && email) {
-  //     navigate("/");
-  //   }
-  // }, [isLoading, email, navigate]);
+  // Shoe error message with toast if failed to login
+  useEffect(() => {
+    if (isError) {
+      toast.error(error);
+    }
+  }, [isError, error]);
 
   return (
     <div className="flex items-center justify-center mx-5 my-12">
@@ -91,11 +93,11 @@ const Login = () => {
             type="submit"
             value="Sign Up"
           />
-          {isError && (
+          {/* {isError && (
             <label className="block mt-2 text-sm font-bold text-red-600">
               {error}
             </label>
-          )}
+          )} */}
         </form>
         {/* ---Link to the login page--- */}
         <p className="text-center">
