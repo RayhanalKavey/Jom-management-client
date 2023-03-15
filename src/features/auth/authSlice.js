@@ -65,6 +65,13 @@ const authSlice = createSlice({
       state.error = "";
       state.user = {};
     },
+    setUser: (state, { payload }) => {
+      state.isLoading = false;
+      // state.isError = false;
+      // state.error = "";
+      state.email = payload.userEmail;
+      state.user = payload;
+    },
   },
 
   // extra reducers for create user and login user. In extra reducer we got pending, fulfilled and rejected state. Action will be exported from createAsyncThunk.
@@ -112,7 +119,7 @@ const authSlice = createSlice({
 });
 
 // Export actions for dispatch where needed
-export const { logOut } = authSlice.actions;
+export const { logOut, setUser } = authSlice.actions;
 
 // Export reducers will provide in the store
 export default authSlice.reducer;
