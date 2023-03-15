@@ -1,12 +1,14 @@
-import { signOut } from "firebase/auth";
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import { logOut } from "../../../features/auth/authSlice";
+import { signOut } from "firebase/auth";
 import auth from "../../../firebase/firebase.config";
 
 const Navbar = () => {
   // Get information from the REDUX store
   const { email } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
   // console.log("user in the navbar from the redux store", email);
 
   // Open and close the hamburger menu
@@ -15,13 +17,23 @@ const Navbar = () => {
     setIsOpen(!isOpen);
   };
   // Log out user
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const handleLogOut = () => {
-    signOut(auth);
+    // Logout from firebase
+    signOut(auth)
+      .then(() => {
+        // If logged out successfully then clear the user from the store. (Back to the initial state.)
+        dispatch(logOut());
+      })
+      .catch((error) => {
+        // An error happened.
+      });
+
     console.log("email state condition after logout", email);
-    // if (!email) {
-    //   navigate("/login");
-    // }
+    // If there is no user the redirect user to the login page
+    if (!email) {
+      navigate("/login");
+    }
   };
   return (
     <nav className="bg-gray-900">
@@ -70,12 +82,18 @@ const Navbar = () => {
             </Link>
             {email ? (
               <button
-                className="text-gray-300 hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium"
                 onClick={handleLogOut}
+                className="text-gray-300 hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium"
               >
                 Logout
               </button>
             ) : (
+              // <input
+              //   onClick={handleLogOut}
+              //   className="text-gray-300 hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium"
+              //   // type="submit"
+              //   value="Logout"
+              // />
               <>
                 <Link
                   to="/login"
