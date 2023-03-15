@@ -29,7 +29,7 @@ const Login = () => {
   const handleOnSubmit = (data) => {
     const { email, password } = data;
     dispatch(loginUser({ email, password }));
-    console.log("handleOnSubmit data", data);
+    // console.log("handleOnSubmit data", data);
   };
   // If loading false and email arrived then redirect user
   useEffect(() => {
@@ -42,7 +42,7 @@ const Login = () => {
   //-------- Google login
   const handleGoogleLogin = () => {
     // dispatch(loginUserWithGoogle());
-    console.log("hangle google login clicked");
+    // console.log("hangle google login clicked");
   };
   // useEffect(() => {
   //   if (!isLoading && email) {

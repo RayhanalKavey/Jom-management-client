@@ -29,7 +29,7 @@ export const createUser = createAsyncThunk(
       photoUrl,
       uid,
     };
-    console.log("Data after create user with email and password", user);
+    // console.log("Data after create user with email and password", user);
     // We get this returned data in addCase's action.payload
     return user;
   }
@@ -47,7 +47,7 @@ export const loginUser = createAsyncThunk(
       photoUrl,
       uid,
     };
-    console.log("Data after sign in with email and password", user);
+    // console.log("Data after sign in with email and password", user);
     return user;
   }
 );
