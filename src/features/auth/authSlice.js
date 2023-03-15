@@ -11,10 +11,11 @@ const initialState = {
 };
 
 // Firebase related functions are basically async function thats why I use async thunk here(with createAsyncThunk)
-const createUser = createAsyncThunk(
+export const createUser = createAsyncThunk(
   "auth/createUser",
   async ({ email, password }) => {
     const data = await createUserWithEmailAndPassword(auth, email, password);
+    console.log("Data after create user with email and password", data.user);
     // We get this returned data in addCase's action.payload
     return data;
   }

@@ -2,10 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useForm, useWatch } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import {
-  createUser,
-  loginUserWithGoogle,
-} from "../../../features/auth/authSlice";
+import { createUser } from "../../../features/auth/authSlice";
 import useTitle from "../../../hooks/useTitle/useTitle";
 
 const Registration = () => {
@@ -33,8 +30,8 @@ const Registration = () => {
   //------- Check for confirm password
   const password = useWatch({ control, name: "password" });
   const confirmPassword = useWatch({ control, name: "confirmPassword" });
-  console.log("password", password);
-  console.log("confirmPassword", confirmPassword);
+  // console.log("password", password);
+  // console.log("confirmPassword", confirmPassword);
   useEffect(() => {
     if (
       password !== undefined &&
@@ -50,11 +47,11 @@ const Registration = () => {
   }, [password, confirmPassword]);
 
   //------- From data will come up here....
-  const handleSignUp = (data) => {
-    // const { email, password } = data;
-    // dispatch(createUser({ email, password }));
+  const handleOnSubmit = (data) => {
+    const { email, password } = data;
+    dispatch(createUser({ email, password }));
     // reset();
-    console.log("handlesignup data", data);
+    console.log("handleOnSubmit data", data);
   };
 
   //-------- Google login
@@ -73,7 +70,7 @@ const Registration = () => {
     <div className="flex items-center justify-center mx-5 my-12">
       <div className="w-96 bg-gray-300 p-10 shadow-xl rounded-tr-50 rounded-bl-50">
         <h1 className="text-3xl mb-5 text-center">Sign Up</h1>
-        <form onSubmit={handleSubmit(handleSignUp)}>
+        <form onSubmit={handleSubmit(handleOnSubmit)}>
           <div className="form-control w-full max-w-xs">
             {/* -----Email--- */}
             <label className="block mb-1 font-bold text-gray-500">Email</label>
