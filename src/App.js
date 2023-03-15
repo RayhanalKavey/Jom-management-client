@@ -1,12 +1,12 @@
 import logo from "./logo.svg";
 import "./App.css";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import router from "./routing/routers/routers";
 import { RouterProvider } from "react-router-dom";
 import { onAuthStateChanged } from "firebase/auth";
 import auth from "./firebase/firebase.config";
-import { useDispatch } from "react-redux";
-import { setUser } from "./features/auth/authSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { setUser, toggleLoading } from "./features/auth/authSlice";
 import { Toaster } from "react-hot-toast";
 
 function App() {
@@ -14,6 +14,8 @@ function App() {
   // console.log(process.env);
   // console.log(document.documentElement);
 
+  const { isLoading } = useSelector((state) => state.auth);
+  // console.log(isLoading);
   const dispatch = useDispatch();
 
   // OnAuthChang .// we have to do this task where the application load in every change. App.js is the place which is loaded every time when anything change
@@ -30,6 +32,8 @@ function App() {
         };
         console.log("Logged in user from onAuthStateChange", userInfo);
         dispatch(setUser(userInfo));
+      } else {
+        dispatch(toggleLoading());
       }
     });
   }, []);

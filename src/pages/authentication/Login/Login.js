@@ -2,16 +2,19 @@ import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import Spinner from "../../../components/Spinner/Spinner";
 import { googleLogin, loginUser } from "../../../features/auth/authSlice";
 import useTitle from "../../../hooks/useTitle/useTitle";
 
 const Login = () => {
   useTitle("Login");
 
-  // Redirect user
+  // Redirect user where from they comes to login
   const navigate = useNavigate();
-
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
+  // console.log(location);
   //------ Take isError , Errors from useSelector of REDUX
   const { isError, error, isLoading, email } = useSelector(
     (state) => state?.auth
@@ -41,7 +44,9 @@ const Login = () => {
   // If loading false and email arrived then redirect user
   useEffect(() => {
     if (!isLoading && email) {
-      navigate("/");
+      //Navigate user to the desired path (It basically works when user forcefully send to the login page. when user login/register the he will redirect to the page from where user if forced)
+      navigate(from, { replace: true });
+      // navigate("/");
       reset();
     }
   }, [isLoading, email]);

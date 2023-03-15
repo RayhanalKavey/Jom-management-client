@@ -76,11 +76,11 @@ const authSlice = createSlice({
   // Normal reducers for logout
   reducers: {
     logOut: (state, action) => {
+      state.isLoading = false;
       state.email = "";
       state.role = "";
-      state.isLoading = true;
-      state.isError = false;
-      state.error = "";
+      // state.isError = false;
+      // state.error = "";
       state.user = {};
     },
     setUser: (state, { payload }) => {
@@ -89,6 +89,9 @@ const authSlice = createSlice({
       // state.error = "";
       state.email = payload.userEmail;
       state.user = payload;
+    },
+    toggleLoading: (state) => {
+      state.isLoading = false;
     },
   },
 
@@ -156,7 +159,7 @@ const authSlice = createSlice({
 });
 
 // Export actions for dispatch where needed
-export const { logOut, setUser } = authSlice.actions;
+export const { logOut, setUser, toggleLoading } = authSlice.actions;
 
 // Export reducers will provide in the store
 export default authSlice.reducer;

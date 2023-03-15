@@ -8,7 +8,7 @@ import { setTheme, toggleTheme } from "../../../features/theme/themeSlice";
 import { MdOutlineLightMode, MdDarkMode } from "react-icons/md";
 const Navbar = () => {
   // Get information from the REDUX store
-  const { email } = useSelector((state) => state.auth);
+  const { email, role } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   // console.log("user in the navbar from the redux store", email);
 
@@ -124,13 +124,21 @@ const Navbar = () => {
             >
               Contact
             </Link>
+            <Link
+              to="/dashboard"
+              className="text-black dark:text-white hover:bg-gray-300 hover:dark:bg-green-700 px-3 py-2 rounded-md text-sm font-medium"
+            >
+              Job Poster/Seeker
+            </Link>
             {email ? (
-              <button
-                onClick={handleLogOut}
-                className="text-black dark:text-white hover:bg-gray-300 hover:dark:bg-green-700 px-3 py-2 rounded-md text-sm font-medium"
-              >
-                Logout
-              </button>
+              <>
+                <button
+                  onClick={handleLogOut}
+                  className="text-black dark:text-white hover:bg-gray-300 hover:dark:bg-green-700 px-3 py-2 rounded-md text-sm font-medium"
+                >
+                  Logout
+                </button>
+              </>
             ) : (
               <>
                 <Link

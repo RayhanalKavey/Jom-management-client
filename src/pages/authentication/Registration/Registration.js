@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useForm, useWatch } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { createUser, googleLogin } from "../../../features/auth/authSlice";
 import useTitle from "../../../hooks/useTitle/useTitle";
 
@@ -12,8 +12,11 @@ const Registration = () => {
 
   // This state is used for password confirmation
   const [disabled, setDisabled] = useState(true);
-  // Redirect user
+  // Redirect user where from they comes to login
   const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
+  console.log("In the registration page", from);
 
   //------ Take isError , Errors from useSelector of REDUX
   const { isError, error, isLoading, email } = useSelector(
@@ -60,7 +63,9 @@ const Registration = () => {
   };
   useEffect(() => {
     if (!isLoading && email) {
-      navigate("/");
+      //Navigate user to the desired path (It basically works when user forcefully send to the login page. when user login/register the he will redirect to the page from where user if forced)
+      navigate(from, { replace: true });
+      // navigate("/");
       reset();
     }
   }, [isLoading, email]);
@@ -141,11 +146,11 @@ const Registration = () => {
             value="Sign Up"
             disabled={disabled}
           />
-          {isError && (
+          {/* {isError && (
             <label className="block mt-2 text-sm font-bold text-red-600">
               {error}
             </label>
-          )}
+          )} */}
         </form>
         {/* ---Link to the login page--- */}
         <p className="text-center">
