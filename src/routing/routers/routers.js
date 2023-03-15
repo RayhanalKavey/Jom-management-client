@@ -21,5 +21,6 @@ const router = createBrowserRouter([
       { path: "/registration", element: <Registration /> },
     ],
   },
+  // { path: "/home", errorElement: <ErrorPage />, element: <Home /> },
 ]);
 export default router;

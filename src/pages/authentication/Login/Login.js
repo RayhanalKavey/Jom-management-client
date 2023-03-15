@@ -2,6 +2,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import { loginUser } from "../../../features/auth/authSlice";
 import useTitle from "../../../hooks/useTitle/useTitle";
 
 const Login = () => {
@@ -26,7 +27,7 @@ const Login = () => {
   //------- From data will come up here....
   const handleOnSubmit = (data) => {
     const { email, password } = data;
-
+    dispatch(loginUser({ email, password }));
     // reset();
     console.log("handleOnSubmit data", data);
   };
