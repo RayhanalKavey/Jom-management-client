@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { createUser, googleLogin } from "../../../features/auth/authSlice";
 import useTitle from "../../../hooks/useTitle/useTitle";
-
 const Registration = () => {
   // Title of the page
   useTitle("Registration");
@@ -73,7 +72,7 @@ const Registration = () => {
   // If failed to register then error message
   useEffect(() => {
     if (isError) {
-      toast.error(error);
+      toast.error(error, { id: "registration" });
     }
   }, [isError, error]);
   // ----------------------------///--------------------------------//

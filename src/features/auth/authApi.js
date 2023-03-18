@@ -2,19 +2,32 @@ import apiSlice from "../api/apiSlice";
 
 const authApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    getJobs: builder.query({
-      query: (data) => ({
-        url: "/jobs",
+    getUser: builder.query({
+      query: () => ({
+        url: "/user",
       }),
-      providesTags: ["jobs"],
+      providesTags: ["users"],
     }),
     registerEmployer: builder.mutation({
       query: (data) => ({
-        url: "/registerEmployer",
+        url: "/user",
         method: "POST",
         body: data,
       }),
+      invalidatesTags: ["users"],
+    }),
+    registerJobSeeker: builder.mutation({
+      query: (data) => ({
+        url: "/user",
+        method: "POST",
+        body: data,
+      }),
+      invalidatesTags: ["users"],
     }),
   }),
 });
-export const { useGetJobsQuery, useRegisterEmployerMutation } = authApi;
+export const {
+  useRegisterEmployerMutation,
+  useGetUserQuery,
+  useRegisterJobSeekerMutation,
+} = authApi;

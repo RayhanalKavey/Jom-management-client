@@ -125,7 +125,7 @@ const Navbar = () => {
               Contact
             </Link>
             <Link
-              to="/dashboard"
+              to="/poster-seeker"
               className="text-black dark:text-white hover:bg-gray-300 hover:dark:bg-green-700 px-3 py-2 rounded-md text-sm font-medium"
             >
               Job Poster/Seeker

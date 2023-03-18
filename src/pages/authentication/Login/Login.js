@@ -53,7 +53,7 @@ const Login = () => {
   // Shoe error message with toast if failed to login
   useEffect(() => {
     if (isError) {
-      toast.error(error);
+      toast.error(error, { id: "login" });
     }
   }, [isError, error]);
 
