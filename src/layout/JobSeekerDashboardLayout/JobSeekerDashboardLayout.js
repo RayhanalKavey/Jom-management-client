@@ -2,22 +2,25 @@ import React, { useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 import Navbar from "../shared/Navbar/Navbar";
 
-const EmployerDashLayout = () => {
+const JobSeekerDashboardLayout = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const links = (
     <ul className="menu p-4">
       <li className="mb-4">
         <Link
-          to="/employer-dashboard/my-posted-job"
+          to="/job-seeker-dashboard/my-apply"
           className="hover:text-blue-500"
         >
-          My Posts
+          My Apply
         </Link>
       </li>
       <li className="mb-4">
-        <Link to="/employer-dashboard/add-job" className="hover:text-blue-500">
-          Post Job
+        <Link
+          to="/job-seeker-dashboard/top-company"
+          className="hover:text-blue-500"
+        >
+          Top Company
         </Link>
       </li>
     </ul>
@@ -60,4 +63,4 @@ const EmployerDashLayout = () => {
   );
 };
 
-export default EmployerDashLayout;
+export default JobSeekerDashboardLayout;
