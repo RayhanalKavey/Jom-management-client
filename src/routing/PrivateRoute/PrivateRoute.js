@@ -7,7 +7,7 @@ const PrivateRoute = ({ children }) => {
   const { isLoading, email } = useSelector((state) => state.auth);
   // console.log(isLoading);
   const location = useLocation();
-  console.log("Private router catch location", location);
+  // console.log("Private router catch location", location);
   if (isLoading) {
     return <Spinner />;
   }

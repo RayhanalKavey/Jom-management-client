@@ -30,6 +30,10 @@ export const createUser = createAsyncThunk(
       emailVerified,
       photoUrl,
       uid,
+      // role: "",
+      // isSeeker: false,
+      // isEmployer: false,
+      // isAdmin: false,
     };
     // console.log("Data after create user with email and password", user);
     // We get this returned data in addCase's action.payload
@@ -78,7 +82,6 @@ const authSlice = createSlice({
     logOut: (state, action) => {
       state.isLoading = false;
       state.email = "";
-      state.role = "";
       // state.isError = false;
       // state.error = "";
       state.user = {};

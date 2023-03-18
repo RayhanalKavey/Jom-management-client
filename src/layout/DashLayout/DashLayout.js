@@ -6,7 +6,6 @@ const DashLayout = () => {
   return (
     <div>
       <Navbar />
-      This is dash
       <Outlet></Outlet>
     </div>
   );

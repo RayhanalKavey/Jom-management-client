@@ -5,7 +5,9 @@ import About from "../../pages/About/About";
 import Login from "../../pages/authentication/Login/Login";
 import Registration from "../../pages/authentication/Registration/Registration";
 import Contact from "../../pages/Contact/Contact";
+import EmployerRegistration from "../../pages/EmployerRegistration/EmployerRegistration";
 import Home from "../../pages/home/Home/Home";
+import JobPosterOrJobSeeker from "../../pages/JobPosterOrJobSeeker/JobPosterOrJobSeeker";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 
 const { createBrowserRouter } = require("react-router-dom");
@@ -31,6 +33,10 @@ const router = createBrowserRouter([
         <DashLayout></DashLayout>
       </PrivateRoute>
     ),
+    children: [
+      { path: "/dashboard", element: <JobPosterOrJobSeeker /> },
+      { path: "/dashboard/employerForm", element: <EmployerRegistration /> },
+    ],
   },
   // { path: "/home", errorElement: <ErrorPage />, element: <Home /> },
 ]);

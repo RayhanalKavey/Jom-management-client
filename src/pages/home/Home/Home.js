@@ -8,7 +8,7 @@ const Home = () => {
   useTitle("Home");
   const { isLoading: authLoading } = useSelector((state) => state.auth);
   const { data, isLoading, isSuccess, isError, error } = useGetJobsQuery();
-  console.log(data);
+  // console.log(data);
   if (authLoading) {
     return <Spinner></Spinner>;
   }
