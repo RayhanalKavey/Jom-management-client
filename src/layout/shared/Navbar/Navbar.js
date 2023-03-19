@@ -66,6 +66,66 @@ const Navbar = () => {
       : document.documentElement.classList.remove("dark");
   }, [theme]);
 
+  const links = (
+    <>
+      <Link
+        to="/"
+        className="text-black dark:text-white hover:bg-gray-300 hover:dark:bg-green-700 px-3 py-2 rounded-md text-sm font-medium"
+      >
+        Home
+      </Link>
+      <Link
+        to="/poster-seeker"
+        className="text-black dark:text-white hover:bg-gray-300 hover:dark:bg-green-700 px-3 py-2 rounded-md text-sm font-medium"
+      >
+        Job Poster/Seeker
+      </Link>
+      <Link
+        to="/all-job"
+        className="text-black dark:text-white hover:bg-gray-300 hover:dark:bg-green-700 px-3 py-2 rounded-md text-sm font-medium"
+      >
+        Find Job
+      </Link>
+      <Link
+        to="/about"
+        className="text-black dark:text-white hover:bg-gray-300 hover:dark:bg-green-700 px-3 py-2 rounded-md text-sm font-medium"
+      >
+        About
+      </Link>
+      <Link
+        to="/contact"
+        className="text-black dark:text-white hover:bg-gray-300 hover:dark:bg-green-700 px-3 py-2 rounded-md text-sm font-medium"
+      >
+        Contact
+      </Link>
+
+      {email ? (
+        <>
+          <button
+            onClick={handleLogOut}
+            className="text-black dark:text-white hover:bg-gray-300 hover:dark:bg-green-700 px-3 py-2 rounded-md text-sm font-medium"
+          >
+            Logout
+          </button>
+        </>
+      ) : (
+        <>
+          <Link
+            to="/login"
+            className="text-black dark:text-white hover:bg-gray-300 hover:dark:bg-green-700 px-3 py-2 rounded-md text-sm font-medium"
+          >
+            Login
+          </Link>
+          <Link
+            to="/registration"
+            className="text-black dark:text-white hover:bg-gray-300 hover:dark:bg-green-700 px-3 py-2 rounded-md text-sm font-medium"
+          >
+            Registration
+          </Link>
+        </>
+      )}
+    </>
+  );
   /* ======================
        Dark mood system end
        ======================*/
@@ -103,55 +163,7 @@ const Navbar = () => {
             >
               {theme === "dark" ? <MdOutlineLightMode /> : <MdDarkMode />}
             </button>
-            <Link
-              to="/"
-              className="text-black dark:text-white hover:bg-gray-300 hover:dark:bg-green-700 px-3 py-2 rounded-md text-sm font-medium"
-            >
-              Home
-            </Link>
-            <Link
-              to="/about"
-              className="text-black dark:text-white hover:bg-gray-300 hover:dark:bg-green-700 px-3 py-2 rounded-md text-sm font-medium"
-            >
-              About
-            </Link>
-            <Link
-              to="/contact"
-              className="text-black dark:text-white hover:bg-gray-300 hover:dark:bg-green-700 px-3 py-2 rounded-md text-sm font-medium"
-            >
-              Contact
-            </Link>
-            <Link
-              to="/poster-seeker"
-              className="text-black dark:text-white hover:bg-gray-300 hover:dark:bg-green-700 px-3 py-2 rounded-md text-sm font-medium"
-            >
-              Job Poster/Seeker
-            </Link>
-            {email ? (
-              <>
-                <button
-                  onClick={handleLogOut}
-                  className="text-black dark:text-white hover:bg-gray-300 hover:dark:bg-green-700 px-3 py-2 rounded-md text-sm font-medium"
-                >
-                  Logout
-                </button>
-              </>
-            ) : (
-              <>
-                <Link
-                  to="/login"
-                  className="text-black dark:text-white hover:bg-gray-300 hover:dark:bg-green-700 px-3 py-2 rounded-md text-sm font-medium"
-                >
-                  Login
-                </Link>
-                <Link
-                  to="/registration"
-                  className="text-black dark:text-white hover:bg-gray-300 hover:dark:bg-green-700 px-3 py-2 rounded-md text-sm font-medium"
-                >
-                  Registration
-                </Link>
-              </>
-            )}
+            {links}
           </div>
         </div>
       </div>
@@ -162,47 +174,7 @@ const Navbar = () => {
         onMouseLeave={toggleMenu}
       >
         <div className="flex flex-col text-center px-2 pt-2 pb-3 space-y-1">
-          <Link
-            to="/"
-            className="text-black dark:text-white hover:bg-gray-300 hover:dark:bg-green-700 px-3 py-2 rounded-md text-sm font-medium"
-          >
-            Home
-          </Link>
-          <Link
-            to="/about"
-            className="text-black dark:text-white hover:bg-gray-300 hover:dark:bg-green-700 px-3 py-2 rounded-md text-sm font-medium"
-          >
-            About
-          </Link>
-          <Link
-            to="/contact"
-            className="text-black dark:text-white hover:bg-gray-300 hover:dark:bg-green-700 px-3 py-2 rounded-md text-sm font-medium"
-          >
-            Contact
-          </Link>
-          {email ? (
-            <Link
-              className="text-black dark:text-white hover:bg-gray-300 hover:dark:bg-green-700 px-3 py-2 rounded-md text-sm font-medium"
-              onClick={handleLogOut}
-            >
-              Logout
-            </Link>
-          ) : (
-            <>
-              <Link
-                to="/login"
-                className="text-black dark:text-white hover:bg-gray-300 hover:dark:bg-green-700 px-3 py-2 rounded-md text-sm font-medium"
-              >
-                Login
-              </Link>
-              <Link
-                to="/registration"
-                className="text-black dark:text-white hover:bg-gray-300 hover:dark:bg-green-700 px-3 py-2 rounded-md text-sm font-medium"
-              >
-                Registration
-              </Link>
-            </>
-          )}
+          {links}
         </div>
       </div>
     </nav>

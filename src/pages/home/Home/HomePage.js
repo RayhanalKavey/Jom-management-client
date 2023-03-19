@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import Spinner from "../../../components/Spinner/Spinner";
 import useTitle from "../../../hooks/useTitle/useTitle";
@@ -8,14 +8,15 @@ import FresherJobHome from "../FresherJobHome/FresherJobHome";
 const HomePage = () => {
   useTitle("Home");
   // Information of the redux store
-  const { isLoading, isSuccess } = useSelector((state) => state.auth);
+  const { isLoading, isError } = useSelector((state) => state.auth);
   // Fetched data of all jobs
 
   let content;
+
   if (isLoading) {
     content = <Spinner />;
   }
-  if (isSuccess) {
+  if (!isError && !isLoading) {
     content = (
       <div>
         <h1>This is home page</h1>
@@ -26,6 +27,7 @@ const HomePage = () => {
       </div>
     );
   }
+
   return <>{content}</>;
 };
 

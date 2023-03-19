@@ -21,6 +21,7 @@ import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import EmployerProfileUpdate from "../../pages/EmployerDashboard/EmployerProfileUpdate/EmployerProfileUpdate";
 import FresherJob from "../../pages/FresherJob/FresherJob";
 import ExperiencedJob from "../../pages/ExperiencedJob/ExperiencedJob";
+import AllJob from "../../pages/AllJob/AllJob";
 
 const { createBrowserRouter } = require("react-router-dom");
 
@@ -39,6 +40,7 @@ const router = createBrowserRouter([
       { path: "/top-company", element: <TopCompany /> },
       { path: "/fresher-job", element: <FresherJob /> },
       { path: "/experienced-Job", element: <ExperiencedJob /> },
+      { path: "/all-job", element: <AllJob /> },
       {
         path: "/poster-seeker",
         element: (
