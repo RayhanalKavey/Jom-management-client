@@ -9,6 +9,7 @@ import Registration from "../../pages/authentication/Registration/Registration";
 import Contact from "../../pages/Contact/Contact";
 import AddJob from "../../pages/EmployerDashboard/AddJob/AddJob";
 import MyPostedJob from "../../pages/EmployerDashboard/MyPostedJob/MyPostedJob";
+import UpdateJob from "../../pages/EmployerDashboard/UpdateJob/UpdateJob";
 import EmployerRegistration from "../../pages/EmployerRegistration/EmployerRegistration";
 import HomePage from "../../pages/home/Home/HomePage";
 import JobPosterOrJobSeeker from "../../pages/JobPosterOrJobSeeker/JobPosterOrJobSeeker";
@@ -68,6 +69,7 @@ const router = createBrowserRouter([
       { path: "/employer-dashboard", element: <MyPostedJob /> },
       { path: "/employer-dashboard/my-posted-job", element: <MyPostedJob /> },
       { path: "/employer-dashboard/add-job", element: <AddJob /> },
+      { path: "/employer-dashboard/update-job", element: <UpdateJob /> },
     ],
   },
   {

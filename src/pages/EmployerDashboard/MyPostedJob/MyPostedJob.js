@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 import { toast } from "react-hot-toast";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import {
   useDeleteAJobMutation,
   useGetJobsQuery,
-  useUpdateAJobMutation,
 } from "../../../features/auth/jobApi";
 
 const MyPostedJob = () => {
@@ -20,9 +20,6 @@ const MyPostedJob = () => {
   // Redux action for deleting a job
   const [deleteAJob, { isLoading: deleteLoading, isSuccess, isError, error }] =
     useDeleteAJobMutation();
-
-  // Redux action for updating a job (updated job)
-  const [updateAJob] = useUpdateAJobMutation();
 
   useEffect(() => {
     if (deleteLoading) {
@@ -40,7 +37,16 @@ const MyPostedJob = () => {
       {loggedInUserPost?.map((job) => (
         <div className="m-2 border border-2 p-2 rounded-lg" key={job?._id}>
           <p>{job?.position}</p>
-          <button>Update</button>
+
+          <Link
+            to={"/employer-dashboard/update-job"}
+            state={job}
+            className="btn btn-xs btn-success"
+          >
+            {" "}
+            Edit
+          </Link>
+
           <br />
           <p>{job?._id}</p>
 
