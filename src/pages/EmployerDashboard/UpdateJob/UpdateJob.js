@@ -28,14 +28,39 @@ const UpdateJob = () => {
   // React hook form submission
   const onSubmit = (data) => {
     const currentDate = new Date();
-    console.log(data);
-    // const jobInfo = {
-    //   ...data,
-    //   fresherJob: data?.jobCategory === "Fresher Job" ? true : false,
-    //   experiencedJob: data?.jobCategory === "Experienced" ? true : false,
-    //   currentDate,
-    // };
-    // UpdateJob(jobInfo);
+    // Destructure the new information
+    const {
+      company,
+      companyCategory,
+      companyDetail,
+      email,
+      jobCategory,
+      jobDetail,
+      jobType,
+      location,
+      logo,
+      position,
+    } = data;
+    // Create new blog information by some parameter like currentDate, fresherJob, experiencedJob manually
+    const jobInfo = {
+      _id: state?._id,
+      company,
+      companyCategory,
+      companyDetail,
+      email,
+      jobCategory,
+      jobDetail,
+      jobType,
+      location,
+      logo,
+      position,
+      // current these are newly added, fresher job and experienced job will be set on the basis of new jobCategory selection
+      currentDate,
+      fresherJob: data?.jobCategory === "Fresher Job" ? true : false,
+      experiencedJob: data?.jobCategory === "Experienced" ? true : false,
+    };
+    updateAJob(jobInfo);
+    console.log("form update form Id", jobInfo?._id);
     // console.log("From add job form", jobInfo);
   };
   // Handle different user update state

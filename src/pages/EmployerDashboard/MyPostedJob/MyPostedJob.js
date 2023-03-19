@@ -49,6 +49,7 @@ const MyPostedJob = () => {
 
           <br />
           <p>{job?._id}</p>
+          <p>{job?.jobType}</p>
 
           <button onClick={() => deleteAJob(job?._id)}>Delete</button>
         </div>
