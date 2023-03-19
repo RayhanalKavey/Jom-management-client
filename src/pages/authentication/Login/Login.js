@@ -14,7 +14,6 @@ const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
-  // console.log(location);
   //------ Take isError , Errors from useSelector of REDUX
   const { isError, error, isLoading, email } = useSelector(
     (state) => state?.auth
@@ -33,7 +32,6 @@ const Login = () => {
   const handleOnSubmit = (data) => {
     const { email, password } = data;
     dispatch(loginUser({ email, password }));
-    // console.log("handleOnSubmit data", data);
   };
 
   //-------- Google login

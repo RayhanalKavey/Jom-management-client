@@ -10,12 +10,10 @@ import {
 const MyPostedJob = () => {
   // Get current user email from the store
   const { email } = useSelector((state) => state?.auth);
-  console.log("From my posted job email", email);
+
   //  Get data from the database using redux
   const { data, isLoading } = useGetJobsQuery();
   const loggedInUserPost = data?.filter((job) => job?.email === email);
-  console.log("From my posted job", data);
-  console.log("From my posted job", loggedInUserPost);
 
   // Redux action for deleting a job
   const [deleteAJob, { isLoading: deleteLoading, isSuccess, isError, error }] =
@@ -34,7 +32,7 @@ const MyPostedJob = () => {
   }, [deleteLoading, isSuccess, isError, error]);
   return (
     <div>
-      {loggedInUserPost?.map((job) => (
+      {loggedInUserPost?.reverse()?.map((job) => (
         <div className="m-2 border border-2 p-2 rounded-lg" key={job?._id}>
           <p>{job?.position}</p>
 
@@ -47,6 +45,12 @@ const MyPostedJob = () => {
             Edit
           </Link>
 
+          <br />
+          <p>{job?.position}</p>
+          <p className="bg-green-200">{job?.jobCategory}</p>
+
+          <br />
+          <p>{job?.companyDetail}</p>
           <br />
           <p>{job?._id}</p>
           <p>{job?.jobType}</p>

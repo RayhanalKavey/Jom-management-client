@@ -1,32 +1,32 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 import Spinner from "../../../components/Spinner/Spinner";
-import { useGetJobsQuery } from "../../../features/auth/jobApi";
 import useTitle from "../../../hooks/useTitle/useTitle";
+import ExperiencedJobHome from "../ExperiencedJobHome/ExperiencedJobHome";
+import FresherJobHome from "../FresherJobHome/FresherJobHome";
 
 const HomePage = () => {
   useTitle("Home");
   // Information of the redux store
-  const { isLoading: authLoading } = useSelector((state) => state.auth);
+  const { isLoading, isSuccess } = useSelector((state) => state.auth);
   // Fetched data of all jobs
-  const { data, isLoading, isSuccess, isError, error } = useGetJobsQuery();
-  console.log(data);
 
   let content;
   if (isLoading) {
     content = <Spinner />;
   }
   if (isSuccess) {
-    content = <div>This is home page</div>;
+    content = (
+      <div>
+        <h1>This is home page</h1>
+        {/* Fresher job */}
+        <FresherJobHome></FresherJobHome>
+        {/* Experience job */}
+        <ExperiencedJobHome></ExperiencedJobHome>
+      </div>
+    );
   }
-  // useEffect(() => {
-  // }, [isLoading]);
-  return (
-    <>
-      {content}
-      {/* <div>{isLoading && <Spinner />}</div> */}
-    </>
-  );
+  return <>{content}</>;
 };
 
 export default HomePage;

@@ -35,7 +35,6 @@ export const createUser = createAsyncThunk(
       // isEmployer: false,
       // isAdmin: false,
     };
-    // console.log("Data after create user with email and password", user);
     // We get this returned data in addCase's action.payload
     return user;
   }
@@ -53,7 +52,6 @@ export const loginUser = createAsyncThunk(
       photoUrl,
       uid,
     };
-    // console.log("Data after sign in with email and password", user);
     return user;
   }
 );
@@ -70,7 +68,6 @@ export const googleLogin = createAsyncThunk("auth/googleLogin", async () => {
     photoUrl,
     uid,
   };
-  console.log("Data after sign in with google", user);
   return user;
 });
 

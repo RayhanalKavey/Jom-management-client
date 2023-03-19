@@ -21,6 +21,14 @@ const EmployerDashLayout = () => {
           Post Job
         </Link>
       </li>
+      <li className="mb-4">
+        <Link
+          to="/employer-dashboard/EmployerProfileUpdate"
+          className="hover:text-blue-500"
+        >
+          My Profile as Employer
+        </Link>
+      </li>
     </ul>
   );
 

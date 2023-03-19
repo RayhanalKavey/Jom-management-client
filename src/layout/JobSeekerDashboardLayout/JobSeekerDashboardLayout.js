@@ -18,10 +18,18 @@ const JobSeekerDashboardLayout = () => {
       </li>
       <li className="mb-4">
         <Link
-          to="/job-seeker-dashboard/top-company"
+          to="/job-seeker-dashboard/shortlisted"
           className="hover:text-blue-500"
         >
-          Top Company
+          Short List
+        </Link>
+      </li>
+      <li className="mb-4">
+        <Link
+          to="/job-seeker-dashboard/JobSeekerProfileUpdate"
+          className="hover:text-blue-500"
+        >
+          My Profile as Candidate
         </Link>
       </li>
     </ul>

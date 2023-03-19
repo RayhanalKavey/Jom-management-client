@@ -7,7 +7,7 @@ import { useUpdateAJobMutation } from "../../../features/auth/jobApi";
 
 const UpdateJob = () => {
   let { state } = useLocation();
-  console.log("from update job", state);
+
   // Get user email from the store
 
   const { email } = useSelector((state) => state?.auth);
@@ -40,6 +40,7 @@ const UpdateJob = () => {
       location,
       logo,
       position,
+      requiredExp,
     } = data;
     // Create new blog information by some parameter like currentDate, fresherJob, experiencedJob manually
     const jobInfo = {
@@ -54,14 +55,13 @@ const UpdateJob = () => {
       location,
       logo,
       position,
+      requiredExp,
       // current these are newly added, fresher job and experienced job will be set on the basis of new jobCategory selection
       currentDate,
-      fresherJob: data?.jobCategory === "Fresher Job" ? true : false,
+      fresherJob: data?.jobCategory === "Fresher" ? true : false,
       experiencedJob: data?.jobCategory === "Experienced" ? true : false,
     };
     updateAJob(jobInfo);
-    console.log("form update form Id", jobInfo?._id);
-    // console.log("From add job form", jobInfo);
   };
   // Handle different user update state
   useEffect(() => {
@@ -78,14 +78,8 @@ const UpdateJob = () => {
     }
   }, [isLoading, isSuccess, isError, error, reset, navigate]);
 
-  const companyCategories = [
-    "Technology",
-    "Finance",
-    "Healthcare",
-    "Retail",
-    "Manufacturing",
-  ];
-  const jobCategories = ["Fresher Job", "Experienced"];
+  const jobCategories = ["Fresher", "Experienced"];
+  const requiredExp = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
 
   return (
     <div className=" min-h-screen">
@@ -182,6 +176,22 @@ const UpdateJob = () => {
             <span className="text-red-500 text-sm">This field is required</span>
           )}
         </div>
+        {/*/// Year of Expert*/}
+        <div className="mt-4">
+          <label htmlFor="jobType">Year Of Expert:</label>
+          <select
+            id="requiredExp"
+            {...register("requiredExp")}
+            defaultValue={state?.requiredExp}
+            className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          >
+            {requiredExp.map((category) => (
+              <option key={category} value={category}>
+                {category}
+              </option>
+            ))}
+          </select>
+        </div>
         {/* Email */}
         <div className="mt-4">
           <label htmlFor="email" className="block mb-1 font-medium">
@@ -216,18 +226,16 @@ const UpdateJob = () => {
         {/* Company category */}
         <div className="mt-4">
           <label htmlFor="companyCategory">Company Category:</label>
-          <select
+          <input
+            type="text"
             id="companyCategory"
-            {...register("companyCategory")}
+            {...register("companyCategory", { required: true })}
             defaultValue={state?.companyCategory}
             className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-          >
-            {companyCategories.map((category) => (
-              <option key={category} value={category}>
-                {category}
-              </option>
-            ))}
-          </select>
+          />
+          {errors.companyCategory && (
+            <span className="text-red-500 text-sm">This field is required</span>
+          )}
         </div>
         {/* Job category /// */}
         <div className="mt-4">

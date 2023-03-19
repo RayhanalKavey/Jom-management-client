@@ -10,7 +10,6 @@ const Navbar = () => {
   // Get information from the REDUX store
   const { email, role } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
-  // console.log("user in the navbar from the redux store", email);
 
   // Open and close the hamburger menu
   const [isOpen, setIsOpen] = useState(false);
@@ -29,7 +28,6 @@ const Navbar = () => {
       .catch((error) => {
         // An error happened.
       });
-    // console.log("email state condition after logout", email);
     // If there is no user the redirect user to the login page
     if (!email) {
       navigate("/login");
@@ -41,7 +39,6 @@ const Navbar = () => {
   //-------with redux
 
   const { theme } = useSelector((state) => state.theme);
-  // console.log("theme from store", theme);
 
   // Check the system preference. It will check this once.
   useEffect(() => {

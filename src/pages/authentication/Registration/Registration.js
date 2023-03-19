@@ -15,7 +15,6 @@ const Registration = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
-  console.log("In the registration page", from);
 
   //------ Take isError , Errors from useSelector of REDUX
   const { isError, error, isLoading, email } = useSelector(
@@ -53,7 +52,6 @@ const Registration = () => {
   const handleOnSubmit = (data) => {
     const { email, password } = data;
     dispatch(createUser({ email, password }));
-    // console.log("handleOnSubmit data", data);
   };
 
   //-------- Google login
