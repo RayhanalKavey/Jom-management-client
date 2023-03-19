@@ -1,14 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import { usePostAJobMutation } from "../../../features/auth/jobApi";
 
 const AddJob = () => {
   // Get user email from the store
 
   const { email } = useSelector((state) => state?.auth);
   const navigate = useNavigate();
+
+  // Redux despatch, and action
+  const [postAJob, { isLoading, isSuccess, isError, error }] =
+    usePostAJobMutation();
 
   // React hook form
   const {
@@ -20,27 +25,31 @@ const AddJob = () => {
 
   // React hook form submission
   const onSubmit = (data) => {
+    const currentDate = new Date();
+    console.log(currentDate);
     const jobInfo = {
       ...data,
       fresherJob: data?.jobCategory === "Fresher Job" ? true : false,
       experiencedJob: data?.jobCategory === "Experienced" ? true : false,
+      currentDate,
     };
+    postAJob(jobInfo);
     console.log("From add job form", jobInfo);
   };
   // Handle different user update state
-  // useEffect(() => {
-  //   if (isLoading) {
-  //     toast.loading("Loading...... Please wait", { id: "addJob" });
-  //   }
-  //   if (isSuccess) {
-  //     toast.success("Welcome as a Employer.", { id: "addJob" });
-  //     reset();
-  //     navigate("/employer-dashboard/my-posted-job");
-  //   }
-  //   if (isError) {
-  //     toast.success({ id: "addJob" });
-  //   }
-  // }, [isLoading, isSuccess, isError, error, reset, navigate]);
+  useEffect(() => {
+    if (isLoading) {
+      toast.loading("Loading...... Please wait", { id: "addJob" });
+    }
+    if (isSuccess) {
+      toast.success("Welcome as a Employer.", { id: "addJob" });
+      // reset();
+      navigate("/employer-dashboard/my-posted-job");
+    }
+    if (isError) {
+      toast.success({ id: "addJob" });
+    }
+  }, [isLoading, isSuccess, isError, error, reset, navigate]);
 
   const companyCategories = [
     "Technology",
@@ -50,8 +59,6 @@ const AddJob = () => {
     "Manufacturing",
   ];
   const jobCategories = ["Fresher Job", "Experienced"];
-
-  const employeeCounts = ["1-50", "51-100", "101-500", "501-1000", "1000+"];
 
   return (
     <div className=" min-h-screen">
