@@ -34,7 +34,7 @@ const EmployerRegistration = () => {
       toast.loading("Loading...... Please wait", { id: "addUser" });
     }
     if (isSuccess) {
-      toast.success("Wellcome as a Employer.", { id: "addUser" });
+      toast.success("Welcome as a Employer.", { id: "addUser" });
       reset();
       navigate("/dashboard");
     }
@@ -70,6 +70,7 @@ const EmployerRegistration = () => {
           {" "}
           Employer Information
         </h1>
+        {/* First Name */}
         <div className="grid grid-cols-2 gap-4">
           <div>
             <label htmlFor="firstName" className="block mb-1 font-medium">
@@ -87,7 +88,7 @@ const EmployerRegistration = () => {
               </span>
             )}
           </div>
-
+          {/* Last Name */}
           <div>
             <label htmlFor="lastName" className="block mb-1 font-medium">
               Last Name:
@@ -105,7 +106,7 @@ const EmployerRegistration = () => {
             )}
           </div>
         </div>
-
+        {/* Gender */}
         <div className="mt-4">
           <label className="block mb-1 font-medium">Gender:</label>
           <div>
@@ -141,7 +142,7 @@ const EmployerRegistration = () => {
             </label>
           </div>
         </div>
-
+        {/* Email */}
         <div className="mt-4">
           <label htmlFor="email" className="block mb-1 font-medium">
             Email:
@@ -171,7 +172,7 @@ const EmployerRegistration = () => {
             <span className="text-red-500 text-sm">This field is required</span>
           )}
         </div>
-
+        {/* Company Category */}
         <div className="mt-4">
           <label htmlFor="companyCategory">Company Category:</label>
           <select

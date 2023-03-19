@@ -7,7 +7,7 @@ import About from "../../pages/About/About";
 import Login from "../../pages/authentication/Login/Login";
 import Registration from "../../pages/authentication/Registration/Registration";
 import Contact from "../../pages/Contact/Contact";
-import { AddJob } from "../../pages/EmployerDashboard/AddJob/AddJob";
+import AddJob from "../../pages/EmployerDashboard/AddJob/AddJob";
 import MyPostedJob from "../../pages/EmployerDashboard/MyPostedJob/MyPostedJob";
 import EmployerRegistration from "../../pages/EmployerRegistration/EmployerRegistration";
 import HomePage from "../../pages/home/Home/HomePage";
