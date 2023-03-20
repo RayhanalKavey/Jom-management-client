@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { useGetUserQuery } from "../../features/auth/authApi";
 
 const JobPosterOrJobSeeker = () => {
+  //LoggedIn user email
   const { email } = useSelector((state) => state?.auth);
   // get all users from the database
   const { data, isLoading, isSuccess, isError, error } = useGetUserQuery();

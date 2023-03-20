@@ -5,9 +5,9 @@ import themeSlice from "../features/theme/themeSlice";
 
 const store = configureStore({
   reducer: {
+    [apiSlice.reducerPath]: apiSlice.reducer,
     auth: authSlice,
     theme: themeSlice,
-    [apiSlice.reducerPath]: apiSlice.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(apiSlice.middleware),
