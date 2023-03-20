@@ -63,8 +63,11 @@ const JobCard = ({ job }) => {
       <p className="text-lg font-semibold text-center">{job?.position}</p>
       <p className="">{job?.jobCategory}</p>
       <br />
-
-      <p>{job?.jobType}</p>
+      <span className="p-1 bg-yellow-300 rounded text-accent ">
+        {job?.jobType}
+      </span>
+      <br />
+      <br />
       {/* <button className="btn btn-darkPrimary btn-sm">Shortlist</button> */}
 
       <div className="flex gap-2">
