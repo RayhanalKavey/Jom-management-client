@@ -41,6 +41,8 @@ const router = createBrowserRouter([
       { path: "/fresher-job", element: <FresherJob /> },
       { path: "/experienced-Job", element: <ExperiencedJob /> },
       { path: "/all-job", element: <AllJob /> },
+      { path: "/all-fresher-job", element: <AllJob /> },
+      { path: "/all-experienced-job", element: <AllJob /> },
       {
         path: "/poster-seeker",
         element: (

@@ -60,40 +60,45 @@ const JobCard = ({ job }) => {
   }, [isLoading, isSuccess, isError, error]);
   return (
     <>
-      <div>
-        <p>{job?.position}</p>
-        <p className="bg-green-200">{job?.jobCategory}</p>
-        <br />
-        <p>{job?.companyDetail}</p>
-        <br />
-        <p>{job?._id}</p>
-        <p>{job?.jobType}</p>
-        <button className="btn btn-darkPrimary btn-sm">Shortlist</button>
+      <p className="text-lg font-semibold text-center">{job?.position}</p>
+      <p className="">{job?.jobCategory}</p>
+      <br />
 
+      <p>{job?.jobType}</p>
+      {/* <button className="btn btn-darkPrimary btn-sm">Shortlist</button> */}
+
+      <div className="flex gap-2">
         {/* Check if the current user applied in this job */}
         {isJobApplied ? (
           <>
-            <Link className="btn btn-primary btn-sm">Applied</Link>
+            <Link className="btn btn-accent  btn-sm ">
+              {" "}
+              <span className="text-secondary">Applied</span>
+            </Link>
           </>
         ) : (
           <>
             {/* This logic is for if the user logged in properly */}
             {!email ? (
               <Link className="btn btn-primary btn-sm" to={"/login"}>
-                Apply
+                <span className="text-secondary">Apply</span>
               </Link>
             ) : (
               <Link
                 className="btn btn-primary btn-sm"
                 onClick={() => applyJobs(applyInformation)}
               >
-                Apply
+                <span className="text-secondary">
+                  <span className="text-secondary">Apply</span>
+                </span>
               </Link>
             )}
           </>
         )}
 
-        <button className="btn btn-secondary btn-sm">Job Details</button>
+        <button className="btn btn-primary  btn-outline btn-sm">
+          Job Details
+        </button>
       </div>
     </>
   );

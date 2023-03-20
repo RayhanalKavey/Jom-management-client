@@ -26,16 +26,35 @@ const HomePage = () => {
             <HeroSection></HeroSection>
           </div>
         </section>
+        {/* <section className="py-28 ">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          </div>
+        </section> */}
 
         {/* Fresher job */}
-        <section>
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section className="dark:bg-accent pt-28 ">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
+            <h3 className="text-md font-bold text-center uppercase text-primary">
+              Fresher Job{" "}
+            </h3>
+            <h2 className="text-3xl font-semibold text-center mt-6 mb-16 text-accent dark:text-secondary">
+              {" "}
+              Looking for a Fresh Start?
+            </h2>
+
             <FresherJobHome></FresherJobHome>
           </div>
         </section>
         {/* Experience job */}
-        <section>
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section className="dark:bg-accent py-28 ">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
+            <h3 className="text-md font-bold text-center uppercase text-primary">
+              Experienced Job{" "}
+            </h3>
+            <h2 className="text-3xl font-semibold text-center mt-6 mb-16 text-accent dark:text-secondary">
+              {" "}
+              Looking for Better Opportunity?
+            </h2>
             <ExperiencedJobHome></ExperiencedJobHome>
           </div>
         </section>
