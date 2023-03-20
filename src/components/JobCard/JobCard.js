@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { toast } from "react-hot-toast";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import {
   useApplyJobsMutation,
   useGetApplyQuery,
@@ -27,8 +28,6 @@ const JobCard = ({ job }) => {
     useGetApplyQuery();
 
   // If the jobSeeker apply this job
-  // find the current job from the applied job array
-
   const isJobApplied = applyJobInfo?.some(
     (ji) =>
       ji?.applyJobId === job?._id && ji?.applyUserId === loggedInJobSeeker?._id
@@ -71,15 +70,27 @@ const JobCard = ({ job }) => {
         <p>{job?.jobType}</p>
         <button className="btn btn-primary btn-sm">Shortlist</button>
 
+        {/* Check if the current user applied in this job */}
         {isJobApplied ? (
-          <button className="btn btn-primary btn-sm">Applied</button>
+          <>
+            <Link className="btn btn-primary btn-sm">Applied</Link>
+          </>
         ) : (
-          <button
-            className="btn btn-primary btn-sm"
-            onClick={() => applyJobs(applyInformation)}
-          >
-            Apply
-          </button>
+          <>
+            {/* This logic is for if the user logged in properly */}
+            {!email ? (
+              <Link className="btn btn-primary btn-sm" to={"/login"}>
+                Apply
+              </Link>
+            ) : (
+              <Link
+                className="btn btn-primary btn-sm"
+                onClick={() => applyJobs(applyInformation)}
+              >
+                Apply
+              </Link>
+            )}
+          </>
         )}
 
         <button className="btn btn-secondary btn-sm">Job Details</button>
