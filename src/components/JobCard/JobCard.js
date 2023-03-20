@@ -68,7 +68,7 @@ const JobCard = ({ job }) => {
         <br />
         <p>{job?._id}</p>
         <p>{job?.jobType}</p>
-        <button className="btn btn-primary btn-sm">Shortlist</button>
+        <button className="btn btn-darkPrimary btn-sm">Shortlist</button>
 
         {/* Check if the current user applied in this job */}
         {isJobApplied ? (

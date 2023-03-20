@@ -6,19 +6,19 @@ module.exports = {
     themes: [
       {
         mytheme: {
-          primary: "#570DF8",
+          primary: "#0B66C3",
 
-          secondary: "#F000B8",
+          secondary: "#F5F5F5",
 
-          accent: "#37CDBE",
+          accent: "#222222",
 
           neutral: "#3D4451",
 
           "base-100": "#FFFFFF",
 
-          info: "#3ABFF8",
+          info: "#444444",
 
-          success: "#36D399",
+          success: "#222222",
 
           warning: "#FBBD23",
 

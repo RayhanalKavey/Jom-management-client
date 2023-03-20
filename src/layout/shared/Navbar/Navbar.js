@@ -66,60 +66,40 @@ const Navbar = () => {
       : document.documentElement.classList.remove("dark");
   }, [theme]);
 
+  // Common Css class for all links
+  const commonLinkClass =
+    "text-accent dark:text-secondary hover:bg-blue-100 hover:dark:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium";
+
   const links = (
     <>
-      <Link
-        to="/"
-        className="text-black dark:text-white hover:bg-gray-300 hover:dark:bg-green-700 px-3 py-2 rounded-md text-sm font-medium"
-      >
+      <Link to="/" className={`${commonLinkClass}`}>
         Home
       </Link>
-      <Link
-        to="/poster-seeker"
-        className="text-black dark:text-white hover:bg-gray-300 hover:dark:bg-green-700 px-3 py-2 rounded-md text-sm font-medium"
-      >
+      <Link to="/poster-seeker" className={`${commonLinkClass}`}>
         Job Poster/Seeker
       </Link>
-      <Link
-        to="/all-job"
-        className="text-black dark:text-white hover:bg-gray-300 hover:dark:bg-green-700 px-3 py-2 rounded-md text-sm font-medium"
-      >
+      <Link to="/all-job" className={`${commonLinkClass}`}>
         Find Job
       </Link>
-      <Link
-        to="/about"
-        className="text-black dark:text-white hover:bg-gray-300 hover:dark:bg-green-700 px-3 py-2 rounded-md text-sm font-medium"
-      >
+      <Link to="/about" className={`${commonLinkClass}`}>
         About
       </Link>
-      <Link
-        to="/contact"
-        className="text-black dark:text-white hover:bg-gray-300 hover:dark:bg-green-700 px-3 py-2 rounded-md text-sm font-medium"
-      >
+      <Link to="/contact" className={`${commonLinkClass}`}>
         Contact
       </Link>
 
       {email ? (
         <>
-          <button
-            onClick={handleLogOut}
-            className="text-black dark:text-white hover:bg-gray-300 hover:dark:bg-green-700 px-3 py-2 rounded-md text-sm font-medium"
-          >
+          <button onClick={handleLogOut} className={`${commonLinkClass}`}>
             Logout
           </button>
         </>
       ) : (
         <>
-          <Link
-            to="/login"
-            className="text-black dark:text-white hover:bg-gray-300 hover:dark:bg-green-700 px-3 py-2 rounded-md text-sm font-medium"
-          >
+          <Link to="/login" className={`${commonLinkClass}`}>
             Login
           </Link>
-          <Link
-            to="/registration"
-            className="text-black dark:text-white hover:bg-gray-300 hover:dark:bg-green-700 px-3 py-2 rounded-md text-sm font-medium"
-          >
+          <Link to="/registration" className={`${commonLinkClass}`}>
             Registration
           </Link>
         </>
@@ -130,7 +110,7 @@ const Navbar = () => {
        Dark mood system end
        ======================*/
   return (
-    <nav className="bg-gray-100 dark:bg-green-900">
+    <nav className="bg-secondary dark:bg-accent">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex justify-between flex-1 ">
@@ -139,7 +119,7 @@ const Navbar = () => {
             </Link>
             {/* Hamburger button */}
             <button
-              className="text-black dark:text-white ml-4 sm:hidden"
+              className="text-accent dark:text-secondary ml-4 sm:hidden"
               onClick={toggleMenu}
               onMouseEnter={toggleMenu}
             >
@@ -157,7 +137,7 @@ const Navbar = () => {
           {/* Menu Link for large screen */}
           <div className="hidden sm:flex sm:items-center">
             <button
-              className="text-black dark:text-white hover:bg-gray-300 hover:dark:bg-green-700 px-3 py-2 rounded-md text-sm font-medium"
+              className="text-accent dark:text-secondary hover:bg-blue-100 hover:dark:bg-gray-600 px-3 py-2 rounded-md text-sm font-medium"
               onClick={() => dispatch(toggleTheme())}
               // onClick={handleSwitchTheme}
             >

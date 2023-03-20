@@ -1,9 +1,11 @@
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import Spinner from "../../../components/Spinner/Spinner";
+import Tryout from "../../../components/Tryout";
 import useTitle from "../../../hooks/useTitle/useTitle";
 import ExperiencedJobHome from "../ExperiencedJobHome/ExperiencedJobHome";
 import FresherJobHome from "../FresherJobHome/FresherJobHome";
+import HeroSection from "../HeroSection/HeroSection";
 
 const HomePage = () => {
   useTitle("Home");
@@ -19,11 +21,24 @@ const HomePage = () => {
   if (!isError && !isLoading) {
     content = (
       <div>
-        <h1>This is home page</h1>
+        <section className="bg-secondary dark:bg-accent py-32">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <HeroSection></HeroSection>
+          </div>
+        </section>
+
         {/* Fresher job */}
-        <FresherJobHome></FresherJobHome>
+        <section>
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <FresherJobHome></FresherJobHome>
+          </div>
+        </section>
         {/* Experience job */}
-        <ExperiencedJobHome></ExperiencedJobHome>
+        <section>
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <ExperiencedJobHome></ExperiencedJobHome>
+          </div>
+        </section>
       </div>
     );
   }

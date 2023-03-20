@@ -13,7 +13,7 @@ const FresherJobHome = () => {
         ?.reverse()
         ?.slice(0, 3)
         ?.map((job) => (
-          <div className="m-2  border-2 p-2 rounded-lg w-full" key={job?._id}>
+          <div className="m-2  border-2 p-2 rounded-lg " key={job?._id}>
             <JobCard job={job}></JobCard>
           </div>
         ))}

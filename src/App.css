@@ -27,7 +27,64 @@
 .App-link {
   color: #61dafb;
 }
+.customContainer {
+  margin-left: auto;
+  margin-right: auto;
+  width: 1280px;
+}
 
+@media (max-width: 576px) {
+  .customContainer {
+    padding-right: 0.5rem;
+    padding-left: 0.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .customContainer {
+    padding-right: 1rem;
+    padding-left: 1rem;
+  }
+}
+/* sm */
+@media (max-width: 1024px) {
+  .customContainer {
+    padding-right: 2rem;
+    padding-left: 2rem;
+  }
+}
+/* lg */
+@media (max-width: 1024px) {
+  .customContainer {
+    padding-right: 4rem;
+    padding-left: 4rem;
+  }
+}
+/* xl */
+@media (max-width: 1280px) {
+  .customContainer {
+    padding-right: 5rem;
+    padding-left: 5rem;
+  }
+}
+/* 2xl */
+@media (max-width: 1536px) {
+  .customContainer {
+    padding-right: 6rem;
+    padding-left: 6rem;
+  }
+}
+/* 
+ sm: '2rem',
+        lg: '4rem',
+        xl: '5rem',
+        '2xl': '6rem',
+None	width: 100%;
+sm (640px)	max-width: 640px;
+md (768px)	max-width: 768px;
+lg (1024px)	max-width: 1024px;
+xl (1280px)	max-width: 1280px;
+2xl (1536px)	max-width: 1536px; */
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
