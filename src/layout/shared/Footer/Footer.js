@@ -108,7 +108,7 @@ const Footer = () => {
           </div>
         </div>
         <div className={`flex justify-between mt-8 ${topBorder} pt-8`}>
-          <p>&copy; 2023 Company Name. All rights reserved.</p>
+          <p>&copy; 2023 Job Management. All rights reserved.</p>
           <ul className="flex space-x-4">
             <li>
               <Link href="#" className={`${commonLinkClass}`}>

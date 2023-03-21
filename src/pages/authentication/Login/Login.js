@@ -44,7 +44,6 @@ const Login = () => {
     if (!isLoading && email) {
       //Navigate user to the desired path (It basically works when user forcefully send to the login page. when user login/register the he will redirect to the page from where user if forced)
       navigate(from, { replace: true });
-      // navigate("/");
       reset();
     }
   }, [isLoading, email]);

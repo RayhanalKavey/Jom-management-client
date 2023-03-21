@@ -15,7 +15,7 @@ const FresherJobHome = () => {
 
   if (isSuccess) {
     content = (
-      <div className=" grid lg:grid-cols-2 gap-4 w-full">
+      <div className=" grid md:grid-cols-2 gap-4 w-full">
         {data
           ?.filter((j) => j?.fresherJob)
           ?.reverse()

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { toast } from "react-hot-toast";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import {
   useApplyJobsMutation,
   useGetApplyQuery,
@@ -63,41 +63,49 @@ const JobCard = ({ job }) => {
    Check if the current user applied in this job, and Buttons class
    -------------------------------------------- */
   const outlinedButton =
-    "px-2 py-1 text-accent hover:text-secondary bg-base-100 border  rounded-lg hover:bg-primary";
+    "text-xs uppercase font-semibold px-2 py-1 text-accent hover:text-secondary bg-base-100 border  rounded-lg hover:bg-primary";
 
   const buttonClass =
-    "px-2 py-1 text-secondary bg-primary border rounded-lg hover:bg-[#2a78a5]";
-  const applyButton = (
-    <>
-      {isJobApplied ? (
-        <>
-          <Link className={`${buttonClass}`}> Applied</Link>
-        </>
-      ) : (
-        <>
-          {/* This logic is for if the user logged in properly */}
-          {!email ? (
-            <Link className={`${buttonClass}`} to={"/login"}>
-              Apply{" "}
-            </Link>
-          ) : (
-            <Link
-              className={`${buttonClass}`}
-              onClick={() => applyJobs(applyInformation)}
-            >
-              Apply{" "}
-            </Link>
-          )}
-        </>
-      )}
-    </>
-  );
+    "text-xs uppercase font-semibold  px-2 py-1 text-secondary bg-primary border rounded-lg hover:bg-[#2a78a5]";
 
-  console.log("Job from Job card", job);
+  let applyButton;
+  /* 
+  1/ If the not logged in then send user  to  the login page 
+  2/ If user logged in but not a job seeker then sent user to the job seeker registration form
+  3/ If user logged in and registered as job seeker and applied in this job then button will be applied
+  */
+  const location = useLocation();
+  if (!email) {
+    applyButton = (
+      <Link
+        className={`${buttonClass}`}
+        to={"/login"}
+        state={{ from: location }}
+        replace
+      >
+        Apply
+      </Link>
+    );
+  }
+  if (email && !loggedInJobSeeker?.isJobSeeker) {
+    applyButton = (
+      <Link
+        className={`${buttonClass}`}
+        to={"/jobSeekerForm"}
+        state={{ from: location }}
+        replace
+      >
+        Apply
+      </Link>
+    );
+  }
+  if (email && loggedInJobSeeker?.isJobSeeker && isJobApplied) {
+    applyButton = <Link className={`${buttonClass}`}> Applied</Link>;
+  }
   return (
     <div>
       {/* inner content */}
-      <div className="flex  items-start  gap-5 mb-5  flex-col sm:flex-row ">
+      <div className="flex  items-start  gap-5   flex-col sm:flex-row md:flex-col lg:flex-row ">
         {/* logo */}
         <div className=" sm:mt-1.5  flex items-center justify-center h-12 w-12 rounded-md p-2 border-[.5px] bg-success">
           <img src={job?.logo} alt="" />
@@ -106,14 +114,14 @@ const JobCard = ({ job }) => {
         {/* content */}
         <div className="flex-1 w-full ">
           <p className="text-lg font-semibold mb-1">{job?.position}</p>
-          <div className="flex gap-2 mb-5">
+          <div className="flex gap-3 sm:gap-5 mb-5 flex-wrap">
             <p>location</p>
             <p>time</p>
             <p>remote/onSite/hybrid</p>
           </div>
 
           {/* All buttons  start*/}
-          <div className="flex gap-2">
+          <div className="flex justify-start items-center gap-2 flex-wrap">
             <button className={`${buttonClass}`}>Shortlist</button>
             {applyButton}
             <button className={`${outlinedButton}`}>Job Details</button>
