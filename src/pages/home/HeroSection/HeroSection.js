@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const HeroSection = () => {
   return (
-    <div className=" flex justify-center items-center">
+    <div className={`flex justify-center items-center`}>
       <div className="text-center">
         <h1 className="text-5xl font-bold text-accent dark:text-secondary mb-4">
           Welcome to our Careers Page!

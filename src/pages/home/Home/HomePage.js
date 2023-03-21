@@ -13,6 +13,8 @@ const HomePage = () => {
   const { isLoading, isError } = useSelector((state) => state.auth);
   // Fetched data of all jobs
 
+  const bottomBorder = "border-b-[.5px]  dark:border-gray-600";
+
   let content;
 
   if (isLoading) {
@@ -21,7 +23,9 @@ const HomePage = () => {
   if (!isError && !isLoading) {
     content = (
       <div>
-        <section className="bg-secondary dark:bg-accent py-32">
+        <section
+          className={`bg-secondary dark:bg-accent py-32  ${bottomBorder}`}
+        >
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <HeroSection></HeroSection>
           </div>

@@ -66,10 +66,16 @@ const Navbar = () => {
       : document.documentElement.classList.remove("dark");
   }, [theme]);
 
-  // Common Css class for all links
+  /*=================
+  COMMON CSS CLASS
+  *================*/
   const commonLinkClass =
     "text-accent dark:text-secondary hover:bg-blue-100 hover:dark:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium";
+  const bottomBorder = "border-b-[.5px] border-accent dark:border-gray-600";
 
+  /*============
+   COMMON LINK 
+   *===========*/
   const links = (
     <>
       <Link to="/" className={`${commonLinkClass}`}>
@@ -90,16 +96,16 @@ const Navbar = () => {
 
       {email ? (
         <>
-          <button onClick={handleLogOut} className={`${commonLinkClass}`}>
+          <Link onClick={handleLogOut} className={`${commonLinkClass}`}>
             Logout
-          </button>
+          </Link>
         </>
       ) : (
         <>
           <Link to="/login" className={`${commonLinkClass}`}>
             Login
           </Link>
-          <Link to="/registration" className={`${commonLinkClass}`}>
+          <Link to="/registration" className={`${commonLinkClass} `}>
             Registration
           </Link>
         </>
@@ -110,16 +116,18 @@ const Navbar = () => {
        Dark mood system end
        ======================*/
   return (
-    <nav className="bg-secondary dark:bg-accent">
+    <nav className="bg-secondary dark:bg-accent  top-0 left-0 right-0 z-50 ">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          <div className="flex justify-between flex-1 ">
+        <div
+          className={`flex items-center justify-between h-16 ${bottomBorder}`}
+        >
+          <div className="flex items-center  justify-between flex-1 ">
             <Link to="#" className="text-black dark:text-white font-bold">
-              Logo
+              Job Management
             </Link>
             {/* Hamburger button */}
             <button
-              className="text-accent dark:text-secondary ml-4 sm:hidden"
+              className="text-accent dark:text-secondary ml-4 md:hidden"
               onClick={toggleMenu}
               onMouseEnter={toggleMenu}
             >
@@ -135,9 +143,9 @@ const Navbar = () => {
             </button>
           </div>
           {/* Menu Link for large screen */}
-          <div className="hidden sm:flex sm:items-center">
+          <div className="hidden md:flex md:items-center">
             <button
-              className="text-accent dark:text-secondary hover:bg-blue-100 hover:dark:bg-gray-600 px-3 py-2 rounded-md text-sm font-medium"
+              className="text-accent dark:text-secondary hover:bg-blue-200 hover:dark:bg-gray-600 px-3 py-2 rounded-full text-sm font-medium "
               onClick={() => dispatch(toggleTheme())}
               // onClick={handleSwitchTheme}
             >
@@ -150,10 +158,10 @@ const Navbar = () => {
 
       {/* Mobile menu, show/hide based on menu state. */}
       <div
-        className={`sm:hidden ${isOpen ? "block" : "hidden"}`}
+        className={`md:hidden ${isOpen ? "block" : "hidden"} `}
         onMouseLeave={toggleMenu}
       >
-        <div className="flex flex-col text-center px-2 pt-2 pb-3 space-y-1">
+        <div className={`flex flex-col text-center px-2 pt-2 pb-3  space-y-1 `}>
           {links}
         </div>
       </div>

@@ -71,7 +71,7 @@ const JobSeekerRegistration = () => {
     if (isSuccess) {
       toast.success("Wellcome as a Job Seeker.", { id: "addUser" });
       reset();
-      navigate("/dashboard");
+      navigate("/job-seeker-dashboard");
     }
     if (isError) {
       toast.success(error, { id: "addUser" });

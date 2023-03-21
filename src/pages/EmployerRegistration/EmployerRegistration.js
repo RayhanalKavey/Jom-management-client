@@ -36,7 +36,7 @@ const EmployerRegistration = () => {
     if (isSuccess) {
       toast.success("Welcome as a Employer.", { id: "addUser" });
       reset();
-      navigate("/dashboard");
+      navigate("/employer-dashboard");
     }
     if (isError) {
       toast.success(error, { id: "addUser" });
