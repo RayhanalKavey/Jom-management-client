@@ -58,52 +58,70 @@ const JobCard = ({ job }) => {
       toast.success(error, { id: "apply" });
     }
   }, [isLoading, isSuccess, isError, error]);
-  return (
+
+  /*--------------------------------------------
+   Check if the current user applied in this job, and Buttons class
+   -------------------------------------------- */
+  const outlinedButton =
+    "px-2 py-1 text-accent hover:text-secondary bg-base-100 border  rounded-lg hover:bg-primary";
+
+  const buttonClass =
+    "px-2 py-1 text-secondary bg-primary border rounded-lg hover:bg-[#2a78a5]";
+  const applyButton = (
     <>
-      <p className="text-lg font-semibold text-center">{job?.position}</p>
-      <p className="">{job?.jobCategory}</p>
-      <br />
-      <span className="p-1 bg-yellow-300 rounded text-accent ">
-        {job?.jobType}
-      </span>
-      <br />
-      <br />
-      {/* <button className="btn btn-darkPrimary btn-sm">Shortlist</button> */}
-
-      <div className="flex gap-2">
-        {/* Check if the current user applied in this job */}
-        {isJobApplied ? (
-          <>
-            <Link className="btn btn-accent  btn-sm ">
-              {" "}
-              <span className="text-secondary">Applied</span>
+      {isJobApplied ? (
+        <>
+          <Link className={`${buttonClass}`}> Applied</Link>
+        </>
+      ) : (
+        <>
+          {/* This logic is for if the user logged in properly */}
+          {!email ? (
+            <Link className={`${buttonClass}`} to={"/login"}>
+              Apply{" "}
             </Link>
-          </>
-        ) : (
-          <>
-            {/* This logic is for if the user logged in properly */}
-            {!email ? (
-              <Link className="btn btn-primary btn-sm" to={"/login"}>
-                <span className="text-secondary">Apply</span>
-              </Link>
-            ) : (
-              <Link
-                className="btn btn-primary btn-sm"
-                onClick={() => applyJobs(applyInformation)}
-              >
-                <span className="text-secondary">
-                  <span className="text-secondary">Apply</span>
-                </span>
-              </Link>
-            )}
-          </>
-        )}
-
-        <button className="btn btn-primary  btn-outline btn-sm">
-          Job Details
-        </button>
-      </div>
+          ) : (
+            <Link
+              className={`${buttonClass}`}
+              onClick={() => applyJobs(applyInformation)}
+            >
+              Apply{" "}
+            </Link>
+          )}
+        </>
+      )}
     </>
+  );
+
+  console.log("Job from Job card", job);
+  return (
+    <div>
+      {/* inner content */}
+      <div className="flex  items-start  gap-5 mb-5  flex-col sm:flex-row ">
+        {/* logo */}
+        <div className=" sm:mt-1.5  flex items-center justify-center h-12 w-12 rounded-md p-2 border-[.5px] bg-success">
+          <img src={job?.logo} alt="" />
+        </div>
+
+        {/* content */}
+        <div className="flex-1 w-full ">
+          <p className="text-lg font-semibold mb-1">{job?.position}</p>
+          <div className="flex gap-2 mb-5">
+            <p>location</p>
+            <p>time</p>
+            <p>remote/onSite/hybrid</p>
+          </div>
+
+          {/* All buttons  start*/}
+          <div className="flex gap-2">
+            <button className={`${buttonClass}`}>Shortlist</button>
+            {applyButton}
+            <button className={`${outlinedButton}`}>Job Details</button>
+          </div>
+          {/* All buttons end */}
+        </div>
+      </div>
+    </div>
   );
 };
 

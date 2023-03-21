@@ -70,7 +70,7 @@ const Navbar = () => {
   COMMON CSS CLASS
   *================*/
   const commonLinkClass =
-    "text-accent dark:text-secondary hover:bg-blue-100 hover:dark:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium";
+    "text-accent dark:text-secondary hover:bg-success hover:dark:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium";
   const bottomBorder = "border-b-[.5px] border-accent dark:border-gray-600";
 
   /*============
@@ -112,6 +112,20 @@ const Navbar = () => {
       )}
     </>
   );
+
+  const darkModeButton = (
+    <button
+      className="md:hidden text-accent dark:text-secondary hover:bg-success hover:dark:bg-gray-600 px-3 py-2 rounded-full text-sm font-medium border-[.5px] border-accent dark:border-info "
+      onClick={() => dispatch(toggleTheme())}
+      // onClick={handleSwitchTheme}
+    >
+      {theme === "dark" ? (
+        <MdOutlineLightMode style={{ fontSize: "1.5em" }} />
+      ) : (
+        <MdDarkMode style={{ fontSize: "1.5em" }} />
+      )}
+    </button>
+  );
   /* ======================
        Dark mood system end
        ======================*/
@@ -126,31 +140,39 @@ const Navbar = () => {
               Job Management
             </Link>
             {/* Hamburger button */}
-            <button
-              className="text-accent dark:text-secondary ml-4 md:hidden"
-              onClick={toggleMenu}
-              onMouseEnter={toggleMenu}
-            >
-              <svg className="h-6 w-6 fill-current" viewBox="0 0 24 24">
-                <path
-                  d="M4 6h16M4 12h16M4 18h16"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </button>
+            <div className="flex items-center justify-center">
+              <div>{darkModeButton}</div>
+              <button
+                className="text-accent dark:text-secondary ml-4 md:hidden"
+                onClick={toggleMenu}
+                onMouseEnter={toggleMenu}
+              >
+                <svg className="h-6 w-6 fill-current" viewBox="0 0 24 24">
+                  <path
+                    d="M4 6h16M4 12h16M4 18h16"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </button>
+            </div>
           </div>
           {/* Menu Link for large screen */}
-          <div className="hidden md:flex md:items-center">
+          <div className="hidden md:flex md:items-center ">
             <button
-              className="text-accent dark:text-secondary hover:bg-blue-200 hover:dark:bg-gray-600 px-3 py-2 rounded-full text-sm font-medium "
+              className="text-accent dark:text-secondary hover:bg-success hover:dark:bg-gray-600 px-3 py-2 rounded-full text-sm font-medium border-[.5px] border-accent dark:border-info  mr-1"
               onClick={() => dispatch(toggleTheme())}
               // onClick={handleSwitchTheme}
             >
-              {theme === "dark" ? <MdOutlineLightMode /> : <MdDarkMode />}
+              {theme === "dark" ? (
+                <MdOutlineLightMode style={{ fontSize: "1.5em" }} />
+              ) : (
+                <MdDarkMode style={{ fontSize: "1.5em" }} />
+              )}
             </button>
+
             {links}
           </div>
         </div>
