@@ -20,3 +20,13 @@ export const disabledButton = "";
 // Scaling of the button
 export const scaleButtonClass =
   "duration-500 transform  hover:scale-125 transition-all";
+// Dashboard buttons
+export const commonDashboardClass =
+  "bg-secondary dark:bg-accent text-accent dark:text-secondary dark:border-gray-600 ";
+export const dashboardDrawerButton =
+  "  text-xs uppercase font-semibold  px-2 py-1 bg-primary text-secondary border rounded-lg fixed bottom-4 right-4  ";
+export const dashboardLinkStyle = "duration-500  hover:text-primary uppercase";
+// delete button
+
+export const deleteButtonClass =
+  " duration-500  text-xs uppercase font-semibold  px-2 py-1 text-secondary bg-error border rounded-lg hover:bg-red-600";

@@ -3,6 +3,12 @@ import { toast } from "react-hot-toast";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import {
+  buttonClass,
+  deleteButtonClass,
+  outlinedButton,
+} from "../../../components/classes/classes";
+import TitleComponent from "../../../components/TitleComponent/TitleComponent";
+import {
   useDeleteAJobMutation,
   useGetJobsQuery,
 } from "../../../features/auth/jobApi";
@@ -31,34 +37,63 @@ const MyPostedJob = () => {
     }
   }, [deleteLoading, isSuccess, isError, error]);
   return (
-    <div>
-      {loggedInUserPost?.reverse()?.map((job) => (
-        <div className="m-2 border border-2 p-2 rounded-lg" key={job?._id}>
-          <p>{job?.position}</p>
+    <>
+      <TitleComponent title={"My Job Circular"} />
 
-          <Link
-            to={"/employer-dashboard/update-job"}
-            state={job}
-            className="btn btn-xs btn-success"
+      <div className="grid grid-cols-1 md:grid-cols-2  lg:grid-cols-1  xl:grid-cols-2 gap-4 w-full py-16 px-5 ">
+        {loggedInUserPost?.reverse()?.map((job) => (
+          <div
+            className="  border-[.08rem] p-4 rounded-lg  bg-secondary relative"
+            key={job?._id}
           >
-            {" "}
-            Edit
-          </Link>
+            {/* ----*/}
+            <div>
+              {/* inner content */}
+              <div className="flex  items-start  gap-5   flex-col sm:flex-row md:flex-col lg:flex-row ">
+                {/* logo */}
+                <div className=" sm:mt-1.5  flex items-center justify-center h-12 w-12 rounded-md p-2 border-[.5px] bg-success">
+                  <img src={job?.logo} alt="" />
+                </div>
 
-          <br />
-          <p>{job?.position}</p>
-          <p className="bg-green-200">{job?.jobCategory}</p>
+                {/* content */}
+                <div className="flex-1 w-full ">
+                  <p className="text-lg font-semibold mb-1">{job?.position}</p>
+                  <div className="flex gap-3 sm:gap-5 mb-5 flex-wrap">
+                    <p>location</p>
+                    <p>time</p>
+                    <p>remote/onSite/hybrid</p>
+                  </div>
 
-          <br />
-          <p>{job?.companyDetail}</p>
-          <br />
-          <p>{job?._id}</p>
-          <p>{job?.jobType}</p>
+                  {/* All buttons  start*/}
+                  <div className="flex justify-start items-center gap-2 flex-wrap">
+                    <button className={`${buttonClass}`}>Shortlist</button>
 
-          <button onClick={() => deleteAJob(job?._id)}>Delete</button>
-        </div>
-      ))}
-    </div>
+                    <button className={`${outlinedButton}`}>Job Details</button>
+                    <Link
+                      to={"/employer-dashboard/update-job"}
+                      state={job}
+                      className={`${buttonClass}`}
+                    >
+                      {" "}
+                      Edit
+                    </Link>
+                    <button
+                      onClick={() => deleteAJob(job?._id)}
+                      className={`${deleteButtonClass} `}
+                    >
+                      Delete
+                    </button>
+                  </div>
+                  {/* All buttons end */}
+                </div>
+              </div>
+            </div>
+
+            {/* ----*/}
+          </div>
+        ))}
+      </div>
+    </>
   );
 };
 

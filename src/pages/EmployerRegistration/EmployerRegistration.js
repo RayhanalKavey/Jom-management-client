@@ -7,7 +7,6 @@ import TitleComponent from "../../components/TitleComponent/TitleComponent";
 import { useRegisterEmployerMutation } from "../../features/auth/authApi";
 import { IoIosArrowRoundBack } from "react-icons/io";
 import {
-  buttonClass,
   scaleButtonClass,
   submitButtonClass,
 } from "../../components/classes/classes";
@@ -60,29 +59,16 @@ const EmployerRegistration = () => {
 
   const employeeCounts = ["1-50", "51-100", "101-500", "501-1000", "1000+"];
 
-  // // Button style
-  // const outlinedButton =
-  //   "text-xs uppercase font-semibold px-2 py-1 text-accent hover:text-secondary bg-base-100 border  rounded-lg hover:bg-primary";
-
-  // const buttonClass =
-  //   "text-xs uppercase font-semibold  px-2 py-1 text-secondary bg-primary border rounded-lg hover:bg-[#2a78a5]";
-
   return (
     <>
       <TitleComponent title={"Employer Registration"}></TitleComponent>
 
       <div className="flex items-center justify-center px-5 py-12 dark:bg-accent bg-base-100">
         <div className="w-[35rem] bg-secondary  p-10  border-[.08rem]  rounded-lg  ">
-          <form
-            onSubmit={handleSubmit(onSubmit)}
-            className="relative"
-            // className="relative max-w-xl mx-auto mt-20 bg-gray-300 p-16  shadow-xl rounded-tr-[50px] rounded-bl-[50px] "
-          >
+          <form onSubmit={handleSubmit(onSubmit)} className="relative">
             <Link to={"/poster-seeker"}>
               <div className={`${scaleButtonClass}  absolute -top-7 -left-7  `}>
-                {/* <h2 className="text-3xl font-bold flex justify-center h-full items-center"> */}
                 <IoIosArrowRoundBack style={{ fontSize: "1.8em" }} />
-                {/* </h2> */}
               </div>
             </Link>
             <h1 className="text-gray-800 text-3xl text-center mb-5 text-semibold">
