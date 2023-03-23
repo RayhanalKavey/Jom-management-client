@@ -30,10 +30,6 @@ export const createUser = createAsyncThunk(
       emailVerified,
       photoUrl,
       uid,
-      // role: "",
-      // isSeeker: false,
-      // isEmployer: false,
-      // isAdmin: false,
     };
     // We get this returned data in addCase's action.payload
     return user;

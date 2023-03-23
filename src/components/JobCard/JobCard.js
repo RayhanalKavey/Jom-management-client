@@ -60,7 +60,7 @@ const JobCard = ({ job }) => {
   }, [isLoading, isSuccess, isError, error]);
 
   /*--------------------------------------------
-   Check if the current user applied in this job, and Buttons class
+   Check if the current user applied in this job, and Buttons class start
    -------------------------------------------- */
   const outlinedButton =
     "text-xs uppercase font-semibold px-2 py-1 text-accent hover:text-secondary bg-base-100 border  rounded-lg hover:bg-primary";
@@ -70,10 +70,12 @@ const JobCard = ({ job }) => {
 
   let applyButton;
   /* 
-  1/ If the not logged in then send user  to  the login page 
-  2/ If user logged in but not a job seeker then sent user to the job seeker registration form
-  3/ If user logged in and registered as job seeker and applied in this job then button will be applied
-  */
+   1/ If the not logged in then send user  to  the login page 
+   2/ If user logged in but not a job seeker then sent user to the job seeker registration form
+   3/ If user logged in and registered as job seeker and applied in this job then button will be applied
+   4/ If user logged in su and registered an job seeker but not applied yet
+   */
+  //  1
   const location = useLocation();
   if (!email) {
     applyButton = (
@@ -87,6 +89,7 @@ const JobCard = ({ job }) => {
       </Link>
     );
   }
+  // 2
   if (email && !loggedInJobSeeker?.isJobSeeker) {
     applyButton = (
       <Link
@@ -99,9 +102,25 @@ const JobCard = ({ job }) => {
       </Link>
     );
   }
+  // 3
   if (email && loggedInJobSeeker?.isJobSeeker && isJobApplied) {
     applyButton = <Link className={`${buttonClass}`}> Applied</Link>;
   }
+  // 4
+  if (email && loggedInJobSeeker?.isJobSeeker && !isJobApplied) {
+    applyButton = (
+      <Link
+        className={`${buttonClass}`}
+        onClick={() => applyJobs(applyInformation)}
+      >
+        {" "}
+        Apply
+      </Link>
+    );
+  }
+  /*--------------------------------------------
+   Check if the current user applied in this job, and Buttons class end
+   -------------------------------------------- */
   return (
     <div>
       {/* inner content */}
