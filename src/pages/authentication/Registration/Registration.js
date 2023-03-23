@@ -81,7 +81,6 @@ const Registration = () => {
       <TitleComponent title={"Registration"}></TitleComponent>
       <div className="flex items-center justify-center px-5 py-12 dark:bg-accent bg-base-100">
         <div className="w-96 bg-secondary  p-10  border-[.08rem]  rounded-lg  ">
-          <h1 className="text-3xl mb-5 text-center">Registration</h1>
           <form onSubmit={handleSubmit(handleOnSubmit)}>
             <div className="form-control w-full max-w-xs">
               {/* -----Email--- */}

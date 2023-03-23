@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { homeButton } from "../../../components/classes/classes";
 
 const HeroSection = () => {
   return (
@@ -12,10 +13,7 @@ const HeroSection = () => {
           Explore job opportunities with our company and learn how you can join
           our team.
         </p>
-        <Link
-          to="/all-job"
-          className="bg-primary py-3 px-6 rounded-full text-accent font-bold shadow-lg uppercase tracking-wider"
-        >
+        <Link to="/all-job" className={`${homeButton}`}>
           <span className="text-secondary"> View Openings</span>
         </Link>
       </div>

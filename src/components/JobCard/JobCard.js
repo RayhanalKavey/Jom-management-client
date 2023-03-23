@@ -7,6 +7,7 @@ import {
   useGetApplyQuery,
 } from "../../features/auth/applyApi";
 import { useGetUserQuery } from "../../features/auth/authApi";
+import { buttonClass, outlinedButton } from "../classes/classes";
 
 const JobCard = ({ job }) => {
   //LoggedIn user email
@@ -59,14 +60,14 @@ const JobCard = ({ job }) => {
     }
   }, [isLoading, isSuccess, isError, error]);
 
-  /*--------------------------------------------
-   Check if the current user applied in this job, and Buttons class start
-   -------------------------------------------- */
-  const outlinedButton =
-    "text-xs uppercase font-semibold px-2 py-1 text-accent hover:text-secondary bg-base-100 border  rounded-lg hover:bg-primary";
+  // /*--------------------------------------------
+  //  Check if the current user applied in this job, and Buttons class start
+  //  -------------------------------------------- */
+  // const outlinedButton =
+  //   "text-xs uppercase font-semibold px-2 py-1 text-accent hover:text-secondary bg-base-100 border  rounded-lg hover:bg-primary";
 
-  const buttonClass =
-    "text-xs uppercase font-semibold  px-2 py-1 text-secondary bg-primary border rounded-lg hover:bg-[#2a78a5]";
+  // const buttonClass =
+  //   "text-xs uppercase font-semibold  px-2 py-1 text-secondary bg-primary border rounded-lg hover:bg-[#2a78a5]";
 
   let applyButton;
   /* 
