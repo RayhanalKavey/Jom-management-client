@@ -72,7 +72,7 @@ const EmployerRegistration = () => {
       <TitleComponent title={"Employer Registration"}></TitleComponent>
 
       <div className="flex items-center justify-center px-5 py-12 dark:bg-accent bg-base-100">
-        <div className="w-96 bg-secondary  p-10  border-[.08rem]  rounded-lg  ">
+        <div className="w-[35rem] bg-secondary  p-10  border-[.08rem]  rounded-lg  ">
           <form
             onSubmit={handleSubmit(onSubmit)}
             className="relative"

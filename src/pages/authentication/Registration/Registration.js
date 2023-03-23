@@ -6,6 +6,12 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import TitleComponent from "../../../components/TitleComponent/TitleComponent";
 import { createUser, googleLogin } from "../../../features/auth/authSlice";
 import useTitle from "../../../hooks/useTitle/useTitle";
+import logInImg from "../../../assets/images/sign_up.png";
+import {
+  googleButton,
+  submitButtonClass,
+} from "../../../components/classes/classes";
+
 const Registration = () => {
   // Title of the page
   useTitle("Registration");
@@ -79,10 +85,17 @@ const Registration = () => {
   return (
     <>
       <TitleComponent title={"Registration"}></TitleComponent>
+
       <div className="flex items-center justify-center px-5 py-12 dark:bg-accent bg-base-100">
-        <div className="w-96 bg-secondary  p-10  border-[.08rem]  rounded-lg  ">
-          <form onSubmit={handleSubmit(handleOnSubmit)}>
-            <div className="form-control w-full max-w-xs">
+        <div className="w-[80%] bg-secondary  p-10  border-[.08rem]  rounded-lg flex items-center justify-center flex-col lg:flex-row">
+          <div className="w-full md:w-1/2">
+            <img src={`${logInImg}`} alt="" />
+          </div>
+          <form
+            className="w-full md:w-1/2  md:px-5"
+            onSubmit={handleSubmit(handleOnSubmit)}
+          >
+            <div className="form-control w-full ">
               {/* -----Email--- */}
               <label className="block mb-1 font-bold text-gray-500">
                 Email
@@ -147,9 +160,10 @@ const Registration = () => {
               {/* ----Submit button----  */}
             </div>
             <input
-              className="w-full px-4 py-2 mt-5 mb-1 text-white bg-blue-500 rounded cursor-pointer"
+              className={`${submitButtonClass}`}
+              // className="w-full px-4 py-2 mt-5 mb-1 text-white bg-blue-500 rounded cursor-pointer"
               type="submit"
-              value="Sign Up"
+              value="Register"
               disabled={disabled}
             />
             {/* {isError && (
@@ -157,35 +171,36 @@ const Registration = () => {
               {error}
             </label>
           )} */}
-          </form>
-          {/* ---Link to the login page--- */}
-          <p className="text-center">
-            Already have an account?{" "}
-            <Link className="text-blue-500" to={"/login"}>
-              Login
-            </Link>{" "}
-          </p>
-          {/* ----Divider--- */}
-          <div className="flex items-center mt-5">
-            <hr className="flex-1 border-t border-gray-500" />
-            <div className="mx-3 text-gray-500">OR</div>
-            <hr className="flex-1 border-t border-gray-500" />
-          </div>
-          {/* ---Google login button--- */}
-          <button
-            onClick={handleGoogleLogin}
-            className="btn btn-md w-full btn-outline bg-white flex items-center justify-center py-2 rounded"
-            type="button"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 32 32"
-              className="w-5 h-5 mr-2"
+
+            {/* ---Link to the login page--- */}
+            <p className="text-center mt-2">
+              Already have an account?{" "}
+              <Link className="text-primary hover:text-warning" to={"/login"}>
+                Login
+              </Link>{" "}
+            </p>
+            {/* ----Divider--- */}
+            <div className="flex items-center mt-5">
+              <hr className="flex-1 border-t border-gray-500" />
+              <div className="mx-3 text-gray-500">OR</div>
+              <hr className="flex-1 border-t border-gray-500" />
+            </div>
+            {/* ---Google login button--- */}
+            <button
+              onClick={handleGoogleLogin}
+              className={`${googleButton}`}
+              type="button"
             >
-              <path d="M16.318 13.714v5.484h9.078c-0.37 2.354-2.745 6.901-9.078 6.901-5.458 0-9.917-4.521-9.917-10.099s4.458-10.099 9.917-10.099c3.109 0 5.193 1.318 6.38 2.464l4.339-4.182c-2.786-2.599-6.396-4.182-10.719-4.182-8.844 0-16 7.151-16 16s7.156 16 16 16c9.234 0 15.365-6.49 15.365-15.635 0-1.052-0.115-1.854-0.255-2.651z" />
-            </svg>
-            <span>Sign in with Google</span>
-          </button>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 32 32"
+                className="w-5 h-5 mr-2"
+              >
+                <path d="M16.318 13.714v5.484h9.078c-0.37 2.354-2.745 6.901-9.078 6.901-5.458 0-9.917-4.521-9.917-10.099s4.458-10.099 9.917-10.099c3.109 0 5.193 1.318 6.38 2.464l4.339-4.182c-2.786-2.599-6.396-4.182-10.719-4.182-8.844 0-16 7.151-16 16s7.156 16 16 16c9.234 0 15.365-6.49 15.365-15.635 0-1.052-0.115-1.854-0.255-2.651z" />
+              </svg>
+              <span>Sign in with Google</span>
+            </button>
+          </form>
         </div>
       </div>
     </>

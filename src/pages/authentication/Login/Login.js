@@ -7,6 +7,10 @@ import Spinner from "../../../components/Spinner/Spinner";
 import { googleLogin, loginUser } from "../../../features/auth/authSlice";
 import useTitle from "../../../hooks/useTitle/useTitle";
 import TitleComponent from "../../../components/TitleComponent/TitleComponent";
+import {
+  googleButton,
+  submitButtonClass,
+} from "../../../components/classes/classes";
 const Login = () => {
   useTitle("Login");
 
@@ -96,9 +100,9 @@ const Login = () => {
             </div>
             {/* ----Submit button----  */}
             <input
-              className="w-full px-4 py-2 mt-5 mb-1 text-white bg-blue-500 rounded cursor-pointer"
+              className={`${submitButtonClass}`}
               type="submit"
-              value="Sign Up"
+              value="Login"
             />
             {/* {isError && (
             <label className="block mt-2 text-sm font-bold text-red-600">
@@ -107,9 +111,12 @@ const Login = () => {
           )} */}
           </form>
           {/* ---Link to the login page--- */}
-          <p className="text-center">
+          <p className="text-center mt-2">
             Not registered yet?{" "}
-            <Link className="text-blue-500" to={"/registration"}>
+            <Link
+              className="text-primary hover:text-warning"
+              to={"/registration"}
+            >
               Registration
             </Link>{" "}
           </p>
@@ -122,7 +129,7 @@ const Login = () => {
           {/* ---Google login button--- */}
           <button
             onClick={handleGoogleLogin}
-            className="btn btn-md w-full btn-outline bg-white flex items-center justify-center py-2 rounded"
+            className={`${googleButton}`}
             type="button"
           >
             <svg

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { useSelector } from "react-redux";
@@ -7,8 +7,8 @@ import TitleComponent from "../../components/TitleComponent/TitleComponent";
 import { useRegisterJobSeekerMutation } from "../../features/auth/authApi";
 import { IoIosArrowRoundBack } from "react-icons/io";
 import {
-  buttonClass,
   scaleButtonClass,
+  submitButtonClass,
 } from "../../components/classes/classes";
 const JobSeekerRegistration = () => {
   // Get user email from the store
@@ -87,7 +87,7 @@ const JobSeekerRegistration = () => {
       <TitleComponent title={"Job Seeker Registration"}></TitleComponent>
 
       <div className="flex items-center justify-center px-5 py-12 dark:bg-accent bg-base-100">
-        <div className="w-96 bg-secondary  p-10  border-[.08rem]  rounded-lg  ">
+        <div className="w-[35rem] bg-secondary  p-10  border-[.08rem]  rounded-lg  ">
           <form
             onSubmit={handleSubmit(onSubmit)}
             className="relative"
@@ -296,7 +296,7 @@ const JobSeekerRegistration = () => {
               </select>
             </div>
 
-            <button type="submit" className={`${buttonClass} mt-4`}>
+            <button type="submit" className={`${submitButtonClass} mt-4`}>
               Submit
             </button>
           </form>

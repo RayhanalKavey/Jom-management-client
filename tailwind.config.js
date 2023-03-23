@@ -6,7 +6,8 @@ module.exports = {
     themes: [
       {
         mytheme: {
-          primary: "#0B66C3",
+          primary: "#6C63FF",
+          // primary: "#0B66C3",
 
           secondary: "#F5F5F5",
 
@@ -20,7 +21,7 @@ module.exports = {
 
           success: "#c9e4f5",
 
-          warning: "#FBBD23",
+          warning: "#2a78a5",
 
           error: "#F87272",
         },

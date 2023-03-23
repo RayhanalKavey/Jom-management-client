@@ -20,38 +20,34 @@ const JobPosterOrJobSeeker = () => {
     (u) => u?.email === email && u?.isJobSeeker === true
   );
 
+  const seekerOrEmployerButton =
+    " bg-secondary  border-[.08rem]  rounded-lg w-full h-full text-center text-2xl duration-500 hover:scale-105 hover:bg-warning hover:text-secondary font-semibold";
+  const linkStyle = "p-10 block";
+
   return (
     <>
       <TitleComponent title={"Continue As"}></TitleComponent>
       <section className="dark:bg-accent py-20 ">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8   ">
           {/* Job poster or seeker content Start */}
-          <div className="flex flex-row">
-            <div className="w-1/2 flex flex-col items-center justify-center bg-gray-100">
-              <p className="text-lg font-medium mb-4">Continue as</p>
+          <div className="flex flex-row gap-8  ">
+            <div className={`${seekerOrEmployerButton}`}>
               {!loggedInEmployer?.isEmployer &&
                 email &&
                 !loggedInEmployer?._id && (
-                  <Link
-                    to="/employerForm"
-                    className="text-black hover:bg-gray-300 px-3 py-2 rounded-md text-sm font-medium"
-                  >
+                  <Link to="/employerForm" className={`${linkStyle}`}>
                     Employer
                   </Link>
                 )}
               {loggedInEmployer?.isEmployer &&
                 email &&
                 loggedInEmployer?._id && (
-                  <Link
-                    to="/employer-dashboard"
-                    className="text-black hover:bg-gray-300 px-3 py-2 rounded-md text-sm font-medium"
-                  >
+                  <Link to="/employer-dashboard" className={`${linkStyle}`}>
                     Employer
                   </Link>
                 )}
             </div>
-            <div className="w-1/2 flex flex-col items-center justify-center bg-gray-200">
-              <p className="text-lg font-medium mb-4">Continue as</p>
+            <div className={`${seekerOrEmployerButton}`}>
               {/* 
         1) !loggedInJobSeeker?.isJobSeeker = To check if the user is a job seeker
         2) email = user is logged in firebase
@@ -60,20 +56,14 @@ const JobPosterOrJobSeeker = () => {
               {!loggedInJobSeeker?.isJobSeeker &&
                 email &&
                 !loggedInJobSeeker?._id && (
-                  <Link
-                    to="/jobSeekerForm"
-                    className="text-black hover:bg-gray-300 px-3 py-2 rounded-md text-sm font-medium"
-                  >
+                  <Link to="/jobSeekerForm" className={`${linkStyle}`}>
                     Job Seeker
                   </Link>
                 )}
               {loggedInJobSeeker?.isJobSeeker &&
                 email &&
                 loggedInJobSeeker?._id && (
-                  <Link
-                    to="/job-seeker-dashboard"
-                    className="text-black hover:bg-gray-300 px-3 py-2 rounded-md text-sm font-medium"
-                  >
+                  <Link to="/job-seeker-dashboard" className={`${linkStyle}`}>
                     Job Seeker
                   </Link>
                 )}
