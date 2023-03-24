@@ -50,3 +50,11 @@ export const dateFormate = {
 };
 /* 
 {new Date(job?.currentDate).toLocaleDateString(en-US",dateFormate)} */
+
+// Icon button with dark button
+
+export const iconButton =
+  " text-accent dark:text-secondary hover:bg-success hover:dark:bg-gray-600 px-3 py-2 rounded-full text-sm font-medium border-[.5px] border-accent dark:border-info";
+// Bottom border
+export const bottomBorder = "border-b-[.5px]  dark:border-gray-600";
+export const topBorder = "border-t-[.5px]  dark:border-gray-600";

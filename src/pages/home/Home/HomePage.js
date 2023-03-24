@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
+import { bottomBorder, topBorder } from "../../../components/classes/classes";
 import SectionHeading from "../../../components/SectionHeading/SectionHeading";
 import SectionSubHeading from "../../../components/SectionSubHeading/SectionSubHeading";
 import Spinner from "../../../components/Spinner/Spinner";
@@ -9,14 +10,13 @@ import ExperiencedJobHome from "../ExperiencedJobHome/ExperiencedJobHome";
 import FresherJobHome from "../FresherJobHome/FresherJobHome";
 import HeroSection from "../HeroSection/HeroSection";
 import PopularJobCategory from "../PopularJobCategory/PopularJobCategory";
+import UserOpinion from "../UserOpinion/UserOpinion";
 
 const HomePage = () => {
   useTitle("Home");
   // Information of the redux store
   const { isLoading, isError } = useSelector((state) => state.auth);
   // Fetched data of all jobs
-
-  const bottomBorder = "border-b-[.5px]  dark:border-gray-600";
 
   let content;
 
@@ -57,7 +57,9 @@ const HomePage = () => {
           </div>
         </section>
         {/* Popular job Category */}
-        <section className="bg-secondary dark:bg-accent py-28 ">
+        <section
+          className={`${bottomBorder} ${topBorder} bg-secondary dark:bg-accent py-28 `}
+        >
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
             <SectionHeading>Job Category</SectionHeading>
             <SectionSubHeading>Popular Job Categories</SectionSubHeading>
@@ -65,10 +67,11 @@ const HomePage = () => {
           </div>
         </section>
         {/*  */}
-        <section className=" dark:bg-accent py-28 ">
+        <section className={` dark:bg-accent py-28 `}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
-            <SectionHeading>Job Category</SectionHeading>
-            <SectionSubHeading>Popular Job Categories</SectionSubHeading>
+            <SectionHeading>User Opinion</SectionHeading>
+            <SectionSubHeading>Let's See What User Says </SectionSubHeading>
+            <UserOpinion></UserOpinion>
           </div>
         </section>
       </div>
