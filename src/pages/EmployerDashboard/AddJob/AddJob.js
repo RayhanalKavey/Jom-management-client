@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
-import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import TitleComponent from "../../../components/TitleComponent/TitleComponent";
 import { usePostAJobMutation } from "../../../features/auth/jobApi";
 import { IoIosArrowRoundBack } from "react-icons/io";
