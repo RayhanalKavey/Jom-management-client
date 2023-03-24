@@ -1,11 +1,14 @@
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
+import SectionHeading from "../../../components/SectionHeading/SectionHeading";
+import SectionSubHeading from "../../../components/SectionSubHeading/SectionSubHeading";
 import Spinner from "../../../components/Spinner/Spinner";
 import Tryout from "../../../components/Tryout";
 import useTitle from "../../../hooks/useTitle/useTitle";
 import ExperiencedJobHome from "../ExperiencedJobHome/ExperiencedJobHome";
 import FresherJobHome from "../FresherJobHome/FresherJobHome";
 import HeroSection from "../HeroSection/HeroSection";
+import PopularJobCategory from "../PopularJobCategory/PopularJobCategory";
 
 const HomePage = () => {
   useTitle("Home");
@@ -38,28 +41,34 @@ const HomePage = () => {
         {/* Fresher job */}
         <section className="dark:bg-accent pt-28 ">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
-            <h3 className="text-md font-bold text-center uppercase text-primary">
-              Fresher Job{" "}
-            </h3>
-            <h2 className="text-3xl font-semibold text-center mt-6 mb-16 text-accent dark:text-secondary">
-              {" "}
-              Looking for a Fresh Start?
-            </h2>
-
+            <SectionHeading>Fresher Job</SectionHeading>
+            <SectionSubHeading> Looking for a Fresh Start?</SectionSubHeading>
             <FresherJobHome></FresherJobHome>
           </div>
         </section>
         {/* Experience job */}
         <section className="dark:bg-accent py-28 ">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
-            <h3 className="text-md font-bold text-center uppercase text-primary">
-              Experienced Job{" "}
-            </h3>
-            <h2 className="text-3xl font-semibold text-center mt-6 mb-16 text-accent dark:text-secondary">
-              {" "}
+            <SectionHeading>Experienced Job</SectionHeading>
+            <SectionSubHeading>
               Looking for Better Opportunity?
-            </h2>
+            </SectionSubHeading>
             <ExperiencedJobHome></ExperiencedJobHome>
+          </div>
+        </section>
+        {/* Popular job Category */}
+        <section className="bg-secondary dark:bg-accent py-28 ">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
+            <SectionHeading>Job Category</SectionHeading>
+            <SectionSubHeading>Popular Job Categories</SectionSubHeading>
+            <PopularJobCategory></PopularJobCategory>
+          </div>
+        </section>
+        {/*  */}
+        <section className=" dark:bg-accent py-28 ">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
+            <SectionHeading>Job Category</SectionHeading>
+            <SectionSubHeading>Popular Job Categories</SectionSubHeading>
           </div>
         </section>
       </div>

@@ -21,7 +21,7 @@ const AllJob = () => {
           ?.reverse()
           ?.map((job) => (
             <div
-              className="m-2  border-[.08rem] p-4 rounded-lg  bg-secondary"
+              className="m-2  border-[.08rem] p-6 rounded-lg  bg-secondary"
               key={job?._id}
             >
               <JobCard job={job}></JobCard>

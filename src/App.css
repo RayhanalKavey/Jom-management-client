@@ -94,3 +94,9 @@ xl (1280px)	max-width: 1280px;
     transform: rotate(360deg);
   }
 }
+.iconStyle svg {
+  /* height: 50px;
+  width: 80px; */
+  /* background-color: bisque;
+  border-radius: 999px; */
+}

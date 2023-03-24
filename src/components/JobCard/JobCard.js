@@ -135,7 +135,7 @@ const JobCard = ({ job }) => {
   return (
     <div>
       {/* inner content */}
-      <div className="flex  items-start  gap-5   flex-col sm:flex-row md:flex-col lg:flex-row ">
+      <div className="flex  items-start  gap-5   flex-col sm:flex-row md:flex-col lg:flex-row relative">
         {/* logo */}
         <div className=" sm:mt-1.5  flex items-center justify-center h-12 w-12 rounded-md p-2 border-[.5px] bg-success">
           <img src={job?.logo} alt="" />
@@ -148,7 +148,7 @@ const JobCard = ({ job }) => {
             <p className="text-lg font-semibold ">{job?.position}</p>
 
             <div
-              className={`${scaleButtonClass}  absolute top-6 right-6 text-accent dark:text-secondary `}
+              className={`${scaleButtonClass}  absolute top-0 right-0 text-accent dark:text-secondary `}
             >
               <MdOutlineBookmarkAdd style={{ fontSize: "1.5rem" }} />
               <MdOutlineBookmarkAdded style={{ fontSize: "1.5rem" }} />
