@@ -7,7 +7,17 @@ import {
   useGetApplyQuery,
 } from "../../features/auth/applyApi";
 import { useGetUserQuery } from "../../features/auth/authApi";
-import { buttonClass, outlinedButton } from "../classes/classes";
+import {
+  badgeClass,
+  buttonApplied,
+  buttonClass,
+  dateFormate,
+  outlinedButton,
+  scaleButtonClass,
+} from "../classes/classes";
+import { MdOutlineBookmarkAdd, MdOutlineBookmarkAdded } from "react-icons/md";
+import { CiLocationOn, CiTimer } from "react-icons/ci";
+import { TbCloudDataConnection } from "react-icons/tb";
 
 const JobCard = ({ job }) => {
   //LoggedIn user email
@@ -105,7 +115,7 @@ const JobCard = ({ job }) => {
   }
   // 3
   if (email && loggedInJobSeeker?.isJobSeeker && isJobApplied) {
-    applyButton = <Link className={`${buttonClass}`}> Applied</Link>;
+    applyButton = <Link className={`${buttonApplied} `}> Applied</Link>;
   }
   // 4
   if (email && loggedInJobSeeker?.isJobSeeker && !isJobApplied) {
@@ -133,21 +143,70 @@ const JobCard = ({ job }) => {
 
         {/* content */}
         <div className="flex-1 w-full ">
-          <p className="text-lg font-semibold mb-1">{job?.position}</p>
-          <div className="flex gap-3 sm:gap-5 mb-5 flex-wrap">
-            <p>location</p>
-            <p>time</p>
-            <p>remote/onSite/hybrid</p>
+          {/* heading(position)  */}
+          <div className="flex justify-between items-center mb-3">
+            <p className="text-lg font-semibold ">{job?.position}</p>
+
+            <div
+              className={`${scaleButtonClass}  absolute top-6 right-6 text-accent dark:text-secondary `}
+            >
+              <MdOutlineBookmarkAdd style={{ fontSize: "1.5rem" }} />
+              <MdOutlineBookmarkAdded style={{ fontSize: "1.5rem" }} />
+            </div>
+          </div>
+
+          {/* ------INFO----- */}
+          <div className="">
+            {/*---- Badge-- */}
+            <div className="flex justify-start items-center gap-3 sm:gap-5 mb-5 flex-wrap text-warning">
+              {/* Company Name */}
+              <div className={`${badgeClass} `}>
+                <p> {job?.company}</p>
+              </div>
+              {/* Job type */}
+              <div className={`${badgeClass} `}>
+                <p>{job?.jobType}</p>
+              </div>
+              {/* Job category */}
+              <div className={`${badgeClass} `}>
+                <p>{job?.jobCategory}</p>
+              </div>
+            </div>
+          </div>
+          {/* ---badge end--- */}
+          {/* --- job info--- */}
+          <div className="flex justify-start items-center gap-4 sm:gap-6 mb-5 flex-wrap text-info text-md">
+            {/* Company Location */}
+            <div className="flex justify-center items-center gap-2">
+              <p>
+                <CiLocationOn style={{ fontSize: "1.4rem" }} />
+              </p>
+              <p className="">{job?.location}</p>
+            </div>
+            {/* Posted time */}
+            <div className="flex justify-center items-center gap-2">
+              <p>
+                <CiTimer style={{ fontSize: "1.4rem" }} />
+              </p>
+              <p>
+                {" "}
+                {new Date(job?.currentDate).toLocaleDateString(
+                  "en-US",
+                  dateFormate
+                )}
+              </p>
+            </div>
+            {/* ---job  info end--- */}
           </div>
 
           {/* All buttons  start*/}
           <div className="flex justify-start items-center gap-2 flex-wrap">
-            <button className={`${buttonClass}`}>Shortlist</button>
             {applyButton}
             <button className={`${outlinedButton}`}>Job Details</button>
           </div>
           {/* All buttons end */}
         </div>
+        {/* content end*/}
       </div>
     </div>
   );
