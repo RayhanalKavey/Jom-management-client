@@ -85,7 +85,7 @@ const EmployerRegistration = () => {
                   type="text"
                   id="firstName"
                   {...register("firstName", { required: true })}
-                  className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
                 />
                 {errors.firstName && (
                   <span className="text-red-500 text-sm">
@@ -102,7 +102,7 @@ const EmployerRegistration = () => {
                   type="text"
                   id="lastName"
                   {...register("lastName", { required: true })}
-                  className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
                 />
                 {errors.lastName && (
                   <span className="text-red-500 text-sm">
@@ -169,7 +169,7 @@ const EmployerRegistration = () => {
                 {...register("email")}
                 defaultValue={email}
                 readOnly
-                className=" cursor-not-allowed w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className=" cursor-not-allowed w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
               />
               {errors.email && (
                 <span className="text-red-500 text-sm">
@@ -184,7 +184,7 @@ const EmployerRegistration = () => {
                 type="text"
                 id="companyName"
                 {...register("companyName", { required: true })}
-                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
               />
               {errors.companyName && (
                 <span className="text-red-500 text-sm">
@@ -198,7 +198,7 @@ const EmployerRegistration = () => {
               <select
                 id="companyCategory"
                 {...register("companyCategory")}
-                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
               >
                 {companyCategories.map((category) => (
                   <option key={category} value={category}>
@@ -214,7 +214,7 @@ const EmployerRegistration = () => {
                 type="text"
                 id="roleInCompany"
                 {...register("roleInCompany", { required: true })}
-                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
               />
               {errors.roleInCompany && (
                 <span className="text-red-500 text-sm">
@@ -229,7 +229,7 @@ const EmployerRegistration = () => {
               <select
                 id="employeeCount"
                 {...register("employeeCount")}
-                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
               >
                 {employeeCounts.map((count) => (
                   <option key={count} value={count}>

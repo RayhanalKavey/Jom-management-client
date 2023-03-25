@@ -73,7 +73,7 @@ const AddJob = () => {
                   type="text"
                   id="position"
                   {...register("position", { required: true })}
-                  className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
                 />
                 {errors.position && (
                   <span className="text-red-500 text-sm">
@@ -90,7 +90,7 @@ const AddJob = () => {
                   type="text"
                   id="company"
                   {...register("company", { required: true })}
-                  className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
                 />
                 {errors.company && (
                   <span className="text-red-500 text-sm">
@@ -156,7 +156,7 @@ const AddJob = () => {
               <select
                 id="requiredExp"
                 {...register("requiredExp")}
-                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
               >
                 {requiredExp.map((category) => (
                   <option key={category} value={category}>
@@ -176,7 +176,7 @@ const AddJob = () => {
                 {...register("email")}
                 defaultValue={email}
                 readOnly
-                className=" cursor-not-allowed w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className=" cursor-not-allowed w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
               />
               {errors.email && (
                 <span className="text-red-500 text-sm">
@@ -191,7 +191,7 @@ const AddJob = () => {
                 type="text"
                 id="location"
                 {...register("location", { required: true })}
-                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
               />
               {errors.location && (
                 <span className="text-red-500 text-sm">
@@ -206,7 +206,7 @@ const AddJob = () => {
                 type="text"
                 id="companyCategory"
                 {...register("companyCategory", { required: true })}
-                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
               />
               {errors.companyCategory && (
                 <span className="text-red-500 text-sm">
@@ -220,7 +220,7 @@ const AddJob = () => {
               <select
                 id="jobCategory"
                 {...register("jobCategory")}
-                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
               >
                 {jobCategories.map((category) => (
                   <option key={category} value={category}>
@@ -236,7 +236,7 @@ const AddJob = () => {
                 type="text"
                 id="logo"
                 {...register("logo", { required: true })}
-                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
               />
               {errors.logo && (
                 <span className="text-red-500 text-sm">
@@ -251,7 +251,7 @@ const AddJob = () => {
                 type="text"
                 id="companyDetail"
                 {...register("companyDetail", { required: true })}
-                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 h-60"
+                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary h-60"
               ></textarea>
               {errors.companyDetail && (
                 <span className="text-red-500 text-sm">
@@ -267,7 +267,7 @@ const AddJob = () => {
                 id="jobDetail"
                 {...register("jobDetail", { required: true })}
                 className="w-full px-4 py-2 border rounded-md focus:outline-none
-            focus:ring-2 focus:ring-blue-500  h-60"
+            focus:ring-2 focus:ring-primary  h-60"
               ></textarea>
 
               {errors.jobDetail && (

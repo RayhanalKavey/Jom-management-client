@@ -11,6 +11,7 @@ import ExperiencedJobHome from "../ExperiencedJobHome/ExperiencedJobHome";
 import FresherJobHome from "../FresherJobHome/FresherJobHome";
 import HeroSection from "../HeroSection/HeroSection";
 import HowItWorks from "../HowItWorks/HowItWorks";
+import Newsletter from "../Newsletter/Newsletter";
 import PopularJobCategory from "../PopularJobCategory/PopularJobCategory";
 import UserOpinion from "../UserOpinion/UserOpinion";
 
@@ -87,6 +88,14 @@ const HomePage = () => {
         <section className={` dark:bg-accent pt-10 pb-28 `}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
             <BrandSection />
+          </div>
+        </section>
+        {/* newsletter Section */}
+        <section className={` ${topBorder} bg-success dark:bg-accent py-28 `}>
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
+            <SectionHeading>Newsletter</SectionHeading>
+            <SectionSubHeading>Subscribe to Our Newsletter</SectionSubHeading>
+            <Newsletter></Newsletter>
           </div>
         </section>
       </div>

@@ -113,7 +113,7 @@ const JobSeekerRegistration = () => {
                   type="text"
                   id="firstName"
                   {...register("firstName", { required: true })}
-                  className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
                 />
                 {errors.firstName && (
                   <span className="text-red-500 text-sm">
@@ -130,7 +130,7 @@ const JobSeekerRegistration = () => {
                   type="text"
                   id="lastName"
                   {...register("lastName", { required: true })}
-                  className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
                 />
                 {errors.lastName && (
                   <span className="text-red-500 text-sm">
@@ -192,7 +192,7 @@ const JobSeekerRegistration = () => {
                 {...register("email")}
                 defaultValue={email}
                 readOnly
-                className=" cursor-not-allowed w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className=" cursor-not-allowed w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
               />
               {errors.email && (
                 <span className="text-red-500 text-sm">
@@ -207,7 +207,7 @@ const JobSeekerRegistration = () => {
               <select
                 id="companyCategory"
                 {...register("companyCategory")}
-                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
               >
                 {companyCategories.map((category) => (
                   <option key={category} value={category}>
@@ -225,7 +225,7 @@ const JobSeekerRegistration = () => {
                 type="text"
                 id="skills"
                 {...register("skills", { required: true })}
-                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
               />
               {errors.skills && (
                 <span className="text-red-500 text-sm">
@@ -240,7 +240,7 @@ const JobSeekerRegistration = () => {
               <select
                 id="position"
                 {...register("position")}
-                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
               >
                 {position.map((category) => (
                   <option key={category} value={category}>
@@ -255,7 +255,7 @@ const JobSeekerRegistration = () => {
               <select
                 id="jobType"
                 {...register("jobType")}
-                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
               >
                 {jobType.map((category) => (
                   <option key={category} value={category}>
@@ -270,7 +270,7 @@ const JobSeekerRegistration = () => {
               <select
                 id="yearOfExp"
                 {...register("yearOfExp")}
-                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
               >
                 {yearOfExp.map((category) => (
                   <option key={category} value={category}>
@@ -286,7 +286,7 @@ const JobSeekerRegistration = () => {
               <select
                 id="employeeCount"
                 {...register("employeeCount")}
-                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
               >
                 {employeeCounts.map((count) => (
                   <option key={count} value={count}>
