@@ -6,9 +6,11 @@ import SectionSubHeading from "../../../components/SectionSubHeading/SectionSubH
 import Spinner from "../../../components/Spinner/Spinner";
 import Tryout from "../../../components/Tryout";
 import useTitle from "../../../hooks/useTitle/useTitle";
+import BrandSection from "../BrandSection/BrandSection";
 import ExperiencedJobHome from "../ExperiencedJobHome/ExperiencedJobHome";
 import FresherJobHome from "../FresherJobHome/FresherJobHome";
 import HeroSection from "../HeroSection/HeroSection";
+import HowItWorks from "../HowItWorks/HowItWorks";
 import PopularJobCategory from "../PopularJobCategory/PopularJobCategory";
 import UserOpinion from "../UserOpinion/UserOpinion";
 
@@ -33,17 +35,24 @@ const HomePage = () => {
             <HeroSection></HeroSection>
           </div>
         </section>
-        {/* <section className="py-28 ">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          </div>
-        </section> */}
 
+        {/* How it works  */}
+        <section className="dark:bg-accent pt-28 ">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
+            <SectionHeading>Career Quest</SectionHeading>
+            <SectionSubHeading>
+              {" "}
+              Simplify Your Job Search or Hiring Process
+            </SectionSubHeading>
+            <HowItWorks />
+          </div>
+        </section>
         {/* Fresher job */}
         <section className="dark:bg-accent pt-28 ">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
             <SectionHeading>Fresher Job</SectionHeading>
             <SectionSubHeading> Looking for a Fresh Start?</SectionSubHeading>
-            <FresherJobHome></FresherJobHome>
+            <FresherJobHome />
           </div>
         </section>
         {/* Experience job */}
@@ -53,7 +62,7 @@ const HomePage = () => {
             <SectionSubHeading>
               Looking for Better Opportunity?
             </SectionSubHeading>
-            <ExperiencedJobHome></ExperiencedJobHome>
+            <ExperiencedJobHome />
           </div>
         </section>
         {/* Popular job Category */}
@@ -63,15 +72,21 @@ const HomePage = () => {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
             <SectionHeading>Job Category</SectionHeading>
             <SectionSubHeading>Popular Job Categories</SectionSubHeading>
-            <PopularJobCategory></PopularJobCategory>
+            <PopularJobCategory />
           </div>
         </section>
-        {/*  */}
+        {/*  User openion */}
         <section className={` dark:bg-accent py-28 `}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
             <SectionHeading>User Opinion</SectionHeading>
             <SectionSubHeading>Let's See What User Says </SectionSubHeading>
-            <UserOpinion></UserOpinion>
+            <UserOpinion />
+          </div>
+        </section>
+        {/* Brand Section */}
+        <section className={` dark:bg-accent pt-10 pb-28 `}>
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
+            <BrandSection />
           </div>
         </section>
       </div>
