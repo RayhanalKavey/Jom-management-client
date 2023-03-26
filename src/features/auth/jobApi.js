@@ -8,6 +8,12 @@ const jobApi = apiSlice.injectEndpoints({
       }),
       providesTags: ["jobs"],
     }),
+    getApplyJobs: builder.query({
+      query: () => ({
+        url: `/apply-jobs?`,
+      }),
+      providesTags: ["jobs"],
+    }),
     postAJob: builder.mutation({
       query: (data) => ({
         url: "/jobs",
@@ -39,6 +45,7 @@ const jobApi = apiSlice.injectEndpoints({
 });
 export const {
   useGetJobsQuery,
+  useGetApplyJobsQuery,
   usePostAJobMutation,
   useUpdateAJobMutation,
   useDeleteAJobMutation,

@@ -8,7 +8,6 @@ import { IoIosArrowRoundBack } from "react-icons/io";
 
 const Blog = () => {
   const { data: blogs } = useGetBlogsQuery();
-  console.log("blogs:-", blogs);
   return (
     <div>
       <TitleComponent title="Blogs" />

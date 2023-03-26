@@ -24,7 +24,6 @@ const HomePage = () => {
   // Fetched data of all jobs
 
   const { data: blogs } = useGetBlogsQuery();
-  console.log("blogs:-", blogs);
 
   let content;
 

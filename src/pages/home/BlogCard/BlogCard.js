@@ -3,7 +3,6 @@ import { AiOutlineRight } from "react-icons/ai";
 import { Link } from "react-router-dom";
 
 const BlogCard = ({ blog }) => {
-  console.log("blog from blog card", blog);
   return (
     <>
       {/* card */}
