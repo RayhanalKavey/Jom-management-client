@@ -1,0 +1,310 @@
+import React, { useEffect } from "react";
+import { toast } from "react-hot-toast";
+import { CiLocationOn, CiTimer } from "react-icons/ci";
+import { IoIosArrowRoundBack } from "react-icons/io";
+import { MdOutlineBookmarkAdd, MdOutlineBookmarkAdded } from "react-icons/md";
+import { useSelector } from "react-redux";
+import { Link, useLocation } from "react-router-dom";
+import {
+  badgeClass,
+  bottomBorder,
+  buttonApplied,
+  buttonClass,
+  dateFormate,
+  outlinedButton,
+  scaleButtonClass,
+} from "../../components/classes/classes";
+import TitleComponent from "../../components/TitleComponent/TitleComponent";
+import {
+  useApplyJobsMutation,
+  useGetApplyQuery,
+} from "../../features/auth/applyApi";
+import { useGetUserQuery } from "../../features/auth/authApi";
+
+const JobDetails = () => {
+  const { state: job } = useLocation();
+  console.log("from job detailes", job);
+  //LoggedIn user email
+  const { email } = useSelector((state) => state?.auth);
+
+  // get all users from the database
+  const { data } = useGetUserQuery();
+
+  // Post apply information. If the user is logged in and register as job seeker
+  const [applyJobs, { isLoading, isSuccess, isError, error }] =
+    useApplyJobsMutation();
+  // Find if the user Registered as job seeker otherwise send to the job seeker Registration page
+  const loggedInJobSeeker = data?.find(
+    (u) => u?.email === email && u?.isJobSeeker === true
+  );
+
+  // get apply jobs information
+  const { data: applyJobInfo, isLoading: getApplyInfoLoading } =
+    useGetApplyQuery();
+
+  // If the jobSeeker apply this job
+  const isJobApplied = applyJobInfo?.some(
+    (ji) =>
+      ji?.applyJobId === job?._id && ji?.applyUserId === loggedInJobSeeker?._id
+  );
+
+  let applyInformation;
+  if (
+    loggedInJobSeeker?._id &&
+    job?._id &&
+    loggedInJobSeeker?.email &&
+    loggedInJobSeeker?.isJobSeeker
+  ) {
+    applyInformation = {
+      applyUserId: loggedInJobSeeker?._id,
+      applyUserEmail: loggedInJobSeeker?.email,
+      applyJobId: job?._id,
+    };
+  }
+  // Handle job posting loading, success and error
+  useEffect(() => {
+    if (isLoading) {
+      toast.loading("Loading...... Please wait", { id: "apply" });
+    }
+    if (isSuccess) {
+      toast.success("Job applied successfully", { id: "apply" });
+    }
+    if (isError) {
+      toast.success(error, { id: "apply" });
+    }
+  }, [isLoading, isSuccess, isError, error]);
+
+  // /*--------------------------------------------
+  //  Check if the current user applied in this job, and Buttons class start
+  //  -------------------------------------------- */
+  // const outlinedButton =
+  //   "text-xs uppercase font-semibold px-2 py-1 text-accent hover:text-secondary bg-base-100 border  rounded-lg hover:bg-primary";
+
+  // const buttonClass =
+  //   "text-xs uppercase font-semibold  px-2 py-1 text-secondary bg-primary border rounded-lg hover:bg-[#2a78a5]";
+
+  let applyButton;
+  /* 
+   1/ If the not logged in then send user  to  the login page 
+   2/ If user logged in but not a job seeker then sent user to the job seeker registration form
+   3/ If user logged in and registered as job seeker and applied in this job then button will be applied
+   4/ If user logged in su and registered an job seeker but not applied yet
+   */
+  //  1
+  const location = useLocation();
+  if (!email) {
+    applyButton = (
+      <Link
+        className={`${buttonClass}`}
+        to={"/login"}
+        state={{ from: location }}
+        replace
+      >
+        Apply
+      </Link>
+    );
+  }
+  // 2
+  if (email && !loggedInJobSeeker?.isJobSeeker) {
+    applyButton = (
+      <Link
+        className={`${buttonClass}`}
+        to={"/jobSeekerForm"}
+        state={{ from: location }}
+        replace
+      >
+        Apply
+      </Link>
+    );
+  }
+  // 3
+  if (email && loggedInJobSeeker?.isJobSeeker && isJobApplied) {
+    applyButton = <Link className={`${buttonApplied} `}> Applied</Link>;
+  }
+  // 4
+  if (email && loggedInJobSeeker?.isJobSeeker && !isJobApplied) {
+    applyButton = (
+      <Link
+        className={`${buttonClass}`}
+        onClick={() => applyJobs(applyInformation)}
+      >
+        {" "}
+        Apply
+      </Link>
+    );
+  }
+  /*--------------------------------------------
+   Check if the current user applied in this job, and Buttons class end
+   -------------------------------------------- */
+  // Job details list style
+  const jobDetailsListStyle = "ml-4 mb-5 text-sm";
+  return (
+    <section className=" bg-base-100 dark:bg-accent text-secondary dark:text-accent">
+      <TitleComponent title={job?.position}></TitleComponent>
+
+      <div className=" max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 text-accent dark:text-secondary">
+        {/* inner content */}
+        <div
+          className={`${bottomBorder} pb-10 flex  items-center justify-center  gap-5   flex-col relative `}
+        >
+          {/* logo */}
+          <div className="  flex items-center justify-center h-20 w-20 rounded-md p-2 border-[.5px] bg-success">
+            <img src={job?.logo} alt="" />
+          </div>
+
+          {/* content */}
+          <div className="flex-1 w-full flex items-center flex-col ">
+            {/* heading(position)  */}
+            <div className="flex justify-between items-center mb-3 ">
+              {/*  */}
+              <div className="group ">
+                <div className=" group">
+                  <div
+                    className={`${scaleButtonClass} tooltip-secondary  absolute top-0 right-10  `}
+                  >
+                    <MdOutlineBookmarkAdd style={{ fontSize: "1.5rem" }} />
+                    <MdOutlineBookmarkAdded style={{ fontSize: "1.5rem" }} />
+                  </div>
+
+                  <div className=" opacity-0 group-hover:opacity-100 pointer-events-none absolute bottom-full left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full text-xs bg-warning  rounded-sm pl-1 pr-16 py-0.5">
+                    Bookmark
+                  </div>
+                </div>
+              </div>
+              {/*  */}
+            </div>
+            {/* back button */}
+            <Link to={"/all-job"}>
+              <div
+                className={`duration-500 transform  hover:scale-[1.03] transition-all left-5 -top-20 absolute bottom-5  text-accent dark:text-secondary `}
+              >
+                <IoIosArrowRoundBack style={{ fontSize: "1.8em" }} />
+              </div>
+            </Link>
+            {/* back button */}
+            {/* ------INFO----- */}
+            <div>
+              {/*---- Badge-- */}
+              <div className="flex justify-start items-center gap-3 sm:gap-5 mb-5 flex-wrap text-warning">
+                {/* Company Name */}
+                <div className={`${badgeClass} `}>
+                  <p> {job?.company}</p>
+                </div>
+                {/* Job type */}
+                <div className={`${badgeClass} `}>
+                  <p>{job?.jobType}</p>
+                </div>
+                {/* Job category */}
+                <div className={`${badgeClass} `}>
+                  <p>{job?.jobCategory}</p>
+                </div>
+              </div>
+            </div>
+            {/* ---badge end--- */}
+            {/* --- job info--- */}
+            <div className="flex justify-start items-center gap-4 sm:gap-6 mb-5 flex-wrap text-md">
+              {/* Company Location */}
+              <div className="flex justify-center items-center gap-2">
+                <p>
+                  <CiLocationOn style={{ fontSize: "1.4rem" }} />
+                </p>
+                <p className="">{job?.location}</p>
+              </div>
+              {/* Posted time */}
+              <div className="flex justify-center items-center gap-2">
+                <p>
+                  <CiTimer style={{ fontSize: "1.4rem" }} />
+                </p>
+                <p>
+                  {" "}
+                  {new Date(job?.currentDate).toLocaleDateString(
+                    "en-US",
+                    dateFormate
+                  )}
+                </p>
+              </div>
+              {/* ---job  info end--- */}
+            </div>
+
+            {/* All buttons  start*/}
+            <div className="flex justify-start items-center gap-2 flex-wrap">
+              {applyButton}
+            </div>
+            {/* All buttons end */}
+          </div>
+          {/* content end*/}
+        </div>
+        {/* Job description start */}
+        <div className="py-16 ">
+          <h4 className="text-xl font-semibold mb-8">Company Details</h4>
+          <p className="text-sm mb-10">{job?.companyDetail}</p>
+          <h4 className="text-xl font-semibold mb-8">Job description</h4>
+          <p className="text-sm mb-10">
+            As a Product Designer, you will work within a Product Delivery Team
+            fused with UX, engineering, product and data talent. You will help
+            the team design beautiful interfaces that solve business challenges
+            for our clients. We work with a number of Tier 1 banks on building
+            web-based applications for AML, KYC and Sanctions List management
+            workflows. This role is ideal if you are looking to segue your
+            career into the FinTech or Big Data arenas.
+          </p>
+          <h4 className="text-xl font-semibold mb-8">Key Responsibility</h4>
+          <ul className="list-disc mb-10">
+            <li className={`${jobDetailsListStyle}`}>
+              Maintain quality of the design process and ensure that when
+              designs are translated into code they accurately reflect the
+              design specifications.
+            </li>
+            <li className={`${jobDetailsListStyle}`}>
+              Contribute to sketching sessions involving non-designersCreate,
+              iterate and maintain UI deliverables including sketch files, style
+              guides, high fidelity prototypes, micro interaction specifications
+              and pattern libraries.
+            </li>
+            <li className={`${jobDetailsListStyle}`}>
+              Design pixel perfect responsive UI’s and understand that adopting
+              common interface patterns is better for UX than reinventing the
+              wheel
+            </li>
+            <li className={`${jobDetailsListStyle}`}>
+              Ensure design choices are data led by identifying assumptions to
+              test each sprint, and work with the analysts in your team to plan
+              moderated usability test sessions.
+            </li>
+            <li className={`${jobDetailsListStyle}`}>
+              Accurately estimate design tickets during planning sessions.
+            </li>
+          </ul>
+          <h4 className="text-xl font-semibold mb-8">Skill and Experience</h4>
+          <ul className="list-disc mb-10">
+            <li className={`${jobDetailsListStyle}`}>
+              You have at least 3 years’ working experience.
+            </li>
+            <li className={`${jobDetailsListStyle}`}>
+              Proficiency in programming languages such as HTML, CSS,
+              JavaScript, and various front-end frameworks like React or Vue.js.
+            </li>
+            <li className={`${jobDetailsListStyle}`}>
+              Understanding of database technologies such as MySQL or MongoDB.
+            </li>
+            <li className={`${jobDetailsListStyle}`}>
+              Familiarity with web development tools and platforms like
+              WordPress, Drupal, or Magento.
+            </li>
+            <li className={`${jobDetailsListStyle}`}>
+              Understanding of responsive design principles and the ability to
+              create responsive web pages.
+            </li>
+            <li className={`${jobDetailsListStyle}`}>
+              Knowledge of search engine optimization (SEO) techniques to
+              improve the visibility of web pages in search engine results.
+            </li>
+          </ul>
+        </div>
+        {/* Job description end */}
+      </div>
+    </section>
+  );
+};
+
+export default JobDetails;

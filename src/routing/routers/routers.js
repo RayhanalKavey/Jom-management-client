@@ -23,6 +23,7 @@ import ExperiencedJob from "../../pages/ExperiencedJob/ExperiencedJob";
 import AllJob from "../../pages/AllJob/AllJob";
 import Blog from "../../pages/Blog/Blog";
 import BlogDetails from "../../pages/Blog/BlogDetails";
+import JobDetails from "../../pages/AllJob/JobDetails";
 
 const { createBrowserRouter } = require("react-router-dom");
 
@@ -43,6 +44,7 @@ const router = createBrowserRouter([
       { path: "/fresher-job", element: <FresherJob /> },
       { path: "/experienced-Job", element: <ExperiencedJob /> },
       { path: "/all-job", element: <AllJob /> },
+      { path: "/job-details", element: <JobDetails /> },
       // { path: "/all-fresher-job", element: <AllJob /> },
       // { path: "/all-experienced-job", element: <AllJob /> },
       {

@@ -40,19 +40,15 @@ const MyApply = () => {
     isLoading: getApplyInfoLoading,
     isSuccess: isSeccessLoading,
   } = useGetApplyQuery();
-  console.log("applyInfo", applyInfo);
   // find the applied jobs
   const currentJobSeekersApplied = applyInfo?.filter(
     (job) => job?.applyUserId === loggedInJobSeeker?._id
   );
-  console.log("currentJobSeekersApplied", currentJobSeekersApplied);
   // find the applied jobs information from the jobs array
 
   const currentJobSeekersAppliedJobs = allJob?.filter((job) =>
     currentJobSeekersApplied?.some((jobObj) => job?._id === jobObj?.applyJobId)
   );
-
-  console.log("currentJobSeekersAppliedJobs", currentJobSeekersAppliedJobs);
 
   let content;
   //  useEffect(() => {
@@ -140,9 +136,13 @@ const MyApply = () => {
 
                     {/* All buttons  start*/}
                     <div className="flex justify-start items-center gap-2 flex-wrap">
-                      <button className={`${outlinedButton}`}>
+                      <Link
+                        to="/job-details"
+                        state={job}
+                        className={`${outlinedButton}`}
+                      >
                         Job Details
-                      </button>
+                      </Link>
                     </div>
                     {/* All buttons end */}
                   </div>

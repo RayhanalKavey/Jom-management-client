@@ -147,16 +147,6 @@ const JobCard = ({ job }) => {
           <div className="flex justify-between items-center mb-3">
             <p className="text-lg font-semibold ">{job?.position}</p>
             {/*  */}
-            {/* <div
-              // title="Add Bookmark"
-              className={`${scaleButtonClass} tooltip-secondary  absolute top-0 right-0 text-accent dark:text-secondary `}
-            >
-              <MdOutlineBookmarkAdd style={{ fontSize: "1.5rem" }} />
-              <MdOutlineBookmarkAdded style={{ fontSize: "1.5rem" }} />
-              <div className="opacity-0 group-hover:opacity-100 pointer-events-none absolute bottom-full left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-2/4 text-xs bg-gray-800 text-white rounded-sm px-1 py-0.5">
-                This is the tooltip message.
-              </div>
-            </div> */}
             <div className="group relative">
               <div className="relative group">
                 <div
@@ -220,7 +210,9 @@ const JobCard = ({ job }) => {
           {/* All buttons  start*/}
           <div className="flex justify-start items-center gap-2 flex-wrap">
             {applyButton}
-            <button className={`${outlinedButton}`}>Job Details</button>
+            <Link to="/job-details" state={job} className={`${outlinedButton}`}>
+              Job Details
+            </Link>
           </div>
           {/* All buttons end */}
         </div>
