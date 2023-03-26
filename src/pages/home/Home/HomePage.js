@@ -5,7 +5,9 @@ import SectionHeading from "../../../components/SectionHeading/SectionHeading";
 import SectionSubHeading from "../../../components/SectionSubHeading/SectionSubHeading";
 import Spinner from "../../../components/Spinner/Spinner";
 import Tryout from "../../../components/Tryout";
+import { useGetBlogsQuery } from "../../../features/auth/blogApi";
 import useTitle from "../../../hooks/useTitle/useTitle";
+import BlogCard from "../BlogCard/BlogCard";
 import BrandSection from "../BrandSection/BrandSection";
 import ExperiencedJobHome from "../ExperiencedJobHome/ExperiencedJobHome";
 import FresherJobHome from "../FresherJobHome/FresherJobHome";
@@ -20,6 +22,9 @@ const HomePage = () => {
   // Information of the redux store
   const { isLoading, isError } = useSelector((state) => state.auth);
   // Fetched data of all jobs
+
+  const { data: blogs } = useGetBlogsQuery();
+  console.log("blogs:-", blogs);
 
   let content;
 
@@ -84,14 +89,28 @@ const HomePage = () => {
             <UserOpinion />
           </div>
         </section>
+        {/* Popular job Category */}
+        <section
+          className={`${bottomBorder} ${topBorder} bg-secondary dark:bg-accent py-28 `}
+        >
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
+            <SectionHeading>Blogs</SectionHeading>
+            <SectionSubHeading>Recent Blogs</SectionSubHeading>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {blogs?.slice(0, 3)?.map((blog) => (
+                <BlogCard blog={blog} key={blog?._id}></BlogCard>
+              ))}
+            </div>
+          </div>
+        </section>
         {/* Brand Section */}
-        <section className={` dark:bg-accent pt-10 pb-28 `}>
+        <section className={` dark:bg-accent py-20 `}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
             <BrandSection />
           </div>
         </section>
         {/* newsletter Section */}
-        <section className={` ${topBorder} bg-success dark:bg-accent py-28 `}>
+        <section className={` ${topBorder} bg-success dark:bg-accent py-20 `}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
             <SectionHeading>Newsletter</SectionHeading>
             <SectionSubHeading>Subscribe to Our Newsletter</SectionSubHeading>

@@ -3,7 +3,6 @@ import EmployerDashLayout from "../../layout/EmployerDashLayout/EmployerDashLayo
 import JobSeekerDashboardLayout from "../../layout/JobSeekerDashboardLayout/JobSeekerDashboardLayout";
 import Main from "../../layout/Main/Main";
 import ErrorPage from "../../layout/shared/ErrorPage/ErrorPage";
-import About from "../../pages/About/About";
 import Login from "../../pages/authentication/Login/Login";
 import Registration from "../../pages/authentication/Registration/Registration";
 import Contact from "../../pages/Contact/Contact";
@@ -22,6 +21,7 @@ import EmployerProfileUpdate from "../../pages/EmployerDashboard/EmployerProfile
 import FresherJob from "../../pages/FresherJob/FresherJob";
 import ExperiencedJob from "../../pages/ExperiencedJob/ExperiencedJob";
 import AllJob from "../../pages/AllJob/AllJob";
+import Blog from "../../pages/Blog/Blog";
 
 const { createBrowserRouter } = require("react-router-dom");
 
@@ -33,7 +33,7 @@ const router = createBrowserRouter([
     children: [
       { path: "/", element: <HomePage /> },
       { path: "/home", element: <HomePage /> },
-      { path: "/about", element: <About /> },
+      { path: "/blog", element: <Blog /> },
       { path: "/contact", element: <Contact /> },
       { path: "/login", element: <Login /> },
       { path: "/registration", element: <Registration /> },
@@ -41,8 +41,8 @@ const router = createBrowserRouter([
       { path: "/fresher-job", element: <FresherJob /> },
       { path: "/experienced-Job", element: <ExperiencedJob /> },
       { path: "/all-job", element: <AllJob /> },
-      { path: "/all-fresher-job", element: <AllJob /> },
-      { path: "/all-experienced-job", element: <AllJob /> },
+      // { path: "/all-fresher-job", element: <AllJob /> },
+      // { path: "/all-experienced-job", element: <AllJob /> },
       {
         path: "/poster-seeker",
         element: (

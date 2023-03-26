@@ -87,12 +87,12 @@ const Navbar = () => {
       <Link to="/all-job" className={`${commonLinkClass}`}>
         Find Job
       </Link>
-      <Link to="/about" className={`${commonLinkClass}`}>
-        About
+      <Link to="/blog" className={`${commonLinkClass}`}>
+        Blogs
       </Link>
-      <Link to="/contact" className={`${commonLinkClass}`}>
+      {/* <Link to="/contact" className={`${commonLinkClass}`}>
         Contact
-      </Link>
+      </Link> */}
 
       {email ? (
         <>

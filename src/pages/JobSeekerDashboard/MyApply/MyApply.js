@@ -6,8 +6,8 @@ const MyApply = () => {
   // get apply jobs information
   const { data: applyInfo, isLoading: getApplyInfoLoading } =
     useGetApplyQuery();
-  console.log("applyInfo of all apply", applyInfo);
-  console.log("getApplyInfoLoading", getApplyInfoLoading);
+  // console.log("applyInfo of all apply", applyInfo);
+  // console.log("getApplyInfoLoading", getApplyInfoLoading);
   return (
     <>
       <TitleComponent title={"My Apply"}></TitleComponent>

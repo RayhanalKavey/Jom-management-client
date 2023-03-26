@@ -26,7 +26,7 @@ const MyPostedJob = () => {
   //  Get data from the database using redux
   const { data, isLoading } = useGetJobsQuery();
   const loggedInUserPost = data?.filter((job) => job?.email === email);
-  console.log(loggedInUserPost);
+
   // Redux action for deleting a job
   const [deleteAJob, { isLoading: deleteLoading, isSuccess, isError, error }] =
     useDeleteAJobMutation();
@@ -36,7 +36,7 @@ const MyPostedJob = () => {
     day: "numeric",
     year: "numeric",
   });
-  console.log(date);
+
   useEffect(() => {
     if (deleteLoading) {
       toast.loading("Loading...... Please wait", { id: "deleteJob" });
