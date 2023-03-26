@@ -22,6 +22,7 @@ import FresherJob from "../../pages/FresherJob/FresherJob";
 import ExperiencedJob from "../../pages/ExperiencedJob/ExperiencedJob";
 import AllJob from "../../pages/AllJob/AllJob";
 import Blog from "../../pages/Blog/Blog";
+import BlogDetails from "../../pages/Blog/BlogDetails";
 
 const { createBrowserRouter } = require("react-router-dom");
 
@@ -34,6 +35,7 @@ const router = createBrowserRouter([
       { path: "/", element: <HomePage /> },
       { path: "/home", element: <HomePage /> },
       { path: "/blog", element: <Blog /> },
+      { path: "/blog-details", element: <BlogDetails /> },
       { path: "/contact", element: <Contact /> },
       { path: "/login", element: <Login /> },
       { path: "/registration", element: <Registration /> },
@@ -96,6 +98,7 @@ const router = createBrowserRouter([
         <JobSeekerDashboardLayout />
       </PrivateRoute>
     ),
+
     children: [
       { path: "/job-seeker-dashboard", element: <MyApply /> },
       { path: "/job-seeker-dashboard/my-apply", element: <MyApply /> },

@@ -136,7 +136,7 @@ const Navbar = () => {
           className={`flex items-center justify-between h-16 ${bottomBorder}`}
         >
           <div className="flex items-center  justify-between flex-1 ">
-            <Link to="#" className="text-black dark:text-white font-bold">
+            <Link to="/" className="text-black dark:text-white font-bold">
               Job Management
             </Link>
             {/* Hamburger button */}

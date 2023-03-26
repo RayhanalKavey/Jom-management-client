@@ -12,11 +12,11 @@ const OpinionCard = ({ currentReview }) => {
       {/* user info */}
       <div className="flex sm:items-center gap-5 flex-col sm:flex-row">
         {/* img */}
-        <div className="w-20 h-20 border-[0.08rem] border-accent rounded-full">
+        <div className="w-20 h-20 border-[0.08rem] border-accent rounded-full overflow-hidden">
           <img
             src={userImg}
             alt=""
-            className=" rounded-full object-cover w-full h-full"
+            className=" rounded-full object-cover w-full h-full "
           />
         </div>
         {/* info */}
