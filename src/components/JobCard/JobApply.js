@@ -13,14 +13,11 @@ import {
   buttonClass,
   dateFormate,
   jobDetailsListStyle,
-  outlinedButton,
   scaleButtonClass,
 } from "../classes/classes";
-import { MdOutlineBookmarkAdd, MdOutlineBookmarkAdded } from "react-icons/md";
+import { MdOutlineBookmarkAdd } from "react-icons/md";
 import { CiLocationOn, CiTimer } from "react-icons/ci";
-import { TbCloudDataConnection } from "react-icons/tb";
 import { useGetUserQuery } from "../../features/auth/authApi";
-import { IoIosArrowRoundBack } from "react-icons/io";
 
 const JobApply = ({ job }) => {
   //LoggedIn user email
@@ -136,7 +133,7 @@ const JobApply = ({ job }) => {
    Check if the current user applied in this job, and Buttons class end
    -------------------------------------------- */
   return (
-    <>
+    <div className="">
       <div
         className={`${bottomBorder} pb-10 flex  items-center justify-center  gap-5   flex-col relative `}
       >
@@ -287,7 +284,7 @@ const JobApply = ({ job }) => {
         </ul>
       </div>
       {/* Job description end */}
-    </>
+    </div>
   );
 };
 

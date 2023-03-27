@@ -1,22 +1,16 @@
-import React, { useEffect, useState } from "react";
-import { toast } from "react-hot-toast";
+import React from "react";
 import { useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
-import {
-  useApplyJobsMutation,
-  useGetApplyQuery,
-} from "../../features/auth/applyApi";
+import { useGetApplyQuery } from "../../features/auth/applyApi";
 import {
   badgeClass,
   buttonApplied,
   buttonClass,
   dateFormate,
-  outlinedButton,
   scaleButtonClass,
 } from "../classes/classes";
-import { MdOutlineBookmarkAdd, MdOutlineBookmarkAdded } from "react-icons/md";
+import { MdOutlineBookmarkAdd } from "react-icons/md";
 import { CiLocationOn, CiTimer } from "react-icons/ci";
-import { TbCloudDataConnection } from "react-icons/tb";
 import { useGetUserQuery } from "../../features/auth/authApi";
 import ApplyModal from "../ApplyModal/ApplyModal";
 import JobDetails from "../../pages/AllJob/JobDetails";
@@ -28,16 +22,6 @@ const JobCard = ({ job }) => {
   // get all users from the database
   const { data } = useGetUserQuery();
 
-  // Post apply information. If the user is logged in and register as job seeker
-  const [applyJobs, { isLoading, isSuccess, isError, error }] =
-    useApplyJobsMutation();
-  console.log(
-    "{ isLoading, isSuccess, isError, error }",
-    isLoading,
-    isSuccess,
-    isError,
-    error
-  );
   // Find if the user Registered as job seeker otherwise send to the job seeker Registration page
   const loggedInJobSeeker = data?.find(
     (u) => u?.email === email && u?.isJobSeeker === true
@@ -53,41 +37,9 @@ const JobCard = ({ job }) => {
       ji?.applyJobId === job?._id && ji?.applyUserId === loggedInJobSeeker?._id
   );
 
-  let applyInformation;
-  if (
-    loggedInJobSeeker?._id &&
-    job?._id &&
-    loggedInJobSeeker?.email &&
-    loggedInJobSeeker?.isJobSeeker
-  ) {
-    applyInformation = {
-      applyUserId: loggedInJobSeeker?._id,
-      applyUserEmail: loggedInJobSeeker?.email,
-      applyJobId: job?._id,
-    };
-  }
-  // Handle job posting loading, success and error
-  useEffect(() => {
-    if (isLoading) {
-      toast.loading("Loading...... Please wait", { id: "japply" });
-    }
-    if (isSuccess) {
-      toast.success("Job applied successfully", { id: "japply" });
-    }
-    if (isError) {
-      toast.success(error, { id: "japply" });
-    }
-  }, [isLoading, isSuccess, isError, error]);
-
   // /*--------------------------------------------
   //  Check if the current user applied in this job, and Buttons class start
   //  -------------------------------------------- */
-  // const outlinedButton =
-  //   "text-xs uppercase font-semibold px-2 py-1 text-accent hover:text-secondary bg-base-100 border  rounded-lg hover:bg-primary";
-
-  // const buttonClass =
-  //   "text-xs uppercase font-semibold  px-2 py-1 text-secondary bg-primary border rounded-lg hover:bg-[#2a78a5]";
-
   let applyButton;
   /* 
    1/ If the not logged in then send user  to  the login page 
@@ -212,9 +164,7 @@ const JobCard = ({ job }) => {
           {/* All buttons  start*/}
           <div className="flex justify-start items-center gap-2 flex-wrap">
             {applyButton}
-            {/* <Link to="/job-details" state={job} className={`${outlinedButton}`}>
-              Job Details
-            </Link> */}
+
             <JobDetails job={job}></JobDetails>
 
             {/* <ApplyModal job={job} /> */}

@@ -1,13 +1,9 @@
 import React from "react";
 import { useState } from "react";
 import { IoIosArrowRoundBack } from "react-icons/io";
-
-import { Link, useLocation } from "react-router-dom";
 import { outlinedButton } from "../../components/classes/classes";
 import JobApply from "../../components/JobCard/JobApply";
 
-import JobCardHorizontal from "../../components/JobCard/JobCardHorizontal";
-import TitleComponent from "../../components/TitleComponent/TitleComponent";
 const JobDetails = ({ job }) => {
   // Job details list style
   const jobDetailsListStyle = "ml-4 mb-5 text-sm";

@@ -22,118 +22,6 @@ import { useGetUserQuery } from "../../features/auth/authApi";
 import { IoIosArrowRoundBack } from "react-icons/io";
 
 const JobCardHorizontal = ({ job }) => {
-  //LoggedIn user email
-  const { email } = useSelector((state) => state?.auth);
-
-  // get all users from the database
-  const { data } = useGetUserQuery();
-
-  // Post apply information. If the user is logged in and register as job seeker
-  const [applyJobs, { isLoading, isSuccess, isError, error }] =
-    useApplyJobsMutation();
-  // Find if the user Registered as job seeker otherwise send to the job seeker Registration page
-  const loggedInJobSeeker = data?.find(
-    (u) => u?.email === email && u?.isJobSeeker === true
-  );
-
-  // get apply jobs information
-  const { data: applyJobInfo, isLoading: getApplyInfoLoading } =
-    useGetApplyQuery();
-
-  // If the jobSeeker apply this job
-  const isJobApplied = applyJobInfo?.some(
-    (ji) =>
-      ji?.applyJobId === job?._id && ji?.applyUserId === loggedInJobSeeker?._id
-  );
-
-  let applyInformation;
-  if (
-    loggedInJobSeeker?._id &&
-    job?._id &&
-    loggedInJobSeeker?.email &&
-    loggedInJobSeeker?.isJobSeeker
-  ) {
-    applyInformation = {
-      applyUserId: loggedInJobSeeker?._id,
-      applyUserEmail: loggedInJobSeeker?.email,
-      applyJobId: job?._id,
-    };
-  }
-  // Handle job posting loading, success and error
-  useEffect(() => {
-    if (isLoading) {
-      toast.loading("Loading...... Please wait", { id: "japply" });
-    }
-    if (isSuccess) {
-      toast.success("Job applied successfully", { id: "japply" });
-    }
-    if (isError) {
-      toast.success(error, { id: "japply" });
-    }
-  }, [isLoading, isSuccess, isError, error]);
-
-  // /*--------------------------------------------
-  //  Check if the current user applied in this job, and Buttons class start
-  //  -------------------------------------------- */
-  // const outlinedButton =
-  //   "text-xs uppercase font-semibold px-2 py-1 text-accent hover:text-secondary bg-base-100 border  rounded-lg hover:bg-primary";
-
-  // const buttonClass =
-  //   "text-xs uppercase font-semibold  px-2 py-1 text-secondary bg-primary border rounded-lg hover:bg-[#2a78a5]";
-
-  let applyButton;
-  /* 
-   1/ If the not logged in then send user  to  the login page 
-   2/ If user logged in but not a job seeker then sent user to the job seeker registration form
-   3/ If user logged in and registered as job seeker and applied in this job then button will be applied
-   4/ If user logged in su and registered an job seeker but not applied yet
-   */
-  //  1
-  const location = useLocation();
-  if (!email) {
-    applyButton = (
-      <Link
-        className={`${buttonClass}`}
-        to={"/login"}
-        state={{ from: location }}
-        replace
-      >
-        Apply
-      </Link>
-    );
-  }
-  // 2
-  if (email && !loggedInJobSeeker?.isJobSeeker) {
-    applyButton = (
-      <Link
-        className={`${buttonClass}`}
-        to={"/jobSeekerForm"}
-        state={{ from: location }}
-        replace
-      >
-        Apply
-      </Link>
-    );
-  }
-  // 3
-  if (email && loggedInJobSeeker?.isJobSeeker && isJobApplied) {
-    applyButton = <button className={`${buttonApplied} `}> Applied</button>;
-  }
-  // 4
-  if (email && loggedInJobSeeker?.isJobSeeker && !isJobApplied) {
-    applyButton = (
-      <Link
-        className={`${buttonClass}`}
-        onClick={() => applyJobs(applyInformation)}
-      >
-        {" "}
-        Apply
-      </Link>
-    );
-  }
-  /*--------------------------------------------
-   Check if the current user applied in this job, and Buttons class end
-   -------------------------------------------- */
   return (
     <div
       className={`${bottomBorder} pb-10 flex  items-center justify-center  gap-5   flex-col relative `}
@@ -151,7 +39,7 @@ const JobCardHorizontal = ({ job }) => {
           <div className="group ">
             <div className=" group">
               <div
-                className={`${scaleButtonClass} tooltip-secondary  absolute top-0 right-10  `}
+                className={`${scaleButtonClass} tooltip-secondary  absolute top-0 right-20  `}
               >
                 <MdOutlineBookmarkAdd style={{ fontSize: "1.5rem" }} />
                 {/* <MdOutlineBookmarkAdded style={{ fontSize: "1.5rem" }} /> */}
@@ -164,15 +52,7 @@ const JobCardHorizontal = ({ job }) => {
           </div>
           {/*  */}
         </div>
-        {/* back button */}
-        <Link to={"/all-job"}>
-          <div
-            className={`duration-500 transform  hover:scale-[1.03] transition-all left-5 -top-20 absolute bottom-5  text-accent dark:text-secondary `}
-          >
-            <IoIosArrowRoundBack style={{ fontSize: "1.8em" }} />
-          </div>
-        </Link>
-        {/* back button */}
+
         {/* ------INFO----- */}
         <div>
           {/*---- Badge-- */}

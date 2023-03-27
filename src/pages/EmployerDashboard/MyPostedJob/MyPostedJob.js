@@ -134,7 +134,7 @@ const MyPostedJob = () => {
                     {/* All buttons  start*/}
                     <div className="flex justify-start items-center gap-2 flex-wrap">
                       <Link
-                        to="/job-details"
+                        to="/employer-dashboard/my-posted-job/details"
                         state={job}
                         className={`${outlinedButton}`}
                       >

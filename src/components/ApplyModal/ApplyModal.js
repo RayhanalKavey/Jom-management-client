@@ -1,12 +1,7 @@
 import React, { useState } from "react";
 import { IoIosArrowRoundBack } from "react-icons/io";
 import { Link } from "react-router-dom";
-import JobDetails from "../../pages/AllJob/JobDetails";
-import {
-  buttonClass,
-  jobDetailsListStyle,
-  outlinedButton,
-} from "../classes/classes";
+import { buttonClass } from "../classes/classes";
 import JobApply from "../JobCard/JobApply";
 
 function ApplyModal({ job }) {
@@ -25,8 +20,8 @@ function ApplyModal({ job }) {
       </button>
 
       {isOpen && (
-        <div className="fixed z-10 inset-0 overflow-y-auto ">
-          <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+        <div className="fixed z-10 inset-0 overflow-y-auto  ">
+          <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0 ">
             <div
               className="fixed inset-0 transition-opacity"
               aria-hidden="true"
@@ -45,7 +40,7 @@ function ApplyModal({ job }) {
               aria-modal="true"
               aria-labelledby="modal-headline"
             >
-              <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+              <div className="bg-secondary dark:bg-accent text-accent dark:text-secondary px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                 <div className="sm:flex sm:items-start">
                   {/* back button */}
                   <Link to={"/all-job"}>
@@ -59,7 +54,7 @@ function ApplyModal({ job }) {
                   {/* back button */}
                   <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
                     <h3
-                      className=" leading-6 font-medium text-gray-900 text-center text-xl my-7"
+                      className=" leading-6 font-medium text-center text-xl my-7"
                       id="modal-headline"
                     >
                       {job?.position}
