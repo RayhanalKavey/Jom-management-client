@@ -6,7 +6,6 @@ import {
   useApplyJobsMutation,
   useGetApplyQuery,
 } from "../../features/auth/applyApi";
-import { useGetUserQuery } from "../../features/auth/authApi";
 import {
   badgeClass,
   buttonApplied,
@@ -18,6 +17,7 @@ import {
 import { MdOutlineBookmarkAdd, MdOutlineBookmarkAdded } from "react-icons/md";
 import { CiLocationOn, CiTimer } from "react-icons/ci";
 import { TbCloudDataConnection } from "react-icons/tb";
+import { useGetUserQuery } from "../../features/auth/authApi";
 
 const JobCard = ({ job }) => {
   //LoggedIn user email
@@ -29,6 +29,13 @@ const JobCard = ({ job }) => {
   // Post apply information. If the user is logged in and register as job seeker
   const [applyJobs, { isLoading, isSuccess, isError, error }] =
     useApplyJobsMutation();
+  console.log(
+    "{ isLoading, isSuccess, isError, error }",
+    isLoading,
+    isSuccess,
+    isError,
+    error
+  );
   // Find if the user Registered as job seeker otherwise send to the job seeker Registration page
   const loggedInJobSeeker = data?.find(
     (u) => u?.email === email && u?.isJobSeeker === true
@@ -60,13 +67,13 @@ const JobCard = ({ job }) => {
   // Handle job posting loading, success and error
   useEffect(() => {
     if (isLoading) {
-      toast.loading("Loading...... Please wait", { id: "apply" });
+      toast.loading("Loading...... Please wait", { id: "japply" });
     }
     if (isSuccess) {
-      toast.success("Job applied successfully", { id: "apply" });
+      toast.success("Job applied successfully", { id: "japply" });
     }
     if (isError) {
-      toast.success(error, { id: "apply" });
+      toast.success(error, { id: "japply" });
     }
   }, [isLoading, isSuccess, isError, error]);
 
@@ -115,7 +122,7 @@ const JobCard = ({ job }) => {
   }
   // 3
   if (email && loggedInJobSeeker?.isJobSeeker && isJobApplied) {
-    applyButton = <Link className={`${buttonApplied} `}> Applied</Link>;
+    applyButton = <button className={`${buttonApplied} `}> Applied</button>;
   }
   // 4
   if (email && loggedInJobSeeker?.isJobSeeker && !isJobApplied) {

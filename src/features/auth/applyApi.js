@@ -14,7 +14,7 @@ const applyApi = apiSlice.injectEndpoints({
         method: "POST",
         body: data,
       }),
-      invalidatesTags: ["jobs", "jobApply"],
+      invalidatesTags: ["jobApply"],
     }),
   }),
 });

@@ -147,7 +147,7 @@ const JobSeekerRegistration = () => {
                   <input
                     type="radio"
                     id="male"
-                    {...register("gender")}
+                    {...register("gender", { required: true })}
                     value="male"
                     className="mr-2"
                   />
@@ -160,7 +160,7 @@ const JobSeekerRegistration = () => {
                   <input
                     type="radio"
                     id="female"
-                    {...register("gender")}
+                    {...register("gender", { required: true })}
                     value="female"
                     className="mr-2"
                   />
@@ -173,7 +173,7 @@ const JobSeekerRegistration = () => {
                   <input
                     type="radio"
                     id="other"
-                    {...register("gender")}
+                    {...register("gender", { required: true })}
                     value="other"
                     className="mr-2"
                   />

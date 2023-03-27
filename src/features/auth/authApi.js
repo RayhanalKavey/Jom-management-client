@@ -24,10 +24,19 @@ const authApi = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ["users"],
     }),
+    updateJobSeeker: builder.mutation({
+      query: ({ _id, ...rest }) => ({
+        url: `/user/${_id}`,
+        method: "PUT",
+        body: rest,
+      }),
+      invalidatesTags: ["users"],
+    }),
   }),
 });
 export const {
-  useRegisterEmployerMutation,
   useGetUserQuery,
+  useRegisterEmployerMutation,
   useRegisterJobSeekerMutation,
+  useUpdateJobSeekerMutation,
 } = authApi;

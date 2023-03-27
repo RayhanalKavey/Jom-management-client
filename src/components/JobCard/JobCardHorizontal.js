@@ -1,21 +1,230 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { toast } from "react-hot-toast";
+import { useSelector } from "react-redux";
+import { Link, useLocation } from "react-router-dom";
+import {
+  useApplyJobsMutation,
+  useGetApplyQuery,
+} from "../../features/auth/applyApi";
+import {
+  badgeClass,
+  bottomBorder,
+  buttonApplied,
+  buttonClass,
+  dateFormate,
+  outlinedButton,
+  scaleButtonClass,
+} from "../classes/classes";
+import { MdOutlineBookmarkAdd, MdOutlineBookmarkAdded } from "react-icons/md";
+import { CiLocationOn, CiTimer } from "react-icons/ci";
+import { TbCloudDataConnection } from "react-icons/tb";
+import { useGetUserQuery } from "../../features/auth/authApi";
+import { IoIosArrowRoundBack } from "react-icons/io";
 
 const JobCardHorizontal = ({ job }) => {
+  //LoggedIn user email
+  const { email } = useSelector((state) => state?.auth);
+
+  // get all users from the database
+  const { data } = useGetUserQuery();
+
+  // Post apply information. If the user is logged in and register as job seeker
+  const [applyJobs, { isLoading, isSuccess, isError, error }] =
+    useApplyJobsMutation();
+  // Find if the user Registered as job seeker otherwise send to the job seeker Registration page
+  const loggedInJobSeeker = data?.find(
+    (u) => u?.email === email && u?.isJobSeeker === true
+  );
+
+  // get apply jobs information
+  const { data: applyJobInfo, isLoading: getApplyInfoLoading } =
+    useGetApplyQuery();
+
+  // If the jobSeeker apply this job
+  const isJobApplied = applyJobInfo?.some(
+    (ji) =>
+      ji?.applyJobId === job?._id && ji?.applyUserId === loggedInJobSeeker?._id
+  );
+
+  let applyInformation;
+  if (
+    loggedInJobSeeker?._id &&
+    job?._id &&
+    loggedInJobSeeker?.email &&
+    loggedInJobSeeker?.isJobSeeker
+  ) {
+    applyInformation = {
+      applyUserId: loggedInJobSeeker?._id,
+      applyUserEmail: loggedInJobSeeker?.email,
+      applyJobId: job?._id,
+    };
+  }
+  // Handle job posting loading, success and error
+  useEffect(() => {
+    if (isLoading) {
+      toast.loading("Loading...... Please wait", { id: "japply" });
+    }
+    if (isSuccess) {
+      toast.success("Job applied successfully", { id: "japply" });
+    }
+    if (isError) {
+      toast.success(error, { id: "japply" });
+    }
+  }, [isLoading, isSuccess, isError, error]);
+
+  // /*--------------------------------------------
+  //  Check if the current user applied in this job, and Buttons class start
+  //  -------------------------------------------- */
+  // const outlinedButton =
+  //   "text-xs uppercase font-semibold px-2 py-1 text-accent hover:text-secondary bg-base-100 border  rounded-lg hover:bg-primary";
+
+  // const buttonClass =
+  //   "text-xs uppercase font-semibold  px-2 py-1 text-secondary bg-primary border rounded-lg hover:bg-[#2a78a5]";
+
+  let applyButton;
+  /* 
+   1/ If the not logged in then send user  to  the login page 
+   2/ If user logged in but not a job seeker then sent user to the job seeker registration form
+   3/ If user logged in and registered as job seeker and applied in this job then button will be applied
+   4/ If user logged in su and registered an job seeker but not applied yet
+   */
+  //  1
+  const location = useLocation();
+  if (!email) {
+    applyButton = (
+      <Link
+        className={`${buttonClass}`}
+        to={"/login"}
+        state={{ from: location }}
+        replace
+      >
+        Apply
+      </Link>
+    );
+  }
+  // 2
+  if (email && !loggedInJobSeeker?.isJobSeeker) {
+    applyButton = (
+      <Link
+        className={`${buttonClass}`}
+        to={"/jobSeekerForm"}
+        state={{ from: location }}
+        replace
+      >
+        Apply
+      </Link>
+    );
+  }
+  // 3
+  if (email && loggedInJobSeeker?.isJobSeeker && isJobApplied) {
+    applyButton = <button className={`${buttonApplied} `}> Applied</button>;
+  }
+  // 4
+  if (email && loggedInJobSeeker?.isJobSeeker && !isJobApplied) {
+    applyButton = (
+      <Link
+        className={`${buttonClass}`}
+        onClick={() => applyJobs(applyInformation)}
+      >
+        {" "}
+        Apply
+      </Link>
+    );
+  }
+  /*--------------------------------------------
+   Check if the current user applied in this job, and Buttons class end
+   -------------------------------------------- */
   return (
-    <>
-      <p>{job?.position}</p>
-      <p className="bg-green-200">{job?.jobCategory}</p>
+    <div
+      className={`${bottomBorder} pb-10 flex  items-center justify-center  gap-5   flex-col relative `}
+    >
+      {/* logo */}
+      <div className="  flex items-center justify-center h-20 w-20 rounded-md p-2 border-[.5px] bg-success">
+        <img src={job?.logo} alt="" />
+      </div>
 
-      <br />
-      <p>{job?.companyDetail}</p>
-      <br />
-      <p>{job?._id}</p>
-      <p>{job?.jobType}</p>
+      {/* content */}
+      <div className="flex-1 w-full flex items-center flex-col ">
+        {/* heading(position)  */}
+        <div className="flex justify-between items-center mb-3 ">
+          {/*  */}
+          <div className="group ">
+            <div className=" group">
+              <div
+                className={`${scaleButtonClass} tooltip-secondary  absolute top-0 right-10  `}
+              >
+                <MdOutlineBookmarkAdd style={{ fontSize: "1.5rem" }} />
+                <MdOutlineBookmarkAdded style={{ fontSize: "1.5rem" }} />
+              </div>
 
-      <button className="btn btn-primary btn-sm">Shortlist</button>
-      <button className="btn btn-secondary btn-sm">Apply</button>
-      <button className="btn btn-secondary btn-sm">Job Details</button>
-    </>
+              <div className=" opacity-0 group-hover:opacity-100 pointer-events-none absolute bottom-full right-0 transform -translate-x-1/2 -translate-y-1/2  text-xs bg-warning  rounded-sm pl-1 pr-16 py-0.5">
+                Bookmark
+              </div>
+            </div>
+          </div>
+          {/*  */}
+        </div>
+        {/* back button */}
+        <Link to={"/all-job"}>
+          <div
+            className={`duration-500 transform  hover:scale-[1.03] transition-all left-5 -top-20 absolute bottom-5  text-accent dark:text-secondary `}
+          >
+            <IoIosArrowRoundBack style={{ fontSize: "1.8em" }} />
+          </div>
+        </Link>
+        {/* back button */}
+        {/* ------INFO----- */}
+        <div>
+          {/*---- Badge-- */}
+          <div className="flex justify-start items-center gap-3 sm:gap-5 mb-5 flex-wrap text-warning">
+            {/* Company Name */}
+            <div className={`${badgeClass} `}>
+              <p> {job?.company}</p>
+            </div>
+            {/* Job type */}
+            <div className={`${badgeClass} `}>
+              <p>{job?.jobType}</p>
+            </div>
+            {/* Job category */}
+            <div className={`${badgeClass} `}>
+              <p>{job?.jobCategory}</p>
+            </div>
+          </div>
+        </div>
+        {/* ---badge end--- */}
+        {/* --- job info--- */}
+        <div className="flex justify-start items-center gap-4 sm:gap-6 mb-5 flex-wrap text-md">
+          {/* Company Location */}
+          <div className="flex justify-center items-center gap-2">
+            <p>
+              <CiLocationOn style={{ fontSize: "1.4rem" }} />
+            </p>
+            <p className="">{job?.location}</p>
+          </div>
+          {/* Posted time */}
+          <div className="flex justify-center items-center gap-2">
+            <p>
+              <CiTimer style={{ fontSize: "1.4rem" }} />
+            </p>
+            <p>
+              {" "}
+              {new Date(job?.currentDate).toLocaleDateString(
+                "en-US",
+                dateFormate
+              )}
+            </p>
+          </div>
+          {/* ---job  info end--- */}
+        </div>
+
+        {/* All buttons  start*/}
+        <div className="flex justify-start items-center gap-2 flex-wrap">
+          {/* {applyButton} */}
+        </div>
+        {/* All buttons end */}
+      </div>
+      {/* content end*/}
+    </div>
   );
 };
 
