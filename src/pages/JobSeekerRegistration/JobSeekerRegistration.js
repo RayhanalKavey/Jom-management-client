@@ -100,11 +100,8 @@ const JobSeekerRegistration = () => {
                 {/* </h2> */}
               </div>
             </Link>
-            <h1 className="text-gray-800  text-3xl text-center mb-5 text-semibold">
-              {" "}
-              Job Seeker Information
-            </h1>
-            <div className="grid grid-cols-2 gap-4">
+
+            <div className="grid grid-cols-2 gap-4 mt-4">
               <div>
                 <label htmlFor="firstName" className="block mb-1 font-medium">
                   First Name:
