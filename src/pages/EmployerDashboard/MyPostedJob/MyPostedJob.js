@@ -81,9 +81,9 @@ const MyPostedJob = () => {
                         className={`${scaleButtonClass}  absolute top-6 right-6 text-accent dark:text-secondary `}
                       >
                         <MdOutlineBookmarkAdd style={{ fontSize: "1.5rem" }} />
-                        <MdOutlineBookmarkAdded
+                        {/* <MdOutlineBookmarkAdded
                           style={{ fontSize: "1.5rem" }}
-                        />
+                        /> */}
                       </div>
                     </div>
                     {/* ------INFO----- */}

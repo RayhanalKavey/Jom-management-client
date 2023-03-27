@@ -154,7 +154,7 @@ const JobCardHorizontal = ({ job }) => {
                 className={`${scaleButtonClass} tooltip-secondary  absolute top-0 right-10  `}
               >
                 <MdOutlineBookmarkAdd style={{ fontSize: "1.5rem" }} />
-                <MdOutlineBookmarkAdded style={{ fontSize: "1.5rem" }} />
+                {/* <MdOutlineBookmarkAdded style={{ fontSize: "1.5rem" }} /> */}
               </div>
 
               <div className=" opacity-0 group-hover:opacity-100 pointer-events-none absolute bottom-full right-0 transform -translate-x-1/2 -translate-y-1/2  text-xs bg-warning  rounded-sm pl-1 pr-16 py-0.5">

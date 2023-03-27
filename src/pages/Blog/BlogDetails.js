@@ -12,9 +12,9 @@ const BlogDetails = () => {
   let { state: blog } = useLocation();
   // console.log("blogs:--------", blog);
   return (
-    <>
+    <section className="bg-secondary dark:bg-accent">
       {/* heading */}
-      <div className="relative flex justify-center items-center flex-col  pt-16 pb-10 bg-secondary dark:bg-accent">
+      <div className="relative flex justify-center items-center flex-col  pt-16 pb-10 text-accent dark:text-secondary">
         <Link to={"/blog"}>
           <div
             className={`${scaleButtonClass}  absolute bottom-5 left-[22%] text-accent dark:text-secondary `}
@@ -26,7 +26,7 @@ const BlogDetails = () => {
         {/* author start*/}
         <div className="flex justify-center items-center gap-4">
           {/* img */}
-          <div className="w-10 h-10 border-[0.08rem] border-accent rounded-full overflow-hidden">
+          <div className="w-10 h-10 border-[0.08rem] border-accent dark:border-secondary rounded-full overflow-hidden dark:bg-secondary">
             <img
               src={userImg}
               alt=""
@@ -41,12 +41,12 @@ const BlogDetails = () => {
       </div>
       {/* Heading End */}
       {/* <TitleComponent title={blog?.title}></TitleComponent> */}
-      <section className={` pb-24  `}>
+      <div className={` pb-24 text-accent dark:text-secondary  `}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
           <div className="flex flex-col justify-center items-center w-full gap-4 dark:bg-accent">
             {/* image */}
             <div className="my-5">
-              <img className="rounded-lg" src={blog?.imgSrc} alt="" />
+              <img className="rounded-lg " src={blog?.imgSrc} alt="" />
             </div>
             {/* content start */}
 
@@ -57,8 +57,8 @@ const BlogDetails = () => {
             {/* content end */}
           </div>
         </div>
-      </section>
-    </>
+      </div>
+    </section>
   );
 };
 

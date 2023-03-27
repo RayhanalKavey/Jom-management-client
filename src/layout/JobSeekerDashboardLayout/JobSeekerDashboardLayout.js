@@ -25,14 +25,14 @@ const JobSeekerDashboardLayout = () => {
           My Apply
         </Link>
       </li>
-      <li className="mb-4">
+      {/* <li className="mb-4">
         <Link
           to="/job-seeker-dashboard/shortlisted"
           className={`${dashboardLinkStyle}`}
         >
           Short List
         </Link>
-      </li>
+      </li> */}
       <li className="mb-4">
         <Link
           to="/job-seeker-dashboard/JobSeekerProfileUpdate"

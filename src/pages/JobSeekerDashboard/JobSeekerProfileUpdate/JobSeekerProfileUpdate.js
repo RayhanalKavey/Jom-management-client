@@ -26,7 +26,6 @@ const JobSeekerProfileUpdate = () => {
     (u) => u?.email === email && u?.isJobSeeker === true
   );
 
-  console.log("loggedInJobSeeker", loggedInJobSeeker);
   // React hook form
   const {
     register,
@@ -78,7 +77,6 @@ const JobSeekerProfileUpdate = () => {
   // Submit form data...
   const onSubmit = (data) => {
     const jobSeeker = { ...data, isJobSeeker: true };
-    console.log("da", jobSeeker);
     registerJobSeeker(jobSeeker);
   };
 

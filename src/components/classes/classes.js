@@ -58,3 +58,6 @@ export const iconButton =
 // Bottom border
 export const bottomBorder = "border-b-[.5px]  dark:border-gray-600";
 export const topBorder = "border-t-[.5px]  dark:border-gray-600";
+
+//  // Job details list style
+export const jobDetailsListStyle = "ml-4 mb-5 text-sm";
