@@ -1,0 +1,20 @@
+/* Skeleton Animation Class */
+.skeleton-animation {
+  background: linear-gradient(
+    to right,
+    #e2e2e2 0%,
+    /* #e2e2e2 20%, */ #e2e2e2 30%,
+    #eeeeee 40%,
+    #eeeeee 45%,
+    #e2e2e2 60%,
+    #e2e2e2 100%
+  );
+  background-size: 200px 104px;
+  animation: skeleton-loading 2s linear infinite;
+}
+
+@keyframes skeleton-loading {
+  100% {
+    background-position: 400px 100px;
+  }
+}

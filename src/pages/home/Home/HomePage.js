@@ -41,17 +41,6 @@ const HomePage = () => {
           </div>
         </section>
 
-        {/* How it works  */}
-        <section className="dark:bg-accent pt-28 ">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
-            <SectionHeading>Career Quest</SectionHeading>
-            <SectionSubHeading>
-              {" "}
-              Simplify Your Job Search or Hiring Process
-            </SectionSubHeading>
-            <HowItWorks />
-          </div>
-        </section>
         {/* Fresher job */}
         <section className="dark:bg-accent pt-28 ">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
@@ -61,13 +50,24 @@ const HomePage = () => {
           </div>
         </section>
         {/* Experience job */}
-        <section className="dark:bg-accent py-28 ">
+        <section className="dark:bg-accent pt-28 ">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
             <SectionHeading>Experienced Job</SectionHeading>
             <SectionSubHeading>
               Looking for Better Opportunity?
             </SectionSubHeading>
             <ExperiencedJobHome />
+          </div>
+        </section>
+        {/* How it works  */}
+        <section className="dark:bg-accent py-28 ">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
+            <SectionHeading>Career Quest</SectionHeading>
+            <SectionSubHeading>
+              {" "}
+              Simplify Your Job Search or Hiring Process
+            </SectionSubHeading>
+            <HowItWorks />
           </div>
         </section>
         {/* Popular job Category */}

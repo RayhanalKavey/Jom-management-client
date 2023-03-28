@@ -25,6 +25,9 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
     <title>Job Management</title>
+
+    <!-- Aso animation -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
   </head>
   <body className="">
     <noscript>You need to enable JavaScript to run this app.</noscript>
@@ -39,5 +42,13 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
+    <!-- Aso animation -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+      AOS.init({
+        offset: 120,
+        duration: 800,
+      });
+    </script>
   </body>
 </html>

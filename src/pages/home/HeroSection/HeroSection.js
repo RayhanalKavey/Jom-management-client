@@ -4,7 +4,11 @@ import { homeButton } from "../../../components/classes/classes";
 
 const HeroSection = () => {
   return (
-    <div className={`flex justify-center items-center`}>
+    <div
+      data-aos="zoom-in"
+      data-aor-duration="800"
+      className={`flex justify-center items-center`}
+    >
       <div className="text-center">
         <h1 className="text-5xl font-bold text-accent dark:text-secondary mb-4">
           Welcome to our Careers Page!

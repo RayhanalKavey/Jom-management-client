@@ -11,7 +11,7 @@ const HowItWorks = () => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-6 ">
       {/* Employer */}
-      <div className={`${cardClass}`}>
+      <div data-aos="fade-right" className={`${cardClass}`}>
         <div className={`${iconClass} mb-8`}>
           <FaBriefcase className="w-8 h-8" />
         </div>
@@ -29,7 +29,7 @@ const HowItWorks = () => {
         </Link>
       </div>
       {/* Job Seeker */}
-      <div className={`${cardClass}`}>
+      <div data-aos="fade-left" className={`${cardClass}`}>
         <div className={`${iconClass} mb-8`}>
           <FaUser className="w-8 h-8" />
         </div>

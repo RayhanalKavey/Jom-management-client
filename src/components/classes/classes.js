@@ -13,7 +13,7 @@ export const activeButtonDashboard =
   *================*/
 
 export const homeButton =
-  "duration-500 bg-primary py-3 px-6 rounded-full text-accent font-bold shadow-md uppercase tracking-wider hover:bg-warning";
+  "text-secondary  duration-500 bg-primary py-3 px-6 rounded-lg  font-bold shadow-md uppercase tracking-wider hover:bg-warning";
 /*====================================
    Apply short list and details button
    ===================================*/

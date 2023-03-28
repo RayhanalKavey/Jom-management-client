@@ -128,6 +128,7 @@ const PopularJobCategory = () => {
     <div className=" grid  sm:grid-cols-2 md:grid-cols-3 gap-4 w-full ">
       {jobCategory?.slice(0, 6)?.map((category, i) => (
         <div
+          data-aos="fade-up"
           className=" flex flex-col sm:flex-col lg:flex-row  items-center sm:items-start lg:items-center gap-5 m-2   justify-start  border-[.08rem] p-6 rounded-lg bg-base-100  dark:bg-secondary "
           key={i}
         >

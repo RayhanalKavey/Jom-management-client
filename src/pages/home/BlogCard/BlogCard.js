@@ -6,12 +6,12 @@ const BlogCard = ({ blog }) => {
   return (
     <>
       {/* card */}
-      <div className="bg-secondary rounded-lg p-5 transition-all">
+      <div
+        data-aos="flip-left"
+        className="bg-secondary rounded-lg p-5 transition-all"
+      >
         {/* image */}
-        <div
-          className="mb-5 overflow-hidden  rounded-lg   "
-          // style={{ transform: "scale(1)", transition: "transform 0.5s" }}
-        >
+        <div className="mb-5 overflow-hidden  rounded-lg   ">
           <img
             className="rounded-lg object-cover hover:scale-[1.1] duration-500"
             src={blog?.imgSrc}
