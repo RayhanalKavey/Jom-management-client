@@ -32,7 +32,7 @@ const HomePage = () => {
   }
   if (!isError && !isLoading) {
     content = (
-      <div>
+      <>
         <section
           className={`bg-secondary dark:bg-accent py-32  ${bottomBorder}`}
         >
@@ -40,7 +40,6 @@ const HomePage = () => {
             <HeroSection></HeroSection>
           </div>
         </section>
-
         {/* Fresher job */}
         <section className="dark:bg-accent pt-28 ">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
@@ -116,7 +115,7 @@ const HomePage = () => {
             <Newsletter></Newsletter>
           </div>
         </section>
-      </div>
+      </>
     );
   }
 
