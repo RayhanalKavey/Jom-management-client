@@ -3,12 +3,14 @@ import JobCard from "../../components/JobCard/JobCard";
 import Spinner from "../../components/Spinner/Spinner";
 import TitleComponent from "../../components/TitleComponent/TitleComponent";
 import { useGetJobsQuery } from "../../features/auth/jobApi";
+import useTitle from "../../hooks/useTitle/useTitle";
 
 const AllJob = () => {
+  useTitle("All Jobs");
+
   const { data, isLoading, isSuccess, isError, error } = useGetJobsQuery();
 
   // const reversed = data?.filter((j) => j)?.reverse();
-  // console.log("reversed", reversed);
   let content;
   if (isLoading) {
     content = <Spinner></Spinner>;

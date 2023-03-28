@@ -4,7 +4,6 @@ import { useGetJobsQuery } from "../../../features/auth/jobApi";
 
 const ExperiencedJobHome = () => {
   const { data, isLoading, isSuccess, isError, error } = useGetJobsQuery();
-  // console.log("ExperiencedJobHome data", data);
 
   return (
     <div className="grid md:grid-cols-2 gap-4 w-full">

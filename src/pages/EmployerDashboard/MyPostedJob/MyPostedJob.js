@@ -18,6 +18,7 @@ import {
 import { MdOutlineBookmarkAdd, MdOutlineBookmarkAdded } from "react-icons/md";
 import { CiLocationOn, CiTimer } from "react-icons/ci";
 import { TbCloudDataConnection } from "react-icons/tb";
+import DeleteModal from "../../../components/DeleteModal/DeleteModal";
 
 const MyPostedJob = () => {
   // Get current user email from the store
@@ -148,12 +149,12 @@ const MyPostedJob = () => {
                         {" "}
                         Edit
                       </Link>
-                      <button
-                        onClick={() => deleteAJob(job?._id)}
-                        className={`${deleteButtonClass} `}
-                      >
-                        Delete
-                      </button>
+                      {/* Delete modal */}
+                      <DeleteModal
+                        mainObj={job}
+                        action={deleteAJob}
+                        actionKey={job?._id}
+                      ></DeleteModal>
                     </div>
                     {/* All buttons end */}
                   </div>

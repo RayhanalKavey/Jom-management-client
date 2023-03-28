@@ -1,8 +1,11 @@
 import React, { useState } from "react";
-import { Link, Outlet } from "react-router-dom";
+import { Link, NavLink, Outlet } from "react-router-dom";
 import {
+  activeButtonClass,
+  activeButtonDashboard,
   buttonClass,
   commonDashboardClass,
+  commonLinkClass,
   dashboardDrawerButton,
   dashboardLinkStyle,
   scaleButtonClass,
@@ -12,35 +15,43 @@ import Navbar from "../shared/Navbar/Navbar";
 import { MdOutlineDashboardCustomize } from "react-icons/md";
 import { TbGitPullRequestClosed } from "react-icons/tb";
 import { IoIosArrowRoundBack } from "react-icons/io";
+import useTitle from "../../hooks/useTitle/useTitle";
 
 const EmployerDashLayout = () => {
+  useTitle("Employer");
   const [isOpen, setIsOpen] = useState(false);
 
   const links = (
-    <ul className="menu p-4">
-      <li className="mb-4">
-        <Link
+    <ul className="p-4 flex flex-col justify-end items-end gap-4">
+      <li>
+        <NavLink
           to="/employer-dashboard/my-posted-job"
-          className={`${dashboardLinkStyle}`}
+          className={({ isActive }) =>
+            isActive ? `${activeButtonDashboard}` : `${commonLinkClass}`
+          }
         >
           My Job Circular
-        </Link>
+        </NavLink>
       </li>
-      <li className="mb-4">
-        <Link
+      <li>
+        <NavLink
           to="/employer-dashboard/add-job"
-          className={`${dashboardLinkStyle}`}
+          className={({ isActive }) =>
+            isActive ? `${activeButtonDashboard}` : `${commonLinkClass}`
+          }
         >
           Post Job
-        </Link>
+        </NavLink>
       </li>
-      <li className="mb-4">
-        <Link
+      <li className="">
+        <NavLink
           to="/employer-dashboard/EmployerProfileUpdate"
-          className={`${dashboardLinkStyle}`}
+          className={({ isActive }) =>
+            isActive ? `${activeButtonDashboard}` : `${commonLinkClass}`
+          }
         >
-          My Profile as Employer
-        </Link>
+          My Employer Profile
+        </NavLink>
       </li>
     </ul>
   );

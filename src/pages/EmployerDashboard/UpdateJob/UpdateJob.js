@@ -85,7 +85,7 @@ const UpdateJob = () => {
 
   return (
     <>
-      <TitleComponent title={"Update Job"}></TitleComponent>
+      <TitleComponent title={"Update Posted Job"}></TitleComponent>
 
       <div className="flex items-center justify-center px-5 py-12 dark:bg-accent bg-base-100">
         <div className="w-[35rem] bg-secondary  p-10  border-[.08rem]  rounded-lg  ">

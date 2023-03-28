@@ -10,7 +10,6 @@ import { scaleButtonClass } from "../../components/classes/classes";
 
 const BlogDetails = () => {
   let { state: blog } = useLocation();
-  // console.log("blogs:--------", blog);
   return (
     <section className="bg-secondary dark:bg-accent">
       {/* heading */}

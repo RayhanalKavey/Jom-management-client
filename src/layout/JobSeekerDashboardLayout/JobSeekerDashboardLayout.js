@@ -1,6 +1,8 @@
 import React, { useState } from "react";
-import { Link, Outlet } from "react-router-dom";
+import { Link, NavLink, Outlet } from "react-router-dom";
+import useTitle from "../../hooks/useTitle/useTitle";
 import {
+  activeButtonDashboard,
   commonDashboardClass,
   dashboardDrawerButton,
   dashboardLinkStyle,
@@ -11,35 +13,37 @@ import Navbar from "../shared/Navbar/Navbar";
 import { MdOutlineDashboardCustomize } from "react-icons/md";
 import { TbGitPullRequestClosed } from "react-icons/tb";
 import { IoIosArrowRoundBack } from "react-icons/io";
+import {
+  commonLinkClass,
+  activeButtonClass,
+} from "../../components/classes/classes";
 
 const JobSeekerDashboardLayout = () => {
+  useTitle("Job Seeker");
+
   const [isOpen, setIsOpen] = useState(false);
 
   const links = (
-    <ul className="menu p-4">
-      <li className="mb-4">
-        <Link
+    <ul className="p-4 flex flex-col justify-end items-end gap-4">
+      <li className="">
+        <NavLink
           to="/job-seeker-dashboard/my-apply"
-          className={`${dashboardLinkStyle}`}
+          className={({ isActive }) =>
+            isActive ? `${activeButtonDashboard}` : `${commonLinkClass}`
+          }
         >
           My Apply
-        </Link>
+        </NavLink>
       </li>
-      {/* <li className="mb-4">
-        <Link
-          to="/job-seeker-dashboard/shortlisted"
-          className={`${dashboardLinkStyle}`}
-        >
-          Short List
-        </Link>
-      </li> */}
-      <li className="mb-4">
-        <Link
+      <li className="">
+        <NavLink
           to="/job-seeker-dashboard/JobSeekerProfileUpdate"
-          className={`${dashboardLinkStyle}`}
+          className={({ isActive }) =>
+            isActive ? `${activeButtonDashboard}` : `${commonLinkClass}`
+          }
         >
-          My Profile as Candidate
-        </Link>
+          My Candidate Profile
+        </NavLink>
       </li>
     </ul>
   );
@@ -50,7 +54,7 @@ const JobSeekerDashboardLayout = () => {
 
       <div className="flex">
         <div
-          className={`hidden lg:block  w-64 min-h-screen border-r-[.5px] ${commonDashboardClass}`}
+          className={` hidden lg:block  w-64 min-h-screen border-r-[.5px] ${commonDashboardClass}`}
         >
           {links}
         </div>

@@ -5,7 +5,6 @@ import { buttonClass } from "../classes/classes";
 import JobApply from "../JobCard/JobApply";
 
 function ApplyModal({ job }) {
-  // console.log(job);
   const [isOpen, setIsOpen] = useState(false);
 
   function toggleModal() {

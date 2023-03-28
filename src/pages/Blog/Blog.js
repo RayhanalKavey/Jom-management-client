@@ -6,8 +6,11 @@ import { useGetBlogsQuery } from "../../features/auth/blogApi";
 import BlogCard from "../home/BlogCard/BlogCard";
 import { IoIosArrowRoundBack } from "react-icons/io";
 import Spinner from "../../components/Spinner/Spinner";
+import useTitle from "../../hooks/useTitle/useTitle";
 
 const Blog = () => {
+  useTitle("Blogs");
+
   const { data: blogs, isLoading } = useGetBlogsQuery();
   let content;
   if (isLoading) {

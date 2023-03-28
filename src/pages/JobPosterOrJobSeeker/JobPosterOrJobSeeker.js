@@ -4,8 +4,11 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import TitleComponent from "../../components/TitleComponent/TitleComponent";
 import { useGetUserQuery } from "../../features/auth/authApi";
+import useTitle from "../../hooks/useTitle/useTitle";
 
 const JobPosterOrJobSeeker = () => {
+  useTitle("Job Poster/Seeker");
+
   //LoggedIn user email
   const { email } = useSelector((state) => state?.auth);
   // get all users from the database
@@ -42,7 +45,10 @@ const JobPosterOrJobSeeker = () => {
               {loggedInEmployer?.isEmployer &&
                 email &&
                 loggedInEmployer?._id && (
-                  <Link to="/employer-dashboard" className={`${linkStyle}`}>
+                  <Link
+                    to="/employer-dashboard/my-posted-job"
+                    className={`${linkStyle}`}
+                  >
                     Employer
                   </Link>
                 )}
@@ -63,7 +69,10 @@ const JobPosterOrJobSeeker = () => {
               {loggedInJobSeeker?.isJobSeeker &&
                 email &&
                 loggedInJobSeeker?._id && (
-                  <Link to="/job-seeker-dashboard" className={`${linkStyle}`}>
+                  <Link
+                    to="/job-seeker-dashboard/my-apply"
+                    className={`${linkStyle}`}
+                  >
                     Job Seeker
                   </Link>
                 )}
