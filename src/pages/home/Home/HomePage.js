@@ -58,8 +58,12 @@ const HomePage = () => {
         {/* Fresher job */}
         <section className="dark:bg-accent pt-28 ">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
-            <SectionHeading>Fresher Job</SectionHeading>
-            <SectionSubHeading> Looking for a Fresh Start?</SectionSubHeading>
+            <SectionHeading>Fresher Job </SectionHeading>
+            <SectionSubHeading>
+              {" "}
+              Looking for a Fresh Start{" "}
+              <span className="inline-block animate-bounce">?</span>
+            </SectionSubHeading>
             <FresherJobHome />
           </div>
         </section>
@@ -68,7 +72,8 @@ const HomePage = () => {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
             <SectionHeading>Experienced Job</SectionHeading>
             <SectionSubHeading>
-              Looking for Better Opportunity?
+              Looking for Better Opportunity{" "}
+              <span className="inline-block animate-bounce">!</span>
             </SectionSubHeading>
             <ExperiencedJobHome />
           </div>

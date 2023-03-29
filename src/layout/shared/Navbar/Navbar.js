@@ -78,7 +78,7 @@ const Navbar = () => {
 
   const darkModeButton = (
     <button
-      className="md:hidden text-accent dark:text-secondary hover:bg-success hover:dark:bg-gray-600 px-3 py-2 rounded-full text-sm font-medium border-[.5px] border-accent dark:border-info "
+      className=" md:hidden text-accent dark:text-secondary hover:bg-success hover:dark:bg-gray-600 px-3 py-2 rounded-full text-sm font-medium border-[.5px] border-accent dark:border-info "
       onClick={() => dispatch(toggleTheme())}
       // onClick={handleSwitchTheme}
     >
@@ -199,7 +199,7 @@ const Navbar = () => {
           {/* ==== Menu Link for large screen ==== */}
           <div className="hidden md:flex md:items-center ">
             <button
-              className="duration-500 text-accent dark:text-secondary hover:bg-success hover:dark:bg-gray-600 px-3 py-2 rounded-full text-sm font-medium border-[.5px] border-accent dark:border-info  mr-1"
+              className="animate-pulse inline-block duration-500 text-accent dark:text-secondary hover:bg-success hover:dark:bg-gray-600 px-3 py-2 rounded-full text-sm font-medium border-[.5px] border-accent dark:border-info  mr-1"
               onClick={() => dispatch(toggleTheme())}
               // onClick={handleSwitchTheme}
             >
