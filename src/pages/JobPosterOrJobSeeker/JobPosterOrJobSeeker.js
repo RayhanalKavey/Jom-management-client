@@ -2,6 +2,7 @@ import React from "react";
 import { toast } from "react-hot-toast";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import Spinner from "../../components/Spinner/Spinner";
 import TitleComponent from "../../components/TitleComponent/TitleComponent";
 import { useGetUserQuery } from "../../features/auth/authApi";
 import useTitle from "../../hooks/useTitle/useTitle";
@@ -14,22 +15,33 @@ const JobPosterOrJobSeeker = () => {
   // get all users from the database
   const { data, isLoading, isSuccess, isError, error } = useGetUserQuery();
 
-  // Find if the user Registered as employer otherwise send to the employer Registration page
-  const loggedInEmployer = data?.find(
-    (u) => u?.email === email && u?.isEmployer === true
-  );
-  // Find if the user Registered as job seeker otherwise send to the job seeker Registration page
-  const loggedInJobSeeker = data?.find(
-    (u) => u?.email === email && u?.isJobSeeker === true
-  );
-
+  /*CSS Class  */
   const seekerOrEmployerButton =
     " bg-secondary  border-[.08rem]  rounded-lg w-full h-full text-center text-2xl duration-500 hover:scale-105 hover:bg-warning hover:text-secondary font-semibold";
   const linkStyle = "p-10 block";
 
-  return (
-    <>
-      <TitleComponent title={"Continue As"}></TitleComponent>
+  /*================================
+  Loading state of logged In user
+    ================================*/
+  let content;
+
+  if (isLoading) {
+    content = <Spinner />;
+  }
+  if (isError) {
+    toast.error(error, { id: "error" });
+  }
+  if (isSuccess) {
+    // Find if the user Registered as employer otherwise send to the employer Registration page
+    const loggedInEmployer = data?.find(
+      (u) => u?.email === email && u?.isEmployer === true
+    );
+    // Find if the user Registered as job seeker otherwise send to the job seeker Registration page
+    const loggedInJobSeeker = data?.find(
+      (u) => u?.email === email && u?.isJobSeeker === true
+    );
+
+    content = (
       <section className="dark:bg-accent py-20 ">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8   ">
           {/* Job poster or seeker content Start */}
@@ -81,6 +93,12 @@ const JobPosterOrJobSeeker = () => {
           {/* Job poster or seeker content End */}
         </div>
       </section>
+    );
+  }
+  return (
+    <>
+      <TitleComponent title={"Continue As"}></TitleComponent>
+      {content}
     </>
   );
 };

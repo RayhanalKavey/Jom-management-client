@@ -94,7 +94,7 @@ const HomePage = () => {
             <PopularJobCategory />
           </div>
         </section>
-        {/*  User openion */}
+        {/*  User opinion */}
         <section className={` dark:bg-accent py-28 `}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
             <SectionHeading>User Opinion</SectionHeading>
