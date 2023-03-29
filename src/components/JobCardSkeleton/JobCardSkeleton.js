@@ -1,6 +1,5 @@
 import React from "react";
-import { CiLocationOn, CiTimer } from "react-icons/ci";
-import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+import Skeleton from "react-loading-skeleton";
 import "./JobCardSkeleton.css";
 const JobCardSkeleton = () => {
   return (

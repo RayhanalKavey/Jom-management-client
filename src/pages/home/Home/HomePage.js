@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
+import { toast } from "react-hot-toast";
 import { useSelector } from "react-redux";
 import { bottomBorder, topBorder } from "../../../components/classes/classes";
 import SectionHeading from "../../../components/SectionHeading/SectionHeading";
 import SectionSubHeading from "../../../components/SectionSubHeading/SectionSubHeading";
 import Spinner from "../../../components/Spinner/Spinner";
-import Tryout from "../../../components/Tryout";
 import { useGetBlogsQuery } from "../../../features/auth/blogApi";
 import useTitle from "../../../hooks/useTitle/useTitle";
 import BlogCard from "../BlogCard/BlogCard";
@@ -19,18 +19,33 @@ import UserOpinion from "../UserOpinion/UserOpinion";
 
 const HomePage = () => {
   useTitle("Home");
-  // Information of the redux store
-  const { isLoading, isError } = useSelector((state) => state.auth);
-  // Fetched data of all jobs
+  /* ======================
+   Getting user information from redux store
+  =======================*/
+  const { isLoading, isError, error } = useSelector((state) => state.auth);
 
-  const { data: blogs } = useGetBlogsQuery();
+  /* =========================
+     Fetched data of all BLOGs
+     =========================*/
+  const {
+    data: blogs,
+    isLoading: blogLoading,
+    isError: blogError,
+    isSuccess: blogSuccess,
+  } = useGetBlogsQuery();
 
+  /*================================
+  Loading state of logged In user
+    ================================*/
   let content;
 
   if (isLoading) {
     content = <Spinner />;
   }
-  if (!isError && !isLoading) {
+  if (isError) {
+    toast.error(error, { id: "error" });
+  }
+  if (!isLoading && !isError) {
     content = (
       <>
         <section

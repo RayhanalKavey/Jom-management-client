@@ -2,22 +2,8 @@ import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
-// import {
-//   scaleButtonClass,
-//   submitButtonClass,
-// } from "../../../components/classes/classes";
-
-// import TitleComponent from "../../../components/TitleComponent/TitleComponent";
-// import {
-//   useGetUserQuery,
-//   useRegisterJobSeekerMutation,
-// } from "../../../features/auth/authApi";
-import { IoIosArrowRoundBack } from "react-icons/io";
-import {
-  scaleButtonClass,
-  submitButtonClass,
-} from "../../../components/classes/classes";
+import { useNavigate } from "react-router-dom";
+import { submitButtonClass } from "../../../components/classes/classes";
 import TitleComponent from "../../../components/TitleComponent/TitleComponent";
 import {
   useGetUserQuery,
@@ -25,17 +11,26 @@ import {
 } from "../../../features/auth/authApi";
 
 const EmployerProfileUpdate = () => {
+  /* ===============================
   // Get user email from the store
+    ================================ */
   const { email } = useSelector((state) => state?.auth);
 
+  /* ===============================
   // get all users from the database
+    ================================ */
   const { data } = useGetUserQuery();
-  // Find if the user Registered as employer otherwise send to the employer Registration page
+
+  /* ===============================
+    // Find if the user Registered as employer otherwise send to the employer Registration page
+      ================================ */
   const loggedInEmployer = data?.find(
     (u) => u?.email === email && u?.isEmployer === true
   );
 
+  /* =================
   // React hook form
+     ================*/
   const {
     register,
     handleSubmit,
@@ -44,7 +39,9 @@ const EmployerProfileUpdate = () => {
   } = useForm();
   const navigate = useNavigate();
 
+  /* ======================
   // Post user to the database and handle its updating state
+  ========================= */
   const [registerJobSeeker, { isSuccess, isLoading, isError, error }] =
     useRegisterJobSeekerMutation();
 
@@ -83,31 +80,39 @@ const EmployerProfileUpdate = () => {
   const yearOfExp = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
   const employeeCounts = ["1-50", "51-100", "101-500", "501-1000", "1000+"];
 
-  // Submit form data...
+  /* ================
+  // Submit form data
+     ================*/
   const onSubmit = (data) => {
     const employer = { ...data, isJobSeeker: true };
     registerJobSeeker(employer);
   };
 
+  /* ===================================
   // Handle different user update state
+     =================================== */
   useEffect(() => {
     if (isLoading) {
-      toast.loading("Loading...... Please wait", { id: "updateUser" });
+      toast.loading("Updating...Please wait...", { id: "updateUser" });
     }
     if (isSuccess) {
-      toast.success("Save changes.", { id: "updateUser" });
-      // reset();
-      // navigate("/job-seeker-dashboard");
+      toast.success("Profile Updated Successfully.", { id: "updateUser" });
+      navigate("/job-seeker-dashboard");
     }
     if (isError) {
-      toast.success(error, { id: "updateUser" });
+      toast.error(error, { id: "updateUser" });
     }
-  }, [isLoading, isSuccess, isError, error, reset, navigate]);
+  }, [isLoading, isSuccess, isError, error, navigate]);
+
+  /* ------------------------------------------------------------------- */
   return (
     <>
       <TitleComponent title={"My Profile"}></TitleComponent>
 
-      <div className="flex items-center justify-center px-5 py-12 dark:bg-accent bg-base-100">
+      <div
+        data-aos="fade-up"
+        className="flex items-center justify-center px-5 py-12 dark:bg-accent bg-base-100"
+      >
         <div className="w-[35rem] bg-secondary  p-10  border-[.08rem]  rounded-lg  ">
           <form onSubmit={handleSubmit(onSubmit)} className="">
             {/* First Name */}

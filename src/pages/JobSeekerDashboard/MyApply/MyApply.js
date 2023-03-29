@@ -1,33 +1,36 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 import {
   badgeClass,
-  buttonClass,
   dateFormate,
-  deleteButtonClass,
   outlinedButton,
   scaleButtonClass,
 } from "../../../components/classes/classes";
 import TitleComponent from "../../../components/TitleComponent/TitleComponent";
 import { useGetApplyQuery } from "../../../features/auth/applyApi";
 import { useGetUserQuery } from "../../../features/auth/authApi";
-import {
-  useDeleteAJobMutation,
-  useGetJobsQuery,
-} from "../../../features/auth/jobApi";
-import { MdOutlineBookmarkAdd, MdOutlineBookmarkAdded } from "react-icons/md";
+import { useGetJobsQuery } from "../../../features/auth/jobApi";
+import { MdOutlineBookmarkAdd } from "react-icons/md";
 import { toast } from "react-hot-toast";
 import { CiLocationOn, CiTimer } from "react-icons/ci";
 import { Link } from "react-router-dom";
+import JobCardSkeleton from "../../../components/JobCardSkeleton/JobCardSkeleton";
 
 const MyApply = () => {
   //LoggedIn user email
   const { email } = useSelector((state) => state?.auth);
-  // get all users from the database
-  const { data, isLoading, isSuccess, isError, error } = useGetUserQuery();
 
-  //
-  const { data: allJob } = useGetJobsQuery();
+  const { data } = useGetUserQuery();
+  /* ===============================
+  //  Get data of All jobs from the database using redux
+     ===============================*/
+  const {
+    data: allJob,
+    isLoading,
+    isSuccess,
+    isError,
+    error,
+  } = useGetJobsQuery();
 
   // Find if the user Registered as job seeker otherwise send to the job seeker Registration page
   const loggedInJobSeeker = data?.find(
@@ -38,7 +41,7 @@ const MyApply = () => {
   const {
     data: applyInfo,
     isLoading: getApplyInfoLoading,
-    isSuccess: isSeccessLoading,
+    isSuccess: isSuccessLoading,
   } = useGetApplyQuery();
   // find the applied jobs
   const currentJobSeekersApplied = applyInfo?.filter(
@@ -50,15 +53,19 @@ const MyApply = () => {
     currentJobSeekersApplied?.some((jobObj) => job?._id === jobObj?.applyJobId)
   );
 
+  /* ===============================
+  Loading state of Getting all jobs
+  =================================*/
   let content;
-  //  useEffect(() => {
-  // }, [deleteLoading, isSuccess, isError, error]);
-
-  if (isSuccess && isSeccessLoading) {
+  if (isLoading && getApplyInfoLoading) {
+    content = <JobCardSkeleton></JobCardSkeleton>;
+  }
+  if (isError) {
+    toast.error(error, { id: "jobske" });
+  }
+  if (isSuccess && isSuccessLoading) {
     content = (
       <>
-        <TitleComponent title={"My Apply"}></TitleComponent>
-
         <div className="grid grid-cols-1 md:grid-cols-2  lg:grid-cols-1  xl:grid-cols-2 gap-4 w-full py-16 px-5 ">
           {currentJobSeekersAppliedJobs?.reverse()?.map((job) => (
             <div
@@ -160,7 +167,12 @@ const MyApply = () => {
   if (isError) {
     toast.success(error, { id: "deleteJob" });
   }
-  return <>{content}</>;
+  return (
+    <>
+      <TitleComponent title={"My Apply"}></TitleComponent>
+      {content}
+    </>
+  );
 };
 
 export default MyApply;

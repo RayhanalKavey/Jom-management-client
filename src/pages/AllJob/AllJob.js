@@ -1,5 +1,7 @@
 import React from "react";
+import { toast } from "react-hot-toast";
 import JobCard from "../../components/JobCard/JobCard";
+import JobCardSkeleton from "../../components/JobCardSkeleton/JobCardSkeleton";
 import Spinner from "../../components/Spinner/Spinner";
 import TitleComponent from "../../components/TitleComponent/TitleComponent";
 import { useGetJobsQuery } from "../../features/auth/jobApi";
@@ -10,10 +12,14 @@ const AllJob = () => {
 
   const { data, isLoading, isSuccess, isError, error } = useGetJobsQuery();
 
-  // const reversed = data?.filter((j) => j)?.reverse();
+  // Handle loading states of getting the job...
+
   let content;
   if (isLoading) {
-    content = <Spinner></Spinner>;
+    content = content = <JobCardSkeleton></JobCardSkeleton>;
+  }
+  if (isError) {
+    toast.success(error, { id: "jobss" });
   }
   if (isSuccess) {
     content = (
@@ -23,6 +29,7 @@ const AllJob = () => {
           ?.reverse()
           ?.map((job) => (
             <div
+              data-aos="fade-up"
               className="m-2  border-[.08rem] p-6 rounded-lg  bg-secondary"
               key={job?._id}
             >

@@ -7,19 +7,27 @@ import BlogCard from "../home/BlogCard/BlogCard";
 import { IoIosArrowRoundBack } from "react-icons/io";
 import Spinner from "../../components/Spinner/Spinner";
 import useTitle from "../../hooks/useTitle/useTitle";
+import BlogCardSkeleton from "../../components/BlogCardSkeleton/BlogCardSkeleton";
 
 const Blog = () => {
   useTitle("Blogs");
 
-  const { data: blogs, isLoading } = useGetBlogsQuery();
+  const {
+    data: blogs,
+    isLoading,
+    isSuccess,
+    isError,
+    error,
+  } = useGetBlogsQuery();
   let content;
+
   if (isLoading) {
-    content = <Spinner></Spinner>;
+    content = <BlogCardSkeleton></BlogCardSkeleton>;
   }
+
   if (!isLoading) {
     content = (
-      <div>
-        <TitleComponent title="Blogs" />
+      <>
         <section className="dark:bg-accent py-20 ">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
             <Link to={"/home"}>
@@ -36,10 +44,15 @@ const Blog = () => {
             </div>
           </div>
         </section>
-      </div>
+      </>
     );
   }
-  return <>{content}</>;
+  return (
+    <>
+      <TitleComponent title="Blogs" />
+      {content}
+    </>
+  );
 };
 
 export default Blog;

@@ -12,16 +12,22 @@ import {
 } from "../../../components/classes/classes";
 
 const AddJob = () => {
+  /* =============================
   // Get user email from the store
+  ================================*/
 
   const { email } = useSelector((state) => state?.auth);
   const navigate = useNavigate();
 
+  /*===========================
   // Redux despatch, and action
+   ============================ */
   const [postAJob, { isLoading, isSuccess, isError, error }] =
     usePostAJobMutation();
 
+  /* ================
   // React hook form
+     ================*/
   const {
     register,
     handleSubmit,
@@ -29,7 +35,9 @@ const AddJob = () => {
     formState: { errors },
   } = useForm();
 
-  // React hook form submission
+  /*=========================  
+  React hook form submission
+  ===========================*/
   const onSubmit = (data) => {
     const currentDate = new Date();
     const jobInfo = {
@@ -40,28 +48,35 @@ const AddJob = () => {
     };
     postAJob(jobInfo);
   };
-  // Handle different user update state
+  /* =================================
+  // Handle update a user state 
+  =====================================*/
   useEffect(() => {
     if (isLoading) {
-      toast.loading("Loading...... Please wait", { id: "addJob" });
+      toast.loading("Loading...Please wait...", { id: "addJob" });
     }
     if (isSuccess) {
-      toast.success("Welcome as a Employer.", { id: "addJob" });
-      // reset();
+      toast.success("Job Posted Successfully.", { id: "addJob" });
+      reset();
       navigate("/employer-dashboard/my-posted-job");
     }
     if (isError) {
-      toast.success({ id: "addJob" });
+      toast.error(isError, { id: "addJob" });
     }
   }, [isLoading, isSuccess, isError, error, reset, navigate]);
 
   const jobCategories = ["Fresher", "Experienced"];
   const requiredExp = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
+
+  // ----------------------///--------------------------------//
   return (
     <>
       <TitleComponent title={"Post Job"}></TitleComponent>
 
-      <div className="flex items-center justify-center px-5 py-12 dark:bg-accent bg-base-100">
+      <div
+        data-aos="fade-up"
+        className="flex items-center justify-center px-5 py-12 dark:bg-accent bg-base-100"
+      >
         <div className="w-[35rem] bg-secondary  p-10  border-[.08rem]  rounded-lg  ">
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="grid grid-cols-2 gap-4">

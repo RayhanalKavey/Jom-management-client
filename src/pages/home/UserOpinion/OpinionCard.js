@@ -3,7 +3,10 @@ import userImg from "../../../assets/images/rayhan-al-kavey.png";
 
 const OpinionCard = ({ currentReview }) => {
   return (
-    <div className=" border-[.08rem] p-10 rounded-lg  bg-secondary transition-all w-full lg:w-2/3  mx-auto">
+    <div
+      data-aos="zoom-in"
+      className=" border-[.08rem] p-10 rounded-lg  bg-secondary transition-all w-full lg:w-2/3  mx-auto"
+    >
       <div className="text-warning font-bold text-2xl mb-7">
         {" "}
         {currentReview?.commentTitle}

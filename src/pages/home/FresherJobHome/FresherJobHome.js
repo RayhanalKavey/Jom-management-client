@@ -1,4 +1,5 @@
 import React from "react";
+import { toast } from "react-hot-toast";
 import { Link } from "react-router-dom";
 import { buttonClass, homeButton } from "../../../components/classes/classes";
 import JobCard from "../../../components/JobCard/JobCard";
@@ -13,7 +14,7 @@ const FresherJobHome = () => {
     content = content = <JobCardSkeleton></JobCardSkeleton>;
   }
   if (isError) {
-    content = <p>{error}</p>;
+    toast.error(error, { id: "jobske" });
   }
 
   if (isSuccess) {

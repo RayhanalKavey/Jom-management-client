@@ -4,10 +4,12 @@ import { useGetReviewQuery } from "../../../features/auth/reviewApi";
 import { AiOutlineDoubleRight, AiOutlineDoubleLeft } from "react-icons/ai";
 import { iconButton } from "../../../components/classes/classes";
 import OpinionCard from "./OpinionCard";
+import { toast } from "react-hot-toast";
+import Spinner from "../../../components/Spinner/Spinner";
 
 const UserOpinion = () => {
   // get reviews from the database
-  const { data: reviews } = useGetReviewQuery();
+  const { data: reviews, isLoading, isError, error } = useGetReviewQuery();
 
   // Get the reviews by dynamic index(changed by an interval)
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -21,6 +23,10 @@ const UserOpinion = () => {
 
     return () => clearInterval(interval);
   }, [currentIndex, reviews?.length]);
+
+  /* =================
+  Onclick image change
+  ================= */
   // Get previous review by onclick
   const prevImage = () => {
     setCurrentIndex(
@@ -34,34 +40,45 @@ const UserOpinion = () => {
       currentIndex === reviews?.length - 1 ? 0 : currentIndex + 1
     );
   };
+
+  /* ===============
   // current review(Check if the data comes successfully. If undefined then it will provide an error cannot read property of undefined)
+     =============== */
   let currentReview;
   if (reviews) {
     currentReview = reviews[currentIndex];
   }
-  return (
-    <div className="relative">
-      {/* card */}
-      {/* <div
-        className="transition-all duration-500 ease-in-out"
-        style={{ transform: `translateX(-${currentIndex * 100}%)` }}
-      >
-      </div> */}
-      <OpinionCard currentReview={currentReview}> </OpinionCard>
-      {/* <div className="transition-all duration-500 ease-in-out">
-      </div> */}
-      {/* card */}
+  /* ===============
+  Loading state of getting user reviews
+  ================= */
+  let content;
+  if (isLoading) {
+    content = <Spinner />;
+  }
+  if (isError) {
+    toast.error(error, { id: "error" });
+  }
 
-      <div className="absolute -bottom-[20%] left-0 transform -translate-y-1/2 flex justify-center w-full gap-2">
-        <button onClick={prevImage} className={`p-2 ${iconButton}`}>
-          <AiOutlineDoubleLeft></AiOutlineDoubleLeft>
-        </button>
-        <button onClick={nextImage} className={`p-2 ${iconButton}`}>
-          <AiOutlineDoubleRight></AiOutlineDoubleRight>
-        </button>
+  if (!isLoading && !isError) {
+    content = (
+      <div className="relative">
+        {/* card */}
+        <OpinionCard currentReview={currentReview}> </OpinionCard>
+        {/* card */}
+
+        <div className="absolute -bottom-[20%] left-0 transform -translate-y-1/2 flex justify-center w-full gap-2">
+          <button onClick={prevImage} className={`p-2 ${iconButton}`}>
+            <AiOutlineDoubleLeft></AiOutlineDoubleLeft>
+          </button>
+          <button onClick={nextImage} className={`p-2 ${iconButton}`}>
+            <AiOutlineDoubleRight></AiOutlineDoubleRight>
+          </button>
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
+
+  return <>{content}</>;
 };
 
 export default UserOpinion;

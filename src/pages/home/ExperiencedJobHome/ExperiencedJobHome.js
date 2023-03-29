@@ -1,4 +1,5 @@
 import React from "react";
+import { toast } from "react-hot-toast";
 import { Link } from "react-router-dom";
 import JobCard from "../../../components/JobCard/JobCard";
 import JobCardSkeleton from "../../../components/JobCardSkeleton/JobCardSkeleton";
@@ -12,7 +13,7 @@ const ExperiencedJobHome = () => {
     content = <JobCardSkeleton></JobCardSkeleton>;
   }
   if (isError) {
-    content = <p>{error}</p>;
+    toast.error(error, { id: "jobSke" });
   }
 
   if (isSuccess) {

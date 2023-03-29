@@ -30,7 +30,7 @@ const EmployerDashLayout = () => {
             isActive ? `${activeButtonDashboard}` : `${commonLinkClass}`
           }
         >
-          My Job Circular
+          Posted Job
         </NavLink>
       </li>
       <li>
@@ -40,7 +40,7 @@ const EmployerDashLayout = () => {
             isActive ? `${activeButtonDashboard}` : `${commonLinkClass}`
           }
         >
-          Post Job
+          Post a Job
         </NavLink>
       </li>
       <li className="">
@@ -50,7 +50,7 @@ const EmployerDashLayout = () => {
             isActive ? `${activeButtonDashboard}` : `${commonLinkClass}`
           }
         >
-          My Employer Profile
+          My Profile
         </NavLink>
       </li>
     </ul>

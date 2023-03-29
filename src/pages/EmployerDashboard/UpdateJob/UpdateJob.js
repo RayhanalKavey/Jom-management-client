@@ -76,7 +76,7 @@ const UpdateJob = () => {
       navigate("/employer-dashboard/my-posted-job");
     }
     if (isError) {
-      toast.success({ id: "addJob" });
+      toast.error({ id: "addJob" });
     }
   }, [isLoading, isSuccess, isError, error, reset, navigate]);
 
@@ -87,7 +87,10 @@ const UpdateJob = () => {
     <>
       <TitleComponent title={"Update Posted Job"}></TitleComponent>
 
-      <div className="flex items-center justify-center px-5 py-12 dark:bg-accent bg-base-100">
+      <div
+        data-aos="fade-up"
+        className="flex items-center justify-center px-5 py-12 dark:bg-accent bg-base-100"
+      >
         <div className="w-[35rem] bg-secondary  p-10  border-[.08rem]  rounded-lg  ">
           <form onSubmit={handleSubmit(onSubmit)}>
             {/* Job position */}

@@ -19,47 +19,62 @@ import { MdOutlineBookmarkAdd, MdOutlineBookmarkAdded } from "react-icons/md";
 import { CiLocationOn, CiTimer } from "react-icons/ci";
 import { TbCloudDataConnection } from "react-icons/tb";
 import DeleteModal from "../../../components/DeleteModal/DeleteModal";
+import JobCardSkeleton from "../../../components/JobCardSkeleton/JobCardSkeleton";
 
 const MyPostedJob = () => {
   // Get current user email from the store
   const { email } = useSelector((state) => state?.auth);
 
-  //  Get data from the database using redux
-  const { data, isLoading } = useGetJobsQuery();
+  /* ===============================
+  //  Get data of All jobs from the database using redux
+     ===============================*/
+  const { data, isLoading, isSuccess, isError, error } = useGetJobsQuery();
+
+  // Get currently logged in user
   const loggedInUserPost = data?.filter((job) => job?.email === email);
 
+  /* ===============================
   // Redux action for deleting a job
-  const [deleteAJob, { isLoading: deleteLoading, isSuccess, isError, error }] =
-    useDeleteAJobMutation();
+     ===============================*/
+  const [deleteAJob, { deleteResult }] = useDeleteAJobMutation();
 
-  const date = new Date().toLocaleDateString("en-US", {
-    month: "numeric",
-    day: "numeric",
-    year: "numeric",
-  });
-
+  /* ===============================
+    Loading States for deleting a job
+    ===============================*/
   useEffect(() => {
-    if (deleteLoading) {
-      toast.loading("Loading...... Please wait", { id: "deleteJob" });
+    if (deleteResult?.isLoading) {
+      toast.loading("Deleting...Please wait...", { id: "deleteJob" });
     }
-    if (isSuccess) {
-      toast.success("Job deleted", { id: "deleteJob" });
+    if (deleteResult?.isSuccess) {
+      toast.success("Job deleted Successfully", { id: "deleteJob" });
     }
-    if (isError) {
-      toast.success(error, { id: "deleteJob" });
+    if (deleteResult?.isError) {
+      toast.success(deleteResult?.error, { id: "deleteJob" });
     }
-  }, [deleteLoading, isSuccess, isError, error]);
+  }, [
+    deleteResult?.isLoading,
+    deleteResult?.isSuccess,
+    deleteResult?.isError,
+    deleteResult?.error,
+  ]);
 
+  /* ===============================
+  Loading state of Getting all jobs
+  =================================*/
   let content;
-
-  if (!isLoading) {
+  if (isLoading) {
+    content = content = <JobCardSkeleton></JobCardSkeleton>;
+  }
+  if (isError) {
+    toast.error(error, { id: "jobaPost" });
+  }
+  if (isSuccess) {
     content = (
       <>
-        <TitleComponent title={"My Job Circular"} />
-
         <div className="grid grid-cols-1 md:grid-cols-2  lg:grid-cols-1  xl:grid-cols-2 gap-4 w-full py-16 px-5 ">
           {loggedInUserPost?.reverse()?.map((job) => (
             <div
+              data-aos="fade-up"
               className="  border-[.08rem] p-6 rounded-lg  bg-secondary relative"
               key={job?._id}
             >
@@ -170,7 +185,12 @@ const MyPostedJob = () => {
     );
   }
 
-  return <>{content}</>;
+  return (
+    <>
+      <TitleComponent title={"Posted Job"} />
+      {content}
+    </>
+  );
 };
 
 export default MyPostedJob;
