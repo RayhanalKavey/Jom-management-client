@@ -8,6 +8,8 @@ import { createUser, googleLogin } from "../../../features/auth/authSlice";
 import useTitle from "../../../hooks/useTitle/useTitle";
 import logInImg from "../../../assets/images/sign_up.png";
 import {
+  formInput,
+  formLabel,
   googleButton,
   submitButtonClass,
 } from "../../../components/classes/classes";
@@ -97,24 +99,20 @@ const Registration = () => {
           >
             <div className="form-control w-full ">
               {/* -----Email--- */}
-              <label className="block mb-1 font-bold text-gray-500">
-                Email
-              </label>
+              <label className={`${formLabel}`}>Email</label>
               <input
                 type="email"
                 {...register("email", {
                   required: "Email address is required !",
                 })}
-                className="w-full px-4 py-2 mb-4 leading-tight border border-gray-500 rounded appearance-none focus:outline-none focus:bg-white focus:border-gray-500"
+                className={`${formInput}`}
                 placeholder="Your email"
               />
               {errors.email && (
                 <p className="text-sm text-red-600">{errors.email?.message}</p>
               )}
               {/* ----Password--- */}
-              <label className="block mb-1 font-bold text-gray-500">
-                Password
-              </label>
+              <label className={`${formLabel}`}>Password</label>
               <input
                 type="password"
                 {...register("password", {
@@ -130,7 +128,7 @@ const Registration = () => {
                       "Ensure password has two uppercase and one special case letter.",
                   },
                 })}
-                className="w-full px-4 py-2 mb-4 leading-tight border border-gray-500 rounded appearance-none focus:outline-none focus:bg-white focus:border-gray-500"
+                className={`${formInput}`}
                 placeholder="*********"
               />
               {errors.password && (
@@ -140,15 +138,13 @@ const Registration = () => {
               )}
               {/* ----Confirm Password---- */}
 
-              <label className="block mb-1 font-bold text-gray-500">
-                Confirm Password
-              </label>
+              <label className={`${formLabel}`}>Confirm Password</label>
               <input
                 type="password"
                 {...register("confirmPassword", {
                   required: "Password confirmation is required !",
                 })}
-                className="   w-full px-4 py-2 mb-4 leading-tight border border-gray-500 rounded appearance-none focus:outline-none focus:bg-white focus:border-gray-500"
+                className={`${formInput}`}
                 placeholder="*********"
               />
               {errors.confirmPassword && (

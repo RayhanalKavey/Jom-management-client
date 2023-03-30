@@ -3,11 +3,12 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import Spinner from "../../../components/Spinner/Spinner";
 import { googleLogin, loginUser } from "../../../features/auth/authSlice";
 import useTitle from "../../../hooks/useTitle/useTitle";
 import TitleComponent from "../../../components/TitleComponent/TitleComponent";
 import {
+  formInput,
+  formLabel,
   googleButton,
   submitButtonClass,
 } from "../../../components/classes/classes";
@@ -66,15 +67,13 @@ const Login = () => {
           <form onSubmit={handleSubmit(handleOnSubmit)}>
             <div className="form-control w-full max-w-xs">
               {/* -----Email--- */}
-              <label className="block mb-1 font-bold text-gray-500">
-                Email
-              </label>
+              <label className={`${formLabel}`}>Email</label>
               <input
                 type="email"
                 {...register("email", {
                   required: "Email address is required !",
                 })}
-                className="w-full px-4 py-2 mb-4 leading-tight border border-gray-500 rounded appearance-none focus:outline-none focus:bg-white focus:border-gray-500"
+                className={`${formInput}`}
                 placeholder="Your email"
               />
               {errors.email && (
@@ -89,7 +88,7 @@ const Login = () => {
                 {...register("password", {
                   required: "Password is required !",
                 })}
-                className="w-full px-4 py-2 mb-4 leading-tight border border-gray-500 rounded appearance-none focus:outline-none focus:bg-white focus:border-gray-500"
+                className={`${formInput}`}
                 placeholder="*********"
               />
               {errors.password && (
