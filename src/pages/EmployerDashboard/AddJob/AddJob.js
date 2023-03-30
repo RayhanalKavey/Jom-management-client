@@ -5,9 +5,9 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import TitleComponent from "../../../components/TitleComponent/TitleComponent";
 import { usePostAJobMutation } from "../../../features/auth/jobApi";
-import { IoIosArrowRoundBack } from "react-icons/io";
 import {
-  scaleButtonClass,
+  formInput,
+  formLabel,
   submitButtonClass,
 } from "../../../components/classes/classes";
 
@@ -46,6 +46,7 @@ const AddJob = () => {
       experiencedJob: data?.jobCategory === "Experienced" ? true : false,
       currentDate,
     };
+    // console.log("JobInfo", jobInfo);
     postAJob(jobInfo);
   };
   /* =================================
@@ -66,7 +67,6 @@ const AddJob = () => {
   }, [isLoading, isSuccess, isError, error, reset, navigate]);
 
   const jobCategories = ["Fresher", "Experienced"];
-  const requiredExp = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
 
   // ----------------------///--------------------------------//
   return (
@@ -75,219 +75,235 @@ const AddJob = () => {
 
       <div
         data-aos="fade-up"
-        className="flex items-center justify-center px-5 py-12 dark:bg-accent bg-base-100"
+        className="flex justify-stretch items-stretch px-5 py-12 dark:bg-accent bg-base-100"
       >
-        <div className="w-[35rem] bg-secondary  p-10  border-[.08rem]  rounded-lg  ">
+        <div className="w-full bg-secondary  p-10  border-[.08rem]  rounded-lg  ">
           <form onSubmit={handleSubmit(onSubmit)}>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid md:grid-cols-2 gap-4">
+              {/* -----------Job Title ------------ */}
               <div>
-                <label htmlFor="position" className="block mb-1 font-medium">
-                  Position Name:
+                <label htmlFor="position" className={`${formLabel}`}>
+                  Job Title
                 </label>
                 <input
                   type="text"
                   id="position"
                   {...register("position", { required: true })}
-                  className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+                  className={`${formInput}`}
+                  placeholder="Front End Developer"
                 />
                 {errors.position && (
                   <span className="text-red-500 text-sm">
-                    This field is required!
+                    This field is required !!
                   </span>
                 )}
               </div>
-              {/* Company Name */}
+              {/* -------------Company Name ------------*/}
               <div>
-                <label htmlFor="company" className="block mb-1 font-medium">
-                  Company Name:
+                <label htmlFor="company" className={`${formLabel}`}>
+                  Company Name
                 </label>
                 <input
                   type="text"
                   id="company"
                   {...register("company", { required: true })}
-                  className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+                  className={`${formInput}`}
+                  placeholder="ABC Company Ltd."
                 />
                 {errors.company && (
                   <span className="text-red-500 text-sm">
-                    This field is required
+                    This field is required !
                   </span>
                 )}
               </div>
             </div>
-            {/* Job Type */}
-            <div className="mt-4">
-              <label className="block mb-1 font-medium">Job Type:</label>
-              <div>
-                <label
-                  htmlFor="remote"
-                  className="inline-flex items-center mr-4"
-                >
-                  <input
-                    type="radio"
-                    id="remote"
-                    {...register("jobType", { required: true })}
-                    value="remote"
-                    className="mr-2"
-                  />
-                  Remote
+            <div className="grid md:grid-cols-2 gap-4">
+              {/* ------------Job Location-------------*/}
+              <div className="mt-4">
+                <label htmlFor="location" className={`${formLabel}`}>
+                  Company Location
                 </label>
-                <label
-                  htmlFor="onSite"
-                  className="inline-flex items-center mr-4"
-                >
-                  <input
-                    type="radio"
-                    id="onSite"
-                    {...register("jobType", { required: true })}
-                    value="onSite"
-                    className="mr-2"
-                  />
-                  On-Site
-                </label>
-                <label
-                  htmlFor="hybrid"
-                  className="inline-flex items-center mr-4"
-                >
-                  <input
-                    type="radio"
-                    id="hybrid"
-                    {...register("jobType", { required: true })}
-                    value="hybrid"
-                    className="mr-2"
-                  />
-                  Hybrid
-                </label>
+                <input
+                  type="text"
+                  id="location"
+                  {...register("location", { required: true })}
+                  className={`${formInput}`}
+                  placeholder="Hasnabad Housing, Dhaka, Bangladesh"
+                />
+                {errors.location && (
+                  <span className="text-red-500 text-sm">
+                    This field is required !
+                  </span>
+                )}
               </div>
-              {errors.jobType && (
-                <span className="text-red-500 text-sm">
-                  This field is required
-                </span>
-              )}
+              {/* ===============Company category ============== */}
+              <div className="mt-4">
+                <label htmlFor="companyCategory" className={`${formLabel}`}>
+                  Company Category
+                </label>
+                <input
+                  type="text"
+                  id="companyCategory"
+                  {...register("companyCategory", { required: true })}
+                  className={`${formInput}`}
+                  placeholder="Technology/Health Care etc."
+                />
+                {errors.companyCategory && (
+                  <span className="text-red-500 text-sm">
+                    This field is required !
+                  </span>
+                )}
+              </div>
+            </div>
+            <div className="grid md:grid-cols-2 gap-4">
+              {/* ---------------Job Type-------------- */}
+              <div className="mt-4">
+                <label htmlFor="jobType" className={`${formLabel}`}>
+                  Job Type
+                </label>
+                <select
+                  id="jobType"
+                  {...register("jobType", { required: true })}
+                  className={`${formInput}`}
+                >
+                  <option value="">-- Select Job Type --</option>
+                  <option key="remote" value="remote">
+                    Remote
+                  </option>
+                  <option key="onSite" value="onSite">
+                    On-Site
+                  </option>
+                  <option key="hybrid" value="hybrid">
+                    Hybrid
+                  </option>
+                </select>
+
+                {errors.jobType && (
+                  <span className="text-red-500 text-sm">
+                    This field is required !
+                  </span>
+                )}
+              </div>
+              {/* ------------Year of Expert -----------------*/}
+              <div className="mt-4">
+                <label htmlFor="requiredExp" className={`${formLabel}`}>
+                  Year Of Expert
+                </label>
+                <input
+                  type="number"
+                  id="requiredExp"
+                  {...register("requiredExp", { required: true })}
+                  className={`${formInput}`}
+                  placeholder="1/2/3/4"
+                  min={0}
+                  // onWheel={(event) => event.preventDefault()}
+                />
+                {errors.requiredExp && (
+                  <span className="text-red-500 text-sm">
+                    This field is required !
+                  </span>
+                )}
+              </div>
+            </div>
+            <div className="grid md:grid-cols-2 gap-4">
+              {/* ================ Email ============== */}
+              <div className="mt-4">
+                <label htmlFor="email" className={`${formLabel}`}>
+                  Email
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  {...register("email")}
+                  className={`${formInput} cursor-not-allowed`}
+                  defaultValue={email}
+                  readOnly
+                />
+                {errors.email && (
+                  <span className="text-red-500 text-sm">
+                    This field is required !!
+                  </span>
+                )}
+              </div>
+
+              {/* ============= Job category =========== */}
+              <div className="mt-4">
+                <label htmlFor="jobCategory" className={`${formLabel}`}>
+                  Job Category
+                </label>
+                <select
+                  id="jobCategory"
+                  {...register("jobCategory", { required: true })}
+                  className={`${formInput}`}
+                >
+                  <option value="">-- Select Category --</option>
+                  {jobCategories.map((category) => (
+                    <option key={category} value={category}>
+                      {category}
+                    </option>
+                  ))}
+                </select>
+                {errors.jobCategory && (
+                  <span className="text-red-500 text-sm">
+                    This field is required !
+                  </span>
+                )}
+              </div>
             </div>
 
-            {/*/// Year of Expert*/}
+            {/*================ Logo ==================*/}
             <div className="mt-4">
-              <label htmlFor="jobType">Year Of Expert:</label>
-              <select
-                id="requiredExp"
-                {...register("requiredExp")}
-                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
-              >
-                {requiredExp.map((category) => (
-                  <option key={category} value={category}>
-                    {category}
-                  </option>
-                ))}
-              </select>
-            </div>
-            {/* Email */}
-            <div className="mt-4">
-              <label htmlFor="email" className="block mb-1 font-medium">
-                Email:
+              <label htmlFor="logo" className={`${formLabel}`}>
+                {" "}
+                Logo Link
               </label>
-              <input
-                type="email"
-                id="email"
-                {...register("email")}
-                defaultValue={email}
-                readOnly
-                className=" cursor-not-allowed w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
-              />
-              {errors.email && (
-                <span className="text-red-500 text-sm">
-                  This field is required
-                </span>
-              )}
-            </div>
-            {/* /// Job Location*/}
-            <div className="mt-4">
-              <label htmlFor="location">Company Location:</label>
-              <input
-                type="text"
-                id="location"
-                {...register("location", { required: true })}
-                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
-              />
-              {errors.location && (
-                <span className="text-red-500 text-sm">
-                  This field is required
-                </span>
-              )}
-            </div>
-            {/* Company category */}
-            <div className="mt-4">
-              <label htmlFor="companyCategory">Company Category:</label>
-              <input
-                type="text"
-                id="companyCategory"
-                {...register("companyCategory", { required: true })}
-                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
-              />
-              {errors.companyCategory && (
-                <span className="text-red-500 text-sm">
-                  This field is required
-                </span>
-              )}
-            </div>
-            {/* Job category /// */}
-            <div className="mt-4">
-              <label htmlFor="jobCategory">Job Category:</label>
-              <select
-                id="jobCategory"
-                {...register("jobCategory")}
-                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
-              >
-                {jobCategories.map((category) => (
-                  <option key={category} value={category}>
-                    {category}
-                  </option>
-                ))}
-              </select>
-            </div>
-            {/* Logo */}
-            <div className="mt-4">
-              <label htmlFor="logo">Logo Link:</label>
               <input
                 type="text"
                 id="logo"
                 {...register("logo", { required: true })}
-                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+                className={`${formInput}`}
+                placeholder="https://www.nike.com/favicon.icos"
               />
               {errors.logo && (
                 <span className="text-red-500 text-sm">
-                  This field is required
+                  This field is required !
                 </span>
               )}
             </div>
-            {/* Company detail */}
+            {/* ==================Company detail================== */}
             <div className="mt-4">
-              <label htmlFor="companyDetail">Company Detail:</label>
+              <label htmlFor="companyDetail" className={`${formLabel}`}>
+                Company Detail
+              </label>
               <textarea
                 type="text"
                 id="companyDetail"
                 {...register("companyDetail", { required: true })}
-                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary h-60"
+                className={`${formInput}  h-60`}
+                placeholder="Brief about your company..."
               ></textarea>
               {errors.companyDetail && (
                 <span className="text-red-500 text-sm">
-                  This field is required
+                  This field is required !
                 </span>
               )}
             </div>
-            {/* Job Description */}
+            {/* ==================Job Description================== */}
             <div className="mt-4">
-              <label htmlFor="jobDetail">Job Detail:</label>
+              <label htmlFor="jobDetail" className={`${formLabel}`}>
+                Job Detail
+              </label>
               <textarea
                 type="text"
                 id="jobDetail"
                 {...register("jobDetail", { required: true })}
-                className="w-full px-4 py-2 border rounded-md focus:outline-none
-            focus:ring-2 focus:ring-primary  h-60"
+                className={`${formInput}  h-60`}
+                placeholder="Brief about the job..."
               ></textarea>
 
               {errors.jobDetail && (
                 <span className="text-red-500 text-sm">
-                  This field is required
+                  This field is required !
                 </span>
               )}
             </div>

@@ -1,13 +1,10 @@
 import React, { useState } from "react";
 import { Link, NavLink, Outlet } from "react-router-dom";
 import {
-  activeButtonClass,
   activeButtonDashboard,
-  buttonClass,
   commonDashboardClass,
   commonLinkClass,
   dashboardDrawerButton,
-  dashboardLinkStyle,
   scaleButtonClass,
 } from "../../components/classes/classes";
 import Footer from "../shared/Footer/Footer";
@@ -40,7 +37,7 @@ const EmployerDashLayout = () => {
             isActive ? `${activeButtonDashboard}` : `${commonLinkClass}`
           }
         >
-          Post a Job
+          Post A Job
         </NavLink>
       </li>
       <li className="">

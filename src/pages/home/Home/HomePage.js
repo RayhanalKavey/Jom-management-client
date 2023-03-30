@@ -73,7 +73,7 @@ const HomePage = () => {
             <SectionHeading>Experienced Job</SectionHeading>
             <SectionSubHeading>
               Looking for Better Opportunity{" "}
-              <span className="inline-block animate-bounce">!</span>
+              <span className="inline-block animate-bounce">?</span>
             </SectionSubHeading>
             <ExperiencedJobHome />
           </div>

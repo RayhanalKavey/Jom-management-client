@@ -6,7 +6,6 @@ import {
   badgeClass,
   buttonClass,
   dateFormate,
-  deleteButtonClass,
   outlinedButton,
   scaleButtonClass,
 } from "../../../components/classes/classes";
@@ -15,9 +14,8 @@ import {
   useDeleteAJobMutation,
   useGetJobsQuery,
 } from "../../../features/auth/jobApi";
-import { MdOutlineBookmarkAdd, MdOutlineBookmarkAdded } from "react-icons/md";
+import { MdOutlineBookmarkAdd } from "react-icons/md";
 import { CiLocationOn, CiTimer } from "react-icons/ci";
-import { TbCloudDataConnection } from "react-icons/tb";
 import DeleteModal from "../../../components/DeleteModal/DeleteModal";
 import JobCardSkeleton from "../../../components/JobCardSkeleton/JobCardSkeleton";
 
@@ -97,9 +95,6 @@ const MyPostedJob = () => {
                         className={`${scaleButtonClass}  absolute top-6 right-6 text-accent dark:text-secondary `}
                       >
                         <MdOutlineBookmarkAdd style={{ fontSize: "1.5rem" }} />
-                        {/* <MdOutlineBookmarkAdded
-                          style={{ fontSize: "1.5rem" }}
-                        /> */}
                       </div>
                     </div>
                     {/* ------INFO----- */}
@@ -187,7 +182,7 @@ const MyPostedJob = () => {
 
   return (
     <>
-      <TitleComponent title={"Posted Job"} />
+      <TitleComponent title={"Latest Posted Job"} />
       {content}
     </>
   );

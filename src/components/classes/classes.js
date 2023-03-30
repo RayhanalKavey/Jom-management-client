@@ -91,3 +91,10 @@ export const topBorder = "border-t-[.5px]  dark:border-gray-600";
   Job details list style
   ======================*/
 export const jobDetailsListStyle = "ml-4 mb-5 text-sm";
+
+/*======================
+    form label and input field
+    ======================*/
+export const formLabel = "block mb-2 text-lg font-medium";
+export const formInput =
+  "appearance-none block w-full bg-white text-gray-700 border border-gray-300 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:border-primary";
