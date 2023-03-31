@@ -13,7 +13,6 @@ import { useUpdateAJobMutation } from "../../../features/auth/jobApi";
 
 const UpdateJob = () => {
   let { state } = useLocation();
-  console.log("state", state);
   /* =============================
   // Get user email from the store
   ================================*/

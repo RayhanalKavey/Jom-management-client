@@ -40,9 +40,11 @@ const BlogDetails = () => {
       </div>
       {/* Heading End */}
       {/* <TitleComponent title={blog?.title}></TitleComponent> */}
-      <div className={` pb-24 text-accent dark:text-secondary  `}>
+      <div
+        className={` pb-24 text-accent dark:text-secondary bg-base-100 dark:bg-accent `}
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
-          <div className="flex flex-col justify-center items-center w-full gap-4 dark:bg-accent">
+          <div className="flex flex-col justify-center items-center w-full gap-4 ">
             {/* image */}
             <div className="my-5">
               <img className="rounded-lg " src={blog?.imgSrc} alt="" />

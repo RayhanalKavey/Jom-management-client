@@ -3,11 +3,7 @@ import { toast } from "react-hot-toast";
 import { FaBriefcase, FaUser } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import {
-  buttonClass,
-  commonDashboardClass,
-} from "../../components/classes/classes";
-import Spinner from "../../components/Spinner/Spinner";
+import SeekerOrPosterSkeleton from "../../components/SeekerOrPosterSkeleton/SeekerOrPosterSkeleton";
 import TitleComponent from "../../components/TitleComponent/TitleComponent";
 import { useGetUserQuery } from "../../features/auth/authApi";
 import useTitle from "../../hooks/useTitle/useTitle";
@@ -35,7 +31,11 @@ const JobPosterOrJobSeeker = () => {
   let content;
 
   if (isLoading) {
-    content = <Spinner />;
+    content = (
+      <div className={` dark:bg-accent py-28 `}>
+        <SeekerOrPosterSkeleton />
+      </div>
+    );
   }
   if (isError) {
     toast.error(error, { id: "error" });
@@ -52,13 +52,13 @@ const JobPosterOrJobSeeker = () => {
 
     content = (
       <section className="dark:bg-accent py-20  text-accent dark:text-secondary">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8   ">
+        <div className="max-w-7xl mx-auto px-8 sm:px-6 lg:px-8   ">
           {/*====== Job poster or seeker content Start =====*/}
-          <div className="flex flex-row gap-8  ">
+          <div className="flex flex-col lg:flex-row gap-8 items-stretch w-full  ">
             {/* ==========================
                Employer content start ///
               ======================== */}
-            <div className="flex flex-col">
+            <div className="flex flex-col flex-1 justify-between ">
               <div
                 data-aos="fade-right"
                 className={`flex flex-col justify-center items-center p-5`}
@@ -66,7 +66,7 @@ const JobPosterOrJobSeeker = () => {
                 <div className={`${iconClass} mb-8`}>
                   <FaBriefcase className="w-8 h-8" />
                 </div>
-                <h3 className="text-2xl font-semibold mb-5 ">
+                <h3 className="text-2xl font-semibold mb-5  text-center">
                   Unlock Your Hiring Potential
                 </h3>
                 <p className="text-lg leading-relaxed mb-8 text-center">
@@ -78,7 +78,7 @@ const JobPosterOrJobSeeker = () => {
               </div>
 
               {/* Employer button start */}
-              <div className={`${seekerOrEmployerButton}`}>
+              <div className={`${seekerOrEmployerButton} `}>
                 {!loggedInEmployer?.isEmployer &&
                   email &&
                   !loggedInEmployer?._id && (
@@ -103,7 +103,7 @@ const JobPosterOrJobSeeker = () => {
             {/* ==========================
                Job Seeker Content start ///
             ======================== */}
-            <div className="flex flex-col">
+            <div className="flex flex-col flex-1 justify-between">
               <div
                 data-aos="fade-left"
                 className={`flex flex-col justify-center items-center p-5`}
@@ -111,7 +111,7 @@ const JobPosterOrJobSeeker = () => {
                 <div className={`${iconClass} mb-8`}>
                   <FaUser className="w-8 h-8" />
                 </div>
-                <h3 className="text-2xl font-semibold mb-5 ">
+                <h3 className="text-2xl font-semibold mb-5 text-center ">
                   Land Your Next Career Opportunity
                 </h3>
                 <p className="text-lg leading-relaxed mb-8 text-center">
@@ -161,6 +161,7 @@ const JobPosterOrJobSeeker = () => {
   return (
     <>
       <TitleComponent title={"Continue As"}></TitleComponent>
+
       {content}
     </>
   );

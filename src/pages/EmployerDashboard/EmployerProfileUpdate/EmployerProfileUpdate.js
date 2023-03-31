@@ -43,7 +43,6 @@ const EmployerProfileUpdate = () => {
     loggedInEmployer = data?.find(
       (u) => u?.email === email && u?.isEmployer === true
     );
-    console.log(loggedInEmployer?._id);
   }
 
   /* =================

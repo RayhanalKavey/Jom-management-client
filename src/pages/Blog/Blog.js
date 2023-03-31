@@ -22,7 +22,11 @@ const Blog = () => {
   let content;
 
   if (isLoading) {
-    content = <BlogCardSkeleton></BlogCardSkeleton>;
+    content = (
+      <div className={` dark:bg-accent py-28 `}>
+        <BlogCardSkeleton></BlogCardSkeleton>;
+      </div>
+    );
   }
 
   if (!isLoading) {
