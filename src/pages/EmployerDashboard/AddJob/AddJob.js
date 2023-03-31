@@ -166,7 +166,7 @@ const AddJob = () => {
                   {...register("jobType", { required: true })}
                   className={`${formInput}`}
                 >
-                  <option value="">-- Select Job Type --</option>
+                  <option value="">--Select--</option>
                   <option key="remote" value="remote">
                     Remote
                   </option>
@@ -196,7 +196,6 @@ const AddJob = () => {
                   className={`${formInput}`}
                   placeholder="1/2/3/4"
                   min={0}
-                  // onWheel={(event) => event.preventDefault()}
                 />
                 {errors.requiredExp && (
                   <span className="text-red-500 text-sm">
@@ -236,7 +235,7 @@ const AddJob = () => {
                   {...register("jobCategory", { required: true })}
                   className={`${formInput}`}
                 >
-                  <option value="">-- Select Category --</option>
+                  <option value="">--Select--</option>
                   {jobCategories.map((category) => (
                     <option key={category} value={category}>
                       {category}

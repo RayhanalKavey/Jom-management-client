@@ -196,7 +196,7 @@ const UpdateJob = () => {
                   className={`${formInput}`}
                   defaultValue={state?.jobType}
                 >
-                  <option value="">-- Select Job Type --</option>
+                  <option value="">--Select--</option>
                   <option key="remote" value="remote">
                     Remote
                   </option>
@@ -268,7 +268,7 @@ const UpdateJob = () => {
                   defaultValue={state?.jobCategory}
                   className={`${formInput}`}
                 >
-                  <option value="">-- Select Category --</option>
+                  <option value="">--Select--</option>
                   {jobCategories.map((category) => (
                     <option key={category} value={category}>
                       {category}

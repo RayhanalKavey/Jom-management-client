@@ -3,24 +3,37 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { submitButtonClass } from "../../../components/classes/classes";
+import {
+  formInput,
+  formLabel,
+  submitButtonClass,
+} from "../../../components/classes/classes";
+import FormSkeleton from "../../../components/FormSkeleteon/FormSkeleton";
 
 import TitleComponent from "../../../components/TitleComponent/TitleComponent";
 import {
   useGetUserQuery,
-  useRegisterJobSeekerMutation,
+  useUpdateEmployerOrJobSeekerMutation,
 } from "../../../features/auth/authApi";
 
 const JobSeekerProfileUpdate = () => {
   /* ===============================
   // Get user email from the store
     ================================ */
-  const { email } = useSelector((state) => state?.auth);
+  const {
+    email,
+    isLoading: authLoading,
+    isError: authError,
+  } = useSelector((state) => state?.auth);
 
   /* ===============================
   // get all users from the database
     ================================ */
-  const { data } = useGetUserQuery();
+  const {
+    data,
+    isLoading: userLoading,
+    isError: userIsError,
+  } = useGetUserQuery();
   /* ===============================
     // Find if the user Registered as job seeker otherwise send to the employer Registration page
       ================================ */
@@ -40,27 +53,10 @@ const JobSeekerProfileUpdate = () => {
 
   /* ======================
   // Post user to the database and handle its updating state
-  ========================= */ const [
-    registerJobSeeker,
-    { isSuccess, isLoading, isError, error },
-  ] = useRegisterJobSeekerMutation();
+  ========================= */
+  const [updateEmployerOrJobSeeker, { isSuccess, isLoading, isError, error }] =
+    useUpdateEmployerOrJobSeekerMutation();
 
-  // Variables used in the form
-  const skills = [
-    "HTML",
-    "CSS",
-    "JavaScript",
-    "React",
-    "Tailwind Css",
-    "Bootstrap",
-    "MongoDB",
-    "Express",
-    "Node.js",
-    "Git",
-    "GitHub",
-    "TypeScript",
-    "Redux toolkit",
-  ];
   const position = [
     "Front End Developer",
     "Back End Developer",
@@ -77,173 +73,141 @@ const JobSeekerProfileUpdate = () => {
     "Retail",
     "Manufacturing",
   ];
-  const yearOfExp = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
   const employeeCounts = ["1-50", "51-100", "101-500", "501-1000", "1000+"];
 
-  // Submit form data...
+  /* ======================
+// Submit form data...
+======================= */
   const onSubmit = (data) => {
-    const jobSeeker = { ...data, isJobSeeker: true };
-    registerJobSeeker(jobSeeker);
+    const jobSeeker = {
+      ...data,
+      isJobSeeker: true,
+      _id: loggedInJobSeeker?._id,
+    };
+    updateEmployerOrJobSeeker(jobSeeker);
   };
+  let content;
 
-  /* ===================================
-  // Handle different user update state
-     =================================== */
-  useEffect(() => {
-    if (isLoading) {
-      toast.loading("Updating...Please wait...", { id: "updateUser" });
-    }
-    if (isSuccess) {
-      toast.success("Profile Updated Successfully.", { id: "updateUser" });
-      navigate("/job-seeker-dashboard");
-    }
-    if (isError) {
-      toast.error(error, { id: "updateUser" });
-    }
-  }, [isLoading, isSuccess, isError, error, navigate]);
-  /* ----------------------------------------------------- */
-  return (
-    <>
-      <TitleComponent title={"My Profile"}></TitleComponent>
-
-      <div className="flex items-center justify-center px-5 py-12 dark:bg-accent bg-base-100">
-        <div className="w-[35rem] bg-secondary  p-10  border-[.08rem]  rounded-lg  ">
-          <form
-            data-aos="fade-up"
-            onSubmit={handleSubmit(onSubmit)}
-            className=""
-            // className="relative max-w-xl mx-auto mt-20 bg-gray-300 p-16  shadow-xl rounded-tr-[50px] rounded-bl-[50px] "
-          >
-            <div className="grid grid-cols-2 gap-4">
+  if ((userLoading, authLoading)) {
+    content = <FormSkeleton />;
+  }
+  //  defaultValue={loggedInJobSeeker?.firstName}
+  if (!userLoading && !authLoading && !authError & !userIsError) {
+    content = (
+      <div
+        data-aos="fade-up"
+        className="max-w-7xl mx-auto  sm:px-6 lg:px-8  flex items-center justify-center px-5 py-12 dark:bg-accent bg-base-100"
+      >
+        {" "}
+        <div className="w-full bg-secondary  p-10  border-[.08rem]  rounded-lg  ">
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <div className="grid grid-cols-2 gap-4 mt-4">
+              {/* Full Name */}
               <div>
-                <label htmlFor="firstName" className="block mb-1 font-medium">
-                  First Name:
+                <label htmlFor="fullName" className={`${formLabel}`}>
+                  Full Name
                 </label>
                 <input
                   type="text"
-                  id="firstName"
-                  {...register("firstName", { required: true })}
-                  defaultValue={loggedInJobSeeker?.firstName}
-                  className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+                  id="fullName"
+                  {...register("fullName", { required: true })}
+                  className={`${formInput}`}
+                  defaultValue={loggedInJobSeeker?.fullName}
                 />
-                {errors.firstName && (
+                {errors.fullName && (
                   <span className="text-red-500 text-sm">
-                    This field is required
+                    This field is required !
                   </span>
                 )}
               </div>
-              {/* Last name */}
+              {/* Email */}
               <div>
-                <label htmlFor="lastName" className="block mb-1 font-medium">
-                  Last Name:
+                <label htmlFor="email" className={`${formLabel}`}>
+                  Email
                 </label>
                 <input
-                  type="text"
-                  id="lastName"
-                  {...register("lastName", { required: true })}
-                  defaultValue={loggedInJobSeeker?.lastName}
-                  className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+                  type="email"
+                  id="email"
+                  {...register("email")}
+                  className={`${formInput}  cursor-not-allowed `}
+                  defaultValue={email}
+                  readOnly
                 />
-                {errors.lastName && (
+                {errors.email && (
                   <span className="text-red-500 text-sm">
-                    This field is required
+                    This field is required !
                   </span>
                 )}
               </div>
             </div>
-            {/* Gender */}
-            <div className="mt-4">
-              <label className="block mb-1 font-medium">Gender:</label>
+            <div className="grid grid-cols-2 gap-4 mt-4">
+              {/* Gender */}
               <div>
-                <label htmlFor="male" className="inline-flex items-center mr-4">
-                  <input
-                    type="radio"
-                    id="male"
-                    {...register("gender", { required: true })}
-                    value="male"
-                    className="mr-2"
-                  />
-                  Male
+                <label htmlFor="gender" className={`${formLabel}`}>
+                  Gender
                 </label>
-                <label
-                  htmlFor="female"
-                  className="inline-flex items-center mr-4"
+                <select
+                  id="gender"
+                  {...register("gender", { required: true })}
+                  className={`${formInput}`}
+                  defaultValue={loggedInJobSeeker?.gender}
                 >
-                  <input
-                    type="radio"
-                    id="female"
-                    {...register("gender", { required: true })}
-                    value="female"
-                    className="mr-2"
-                  />
-                  Female
-                </label>
-                <label
-                  htmlFor="other"
-                  className="inline-flex items-center mr-4"
-                >
-                  <input
-                    type="radio"
-                    id="other"
-                    {...register("gender", { required: true })}
-                    value="other"
-                    className="mr-2"
-                  />
-                  Other
-                </label>
-              </div>
-              {errors.gender && (
-                <span className="text-red-500 text-sm">
-                  This field is required
-                </span>
-              )}
-            </div>
-            {/* email */}
-            <div className="mt-4">
-              <label htmlFor="email" className="block mb-1 font-medium">
-                Email:
-              </label>
-              <input
-                type="email"
-                id="email"
-                {...register("email")}
-                defaultValue={email}
-                readOnly
-                className=" cursor-not-allowed w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
-              />
-              {errors.email && (
-                <span className="text-red-500 text-sm">
-                  This field is required
-                </span>
-              )}
-            </div>
-
-            {/* Company category */}
-            <div className="mt-4">
-              <label htmlFor="companyCategory">Company Category:</label>
-              <select
-                id="companyCategory"
-                {...register("companyCategory", { required: true })}
-                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
-              >
-                {companyCategories.map((category) => (
-                  <option key={category} value={category}>
-                    {category}
+                  <option value="">--Select--</option>
+                  <option key="male" value="male">
+                    Male
                   </option>
-                ))}
-              </select>
+                  <option key="female" value="female">
+                    Female
+                  </option>
+                  <option key="other" value="other">
+                    Other
+                  </option>
+                </select>
+
+                {errors.gender && (
+                  <span className="text-red-500 text-sm">
+                    This field is required !
+                  </span>
+                )}
+              </div>
+
+              {/* Company Category */}
+              <div>
+                <label htmlFor="companyCategory" className={`${formLabel}`}>
+                  Company Category
+                </label>
+                <select
+                  id="companyCategory"
+                  {...register("companyCategory", { required: true })}
+                  className={`${formInput}`}
+                  defaultValue={loggedInJobSeeker?.companyCategory}
+                >
+                  <option value="">--Select--</option>
+                  {companyCategories?.map((category) => (
+                    <option key={category} value={category}>
+                      {category}
+                    </option>
+                  ))}
+                </select>
+                {errors.companyCategory && (
+                  <span className="text-red-500 text-sm">
+                    This field is required !
+                  </span>
+                )}
+              </div>
             </div>
+
             {/* Skills */}
             <div>
-              <label htmlFor="skills" className="block mb-1 font-medium">
+              <label htmlFor="skills" className={`${formLabel}`}>
                 Skills:
               </label>
               <input
                 type="text"
                 id="skills"
                 {...register("skills", { required: true })}
+                className={`${formInput}`}
                 defaultValue={loggedInJobSeeker?.skills}
-                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
               />
               {errors.skills && (
                 <span className="text-red-500 text-sm">
@@ -254,64 +218,116 @@ const JobSeekerProfileUpdate = () => {
 
             {/*/// Desire position*/}
             <div className="mt-4">
-              <label htmlFor="jobType">Your Position:</label>
+              <label htmlFor="position" className={`${formLabel}`}>
+                Your Position
+              </label>
               <select
                 id="position"
                 {...register("position", { required: true })}
-                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+                className={`${formInput}`}
+                defaultValue={loggedInJobSeeker?.position}
               >
+                <option value="">--Select--</option>
+
                 {position.map((category) => (
                   <option key={category} value={category}>
                     {category}
                   </option>
                 ))}
               </select>
+              {errors.position && (
+                <span className="text-red-500 text-sm">
+                  This field is required
+                </span>
+              )}
             </div>
             {/*/// Job type */}
             <div className="mt-4">
-              <label htmlFor="jobType">Job Type:</label>
+              <label htmlFor="jobType" className={`${formLabel}`}>
+                Job Type:
+              </label>
               <select
                 id="jobType"
                 {...register("jobType", { required: true })}
-                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+                className={`${formInput}`}
+                defaultValue={loggedInJobSeeker?.jobType}
               >
+                <option value="">--Select--</option>
+
                 {jobType.map((category) => (
                   <option key={category} value={category}>
                     {category}
                   </option>
                 ))}
               </select>
+              {errors.jobType && (
+                <span className="text-red-500 text-sm">
+                  This field is required
+                </span>
+              )}
             </div>
             {/*/// Year of Expert*/}
             <div className="mt-4">
-              <label htmlFor="jobType">Year Of Expert:</label>
-              <select
+              <label htmlFor="yearOfExp" className={`${formLabel}`}>
+                Year Of Expert
+              </label>{" "}
+              <input
+                type="number"
                 id="yearOfExp"
                 {...register("yearOfExp", { required: true })}
-                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
-              >
-                {yearOfExp.map((category) => (
-                  <option key={category} value={category}>
-                    {category}
-                  </option>
-                ))}
-              </select>
+                className={`${formInput}`}
+                defaultValue={loggedInJobSeeker?.yearOfExp}
+                min={0}
+              />
+              {errors.yearOfExp && (
+                <span className="text-red-500 text-sm">
+                  This field is required !
+                </span>
+              )}
             </div>
 
             {/* Number of employees */}
             <div className="mt-4">
-              <label htmlFor="employeeCount">Company Size:</label>
+              <label htmlFor="employeeCount" className={`${formLabel}`}>
+                Desired Number of Employees
+              </label>
               <select
                 id="employeeCount"
                 {...register("employeeCount", { required: true })}
-                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+                className={`${formInput}`}
+                defaultValue={loggedInJobSeeker?.employeeCount}
               >
+                <option value="">--Select--</option>
                 {employeeCounts.map((count) => (
                   <option key={count} value={count}>
                     {count}
                   </option>
                 ))}
               </select>
+              {errors.employeeCount && (
+                <span className="text-red-500 text-sm">
+                  This field is required !
+                </span>
+              )}
+
+              {/* ================= about me================== */}
+              <div className="mt-4">
+                <label htmlFor="aboutMe" className={`${formLabel}`}>
+                  Company Detail
+                </label>
+                <textarea
+                  type="text"
+                  id="aboutMe"
+                  {...register("aboutMe", { required: true })}
+                  className={`${formInput}  h-60`}
+                  defaultValue={loggedInJobSeeker?.aboutMe}
+                ></textarea>
+                {errors.aboutMe && (
+                  <span className="text-red-500 text-sm">
+                    This field is required !
+                  </span>
+                )}
+              </div>
             </div>
 
             <button type="submit" className={`${submitButtonClass} mt-4`}>
@@ -320,6 +336,30 @@ const JobSeekerProfileUpdate = () => {
           </form>
         </div>
       </div>
+    );
+  }
+
+  /* ===================================
+  // Handle different user update state
+     =================================== */
+  useEffect(() => {
+    if (isLoading) {
+      toast.loading("Updating...Please wait...", { id: "updateUser" });
+    }
+    if (isSuccess) {
+      toast.success("Profile Updated Successfully.", { id: "updateUser" });
+      // navigate("/job-seeker-dashboard");
+    }
+    if (isError) {
+      toast.error(error, { id: "updateUser" });
+    }
+  }, [isLoading, isSuccess, isError, error, navigate]);
+  /* ----------------------------------------------------- */
+  return (
+    <>
+      <TitleComponent title={"My Profile"}></TitleComponent>
+
+      {content}
     </>
   );
 };

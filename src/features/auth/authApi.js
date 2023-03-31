@@ -24,7 +24,7 @@ const authApi = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ["users"],
     }),
-    updateJobSeeker: builder.mutation({
+    updateEmployerOrJobSeeker: builder.mutation({
       query: ({ _id, ...rest }) => ({
         url: `/user/${_id}`,
         method: "PUT",
@@ -38,5 +38,5 @@ export const {
   useGetUserQuery,
   useRegisterEmployerMutation,
   useRegisterJobSeekerMutation,
-  useUpdateJobSeekerMutation,
+  useUpdateEmployerOrJobSeekerMutation,
 } = authApi;
