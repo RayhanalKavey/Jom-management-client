@@ -48,7 +48,6 @@ const AddJob = () => {
       applicants: [],
       queries: [],
     };
-    // console.log("JobInfo", jobInfo);
     postAJob(jobInfo);
   };
   /* =================================

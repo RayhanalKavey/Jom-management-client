@@ -13,7 +13,7 @@ import FormSkeleton from "../../../components/FormSkeleteon/FormSkeleton";
 import TitleComponent from "../../../components/TitleComponent/TitleComponent";
 import {
   useGetUserQuery,
-  useUpdateEmployerOrJobSeekerMutation,
+  useRegisterAsEmployerMutation,
 } from "../../../features/auth/authApi";
 
 const EmployerProfileUpdate = () => {
@@ -22,6 +22,7 @@ const EmployerProfileUpdate = () => {
     ================================ */
   const {
     email,
+    user,
     isLoading: authLoading,
     isError: authError,
   } = useSelector((state) => state?.auth);
@@ -34,16 +35,6 @@ const EmployerProfileUpdate = () => {
     isLoading: userLoading,
     isError: userIsError,
   } = useGetUserQuery();
-
-  /* ===============================
-    // Find if the user Registered as employer otherwise send to the employer Registration page
-      ================================ */
-  let loggedInEmployer;
-  if (data) {
-    loggedInEmployer = data?.find(
-      (u) => u?.email === email && u?.isEmployer === true
-    );
-  }
 
   /* =================
   // React hook form
@@ -59,8 +50,8 @@ const EmployerProfileUpdate = () => {
   /* ======================
   // Post user to the database and handle its updating state
   ========================= */
-  const [updateEmployerOrJobSeeker, { isSuccess, isLoading, isError, error }] =
-    useUpdateEmployerOrJobSeekerMutation();
+  const [registerAsEmployer, { isSuccess, isLoading, isError, error }] =
+    useRegisterAsEmployerMutation();
 
   const companyCategories = [
     "Technology",
@@ -75,8 +66,8 @@ const EmployerProfileUpdate = () => {
   // Submit form data
      ================*/
   const onSubmit = (data) => {
-    const employer = { ...data, isJobSeeker: true, _id: loggedInEmployer?._id };
-    updateEmployerOrJobSeeker(employer);
+    const employer = { ...data, _id: user?._id };
+    registerAsEmployer(employer);
   };
   let content;
 
@@ -102,7 +93,7 @@ const EmployerProfileUpdate = () => {
                   id="fullName"
                   {...register("fullName", { required: true })}
                   className={`${formInput}`}
-                  defaultValue={loggedInEmployer?.fullName}
+                  defaultValue={user?.regAsEmployer?.fullName}
                 />
                 {errors.fullName && (
                   <span className="text-red-500 text-sm">
@@ -141,7 +132,7 @@ const EmployerProfileUpdate = () => {
                   type="text"
                   id="companyName"
                   {...register("companyName", { required: true })}
-                  defaultValue={loggedInEmployer?.companyName}
+                  defaultValue={user?.regAsEmployer?.companyName}
                   className={`${formInput}`}
                 />
                 {errors.companyName && (
@@ -159,7 +150,7 @@ const EmployerProfileUpdate = () => {
                   type="text"
                   id="roleInCompany"
                   {...register("roleInCompany", { required: true })}
-                  defaultValue={loggedInEmployer?.roleInCompany}
+                  defaultValue={user?.regAsEmployer?.roleInCompany}
                   className={`${formInput}`}
                 />
                 {errors.roleInCompany && (
@@ -180,7 +171,7 @@ const EmployerProfileUpdate = () => {
                   id="gender"
                   {...register("gender", { required: true })}
                   className={`${formInput}`}
-                  defaultValue={loggedInEmployer?.gender}
+                  defaultValue={user?.regAsEmployer?.gender}
                 >
                   <option value="">--Select--</option>
                   <option key="male" value="male">
@@ -209,7 +200,7 @@ const EmployerProfileUpdate = () => {
                 <select
                   id="companyCategory"
                   {...register("companyCategory", { required: true })}
-                  defaultValue={loggedInEmployer?.companyCategory}
+                  defaultValue={user?.regAsEmployer?.companyCategory}
                   className={`${formInput}`}
                 >
                   <option value="">--Select--</option>
@@ -235,7 +226,7 @@ const EmployerProfileUpdate = () => {
               <select
                 id="employeeCount"
                 {...register("employeeCount", { required: true })}
-                defaultValue={loggedInEmployer?.employeeCount}
+                defaultValue={user?.regAsEmployer?.employeeCount}
                 className={`${formInput}`}
               >
                 <option value="">--Select--</option>
@@ -261,7 +252,7 @@ const EmployerProfileUpdate = () => {
                   id="companyDetail"
                   {...register("companyDetail", { required: true })}
                   className={`${formInput}  h-60`}
-                  defaultValue={loggedInEmployer?.companyDetail}
+                  defaultValue={user?.regAsEmployer?.companyDetail}
                 ></textarea>
                 {errors.companyDetail && (
                   <span className="text-red-500 text-sm">
@@ -284,14 +275,14 @@ const EmployerProfileUpdate = () => {
      =================================== */
   useEffect(() => {
     if (isLoading) {
-      toast.loading("Updating...Please wait...", { id: "updateUser" });
+      toast.loading("Updating...Please wait...", { id: "updateEmployer" });
     }
     if (isSuccess) {
-      toast.success("Profile Updated Successfully.", { id: "updateUser" });
+      toast.success("Profile Updated Successfully.", { id: "updateEmployer" });
       // navigate("/employer-dashboard");
     }
     if (isError) {
-      toast.error(error, { id: "updateUser" });
+      toast.error(error, { id: "updateEmployer" });
     }
   }, [isLoading, isSuccess, isError, error, navigate]);
 

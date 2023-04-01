@@ -11,11 +11,8 @@ import useTitle from "../../hooks/useTitle/useTitle";
 const JobPosterOrJobSeeker = () => {
   useTitle("Job Poster/Seeker");
 
-  //LoggedIn user email
-  const { email } = useSelector((state) => state?.auth);
-  // get all users from the database
-  const { data, isLoading, isSuccess, isError, error } = useGetUserQuery();
-
+  //LoggedIn user
+  const { user } = useSelector((state) => state?.auth);
   /*CSS Class  */
 
   const iconClass =
@@ -30,26 +27,15 @@ const JobPosterOrJobSeeker = () => {
     ================================*/
   let content;
 
-  if (isLoading) {
+  if (!user) {
     content = (
       <div className={` dark:bg-accent py-28 `}>
         <SeekerOrPosterSkeleton />
       </div>
     );
   }
-  if (isError) {
-    toast.error(error, { id: "error" });
-  }
-  if (isSuccess) {
-    // Find if the user Registered as employer otherwise send to the employer Registration page
-    const loggedInEmployer = data?.find(
-      (u) => u?.email === email && u?.isEmployer === true
-    );
-    // Find if the user Registered as job seeker otherwise send to the job seeker Registration page
-    const loggedInJobSeeker = data?.find(
-      (u) => u?.email === email && u?.isJobSeeker === true
-    );
 
+  if (user) {
     content = (
       <section className="dark:bg-accent py-20  text-accent dark:text-secondary">
         <div className="max-w-7xl mx-auto px-8 sm:px-6 lg:px-8   ">
@@ -79,23 +65,19 @@ const JobPosterOrJobSeeker = () => {
 
               {/* Employer button start */}
               <div className={`${seekerOrEmployerButton} `}>
-                {!loggedInEmployer?.isEmployer &&
-                  email &&
-                  !loggedInEmployer?._id && (
-                    <Link to="/employerForm" className={`${linkStyle}`}>
-                      Employer
-                    </Link>
-                  )}
-                {loggedInEmployer?.isEmployer &&
-                  email &&
-                  loggedInEmployer?._id && (
-                    <Link
-                      to="/employer-dashboard/my-posted-job"
-                      className={`${linkStyle}`}
-                    >
-                      Employer
-                    </Link>
-                  )}
+                {!user?.isEmployer && (
+                  <Link to="/employerForm" className={`${linkStyle}`}>
+                    Employer
+                  </Link>
+                )}
+                {user?.isEmployer && (
+                  <Link
+                    to="/employer-dashboard/my-posted-job"
+                    className={`${linkStyle}`}
+                  >
+                    Employer
+                  </Link>
+                )}
               </div>
             </div>
             {/* =========Employer content end ========= */}
@@ -131,23 +113,19 @@ const JobPosterOrJobSeeker = () => {
         3) loggedInJobSeeker?._id = Sometimes user information from the database needs some time to reach. In that moment user can access the form though he is already registered. To prevent this this condition check for user data reach from the database
          */}
 
-                {!loggedInJobSeeker?.isJobSeeker &&
-                  email &&
-                  !loggedInJobSeeker?._id && (
-                    <Link to="/jobSeekerForm" className={`${linkStyle}`}>
-                      Job Seeker
-                    </Link>
-                  )}
-                {loggedInJobSeeker?.isJobSeeker &&
-                  email &&
-                  loggedInJobSeeker?._id && (
-                    <Link
-                      to="/job-seeker-dashboard/my-apply"
-                      className={`${linkStyle}`}
-                    >
-                      Job Seeker
-                    </Link>
-                  )}
+                {!user?.isJobSeeker && (
+                  <Link to="/jobSeekerForm" className={`${linkStyle}`}>
+                    Job Seeker
+                  </Link>
+                )}
+                {user?.isJobSeeker && (
+                  <Link
+                    to="/job-seeker-dashboard/my-apply"
+                    className={`${linkStyle}`}
+                  >
+                    Job Seeker
+                  </Link>
+                )}
               </div>
             </div>
 

@@ -8,7 +8,7 @@ const authApi = apiSlice.injectEndpoints({
       }),
       providesTags: ["users"],
     }),
-    registerEmployer: builder.mutation({
+    postUser: builder.mutation({
       query: (data) => ({
         url: "/user",
         method: "POST",
@@ -16,19 +16,20 @@ const authApi = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ["users"],
     }),
-    registerJobSeeker: builder.mutation({
+    registerAsEmployer: builder.mutation({
       query: (data) => ({
-        url: "/user",
-        method: "POST",
+        url: `/user/employer`,
+        method: "PATCH",
         body: data,
       }),
       invalidatesTags: ["users"],
     }),
-    updateEmployerOrJobSeeker: builder.mutation({
-      query: ({ _id, ...rest }) => ({
-        url: `/user/${_id}`,
-        method: "PUT",
-        body: rest,
+
+    registerAsJobSeeker: builder.mutation({
+      query: (data) => ({
+        url: "/user/jobSeeker",
+        method: "PATCH",
+        body: data,
       }),
       invalidatesTags: ["users"],
     }),
@@ -36,7 +37,7 @@ const authApi = apiSlice.injectEndpoints({
 });
 export const {
   useGetUserQuery,
-  useRegisterEmployerMutation,
-  useRegisterJobSeekerMutation,
-  useUpdateEmployerOrJobSeekerMutation,
+  usePostUserMutation,
+  useRegisterAsEmployerMutation,
+  useRegisterAsJobSeekerMutation,
 } = authApi;

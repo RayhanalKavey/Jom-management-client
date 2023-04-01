@@ -1,7 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
-import { useGetApplyQuery } from "../../features/auth/applyApi";
 import {
   badgeClass,
   buttonApplied,
@@ -11,32 +10,18 @@ import {
 } from "../classes/classes";
 import { MdOutlineBookmarkAdd } from "react-icons/md";
 import { CiLocationOn, CiTimer } from "react-icons/ci";
-import { useGetUserQuery } from "../../features/auth/authApi";
 import ApplyModal from "../ApplyModal/ApplyModal";
 import JobDetails from "../../pages/AllJob/JobDetails";
 
 const JobCard = ({ job }) => {
   //LoggedIn user email
-  const { email } = useSelector((state) => state?.auth);
-
-  // get all users from the database
-  const { data } = useGetUserQuery();
-
-  // Find if the user Registered as job seeker otherwise send to the job seeker Registration page
-  const loggedInJobSeeker = data?.find(
-    (u) => u?.email === email && u?.isJobSeeker === true
-  );
-
-  // get apply jobs information
-  const { data: applyJobInfo, isLoading: getApplyInfoLoading } =
-    useGetApplyQuery();
+  const { user, email } = useSelector((state) => state?.auth);
 
   // If the jobSeeker apply this job
-  const isJobApplied = applyJobInfo?.some(
-    (ji) =>
-      ji?.applyJobId === job?._id && ji?.applyUserId === loggedInJobSeeker?._id
-  );
-
+  let isJobApplied;
+  if (job) {
+    isJobApplied = job?.applicants?.some((app) => app?.userId === user?._id);
+  }
   // /*--------------------------------------------
   //  Check if the current user applied in this job, and Buttons class start
   //  -------------------------------------------- */
@@ -62,7 +47,7 @@ const JobCard = ({ job }) => {
     );
   }
   // 2
-  if (email && !loggedInJobSeeker?.isJobSeeker) {
+  if (!user?.isJobSeeker) {
     applyButton = (
       <Link
         className={`${buttonClass}`}
@@ -75,11 +60,12 @@ const JobCard = ({ job }) => {
     );
   }
   // 3
-  if (email && loggedInJobSeeker?.isJobSeeker && isJobApplied) {
+  if (user?.isJobSeeker && isJobApplied) {
     applyButton = <button className={`${buttonApplied} `}> Applied</button>;
   }
   // 4
-  if (email && loggedInJobSeeker?.isJobSeeker && !isJobApplied) {
+
+  if (user?.isJobSeeker && !isJobApplied) {
     applyButton = <ApplyModal job={job} />;
   }
   /*--------------------------------------------

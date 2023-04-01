@@ -1,25 +1,13 @@
-import React, { useEffect } from "react";
-import { toast } from "react-hot-toast";
-import { useSelector } from "react-redux";
-import { Link, useLocation } from "react-router-dom";
-import {
-  useApplyJobsMutation,
-  useGetApplyQuery,
-} from "../../features/auth/applyApi";
+import React from "react";
+
 import {
   badgeClass,
   bottomBorder,
-  buttonApplied,
-  buttonClass,
   dateFormate,
-  outlinedButton,
   scaleButtonClass,
 } from "../classes/classes";
-import { MdOutlineBookmarkAdd, MdOutlineBookmarkAdded } from "react-icons/md";
+import { MdOutlineBookmarkAdd } from "react-icons/md";
 import { CiLocationOn, CiTimer } from "react-icons/ci";
-import { TbCloudDataConnection } from "react-icons/tb";
-import { useGetUserQuery } from "../../features/auth/authApi";
-import { IoIosArrowRoundBack } from "react-icons/io";
 
 const JobCardHorizontal = ({ job }) => {
   return (

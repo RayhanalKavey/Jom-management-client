@@ -13,7 +13,7 @@ import FormSkeleton from "../../../components/FormSkeleteon/FormSkeleton";
 import TitleComponent from "../../../components/TitleComponent/TitleComponent";
 import {
   useGetUserQuery,
-  useUpdateEmployerOrJobSeekerMutation,
+  useRegisterAsJobSeekerMutation,
 } from "../../../features/auth/authApi";
 
 const JobSeekerProfileUpdate = () => {
@@ -21,6 +21,7 @@ const JobSeekerProfileUpdate = () => {
   // Get user email from the store
     ================================ */
   const {
+    user,
     email,
     isLoading: authLoading,
     isError: authError,
@@ -34,12 +35,6 @@ const JobSeekerProfileUpdate = () => {
     isLoading: userLoading,
     isError: userIsError,
   } = useGetUserQuery();
-  /* ===============================
-    // Find if the user Registered as job seeker otherwise send to the employer Registration page
-      ================================ */
-  const loggedInJobSeeker = data?.find(
-    (u) => u?.email === email && u?.isJobSeeker === true
-  );
 
   /* =================
   // React hook form
@@ -54,8 +49,8 @@ const JobSeekerProfileUpdate = () => {
   /* ======================
   // Post user to the database and handle its updating state
   ========================= */
-  const [updateEmployerOrJobSeeker, { isSuccess, isLoading, isError, error }] =
-    useUpdateEmployerOrJobSeekerMutation();
+  const [registerAsJobSeeker, { isSuccess, isLoading, isError, error }] =
+    useRegisterAsJobSeekerMutation();
 
   const position = [
     "Front End Developer",
@@ -81,10 +76,10 @@ const JobSeekerProfileUpdate = () => {
   const onSubmit = (data) => {
     const jobSeeker = {
       ...data,
-      isJobSeeker: true,
-      _id: loggedInJobSeeker?._id,
+
+      _id: user?._id,
     };
-    updateEmployerOrJobSeeker(jobSeeker);
+    registerAsJobSeeker(jobSeeker);
   };
   let content;
 
@@ -112,7 +107,7 @@ const JobSeekerProfileUpdate = () => {
                   id="fullName"
                   {...register("fullName", { required: true })}
                   className={`${formInput}`}
-                  defaultValue={loggedInJobSeeker?.fullName}
+                  defaultValue={user?.regAsJobSeeker?.fullName}
                 />
                 {errors.fullName && (
                   <span className="text-red-500 text-sm">
@@ -150,7 +145,7 @@ const JobSeekerProfileUpdate = () => {
                   id="gender"
                   {...register("gender", { required: true })}
                   className={`${formInput}`}
-                  defaultValue={loggedInJobSeeker?.gender}
+                  defaultValue={user?.regAsJobSeeker?.gender}
                 >
                   <option value="">--Select--</option>
                   <option key="male" value="male">
@@ -180,7 +175,7 @@ const JobSeekerProfileUpdate = () => {
                   id="companyCategory"
                   {...register("companyCategory", { required: true })}
                   className={`${formInput}`}
-                  defaultValue={loggedInJobSeeker?.companyCategory}
+                  defaultValue={user?.regAsJobSeeker?.companyCategory}
                 >
                   <option value="">--Select--</option>
                   {companyCategories?.map((category) => (
@@ -207,7 +202,7 @@ const JobSeekerProfileUpdate = () => {
                 id="skills"
                 {...register("skills", { required: true })}
                 className={`${formInput}`}
-                defaultValue={loggedInJobSeeker?.skills}
+                defaultValue={user?.regAsJobSeeker?.skills}
               />
               {errors.skills && (
                 <span className="text-red-500 text-sm">
@@ -225,7 +220,7 @@ const JobSeekerProfileUpdate = () => {
                 id="position"
                 {...register("position", { required: true })}
                 className={`${formInput}`}
-                defaultValue={loggedInJobSeeker?.position}
+                defaultValue={user?.regAsJobSeeker?.position}
               >
                 <option value="">--Select--</option>
 
@@ -250,7 +245,7 @@ const JobSeekerProfileUpdate = () => {
                 id="jobType"
                 {...register("jobType", { required: true })}
                 className={`${formInput}`}
-                defaultValue={loggedInJobSeeker?.jobType}
+                defaultValue={user?.regAsJobSeeker?.jobType}
               >
                 <option value="">--Select--</option>
 
@@ -276,7 +271,7 @@ const JobSeekerProfileUpdate = () => {
                 id="yearOfExp"
                 {...register("yearOfExp", { required: true })}
                 className={`${formInput}`}
-                defaultValue={loggedInJobSeeker?.yearOfExp}
+                defaultValue={user?.regAsJobSeeker?.yearOfExp}
                 min={0}
               />
               {errors.yearOfExp && (
@@ -295,7 +290,7 @@ const JobSeekerProfileUpdate = () => {
                 id="employeeCount"
                 {...register("employeeCount", { required: true })}
                 className={`${formInput}`}
-                defaultValue={loggedInJobSeeker?.employeeCount}
+                defaultValue={user?.regAsJobSeeker?.employeeCount}
               >
                 <option value="">--Select--</option>
                 {employeeCounts.map((count) => (
@@ -313,14 +308,14 @@ const JobSeekerProfileUpdate = () => {
               {/* ================= about me================== */}
               <div className="mt-4">
                 <label htmlFor="aboutMe" className={`${formLabel}`}>
-                  Company Detail
+                  About Me
                 </label>
                 <textarea
                   type="text"
                   id="aboutMe"
                   {...register("aboutMe", { required: true })}
                   className={`${formInput}  h-60`}
-                  defaultValue={loggedInJobSeeker?.aboutMe}
+                  defaultValue={user?.regAsJobSeeker?.aboutMe}
                 ></textarea>
                 {errors.aboutMe && (
                   <span className="text-red-500 text-sm">
@@ -344,14 +339,14 @@ const JobSeekerProfileUpdate = () => {
      =================================== */
   useEffect(() => {
     if (isLoading) {
-      toast.loading("Updating...Please wait...", { id: "updateUser" });
+      toast.loading("Updating...Please wait...", { id: "updateJobSeeker" });
     }
     if (isSuccess) {
-      toast.success("Profile Updated Successfully.", { id: "updateUser" });
+      toast.success("Profile Updated Successfully.", { id: "updateJobSeeker" });
       // navigate("/job-seeker-dashboard");
     }
     if (isError) {
-      toast.error(error, { id: "updateUser" });
+      toast.error(error, { id: "updateJobSeeker" });
     }
   }, [isLoading, isSuccess, isError, error, navigate]);
   /* ----------------------------------------------------- */

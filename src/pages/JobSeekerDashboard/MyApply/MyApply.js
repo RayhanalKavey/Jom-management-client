@@ -3,24 +3,21 @@ import { useSelector } from "react-redux";
 import {
   badgeClass,
   dateFormate,
-  outlinedButton,
   scaleButtonClass,
 } from "../../../components/classes/classes";
 import TitleComponent from "../../../components/TitleComponent/TitleComponent";
-import { useGetApplyQuery } from "../../../features/auth/applyApi";
-import { useGetUserQuery } from "../../../features/auth/authApi";
+
 import { useGetJobsQuery } from "../../../features/auth/jobApi";
 import { MdOutlineBookmarkAdd } from "react-icons/md";
 import { toast } from "react-hot-toast";
 import { CiLocationOn, CiTimer } from "react-icons/ci";
-import { Link } from "react-router-dom";
 import JobCardSkeleton from "../../../components/JobCardSkeleton/JobCardSkeleton";
+import JobDetails from "../../AllJob/JobDetails";
 
 const MyApply = () => {
   //LoggedIn user email
-  const { email } = useSelector((state) => state?.auth);
+  const { user } = useSelector((state) => state?.auth);
 
-  const { data } = useGetUserQuery();
   /* ===============================
   //  Get data of All jobs from the database using redux
      ===============================*/
@@ -32,42 +29,26 @@ const MyApply = () => {
     error,
   } = useGetJobsQuery();
 
-  // Find if the user Registered as job seeker otherwise send to the job seeker Registration page
-  const loggedInJobSeeker = data?.find(
-    (u) => u?.email === email && u?.isJobSeeker === true
-  );
-
-  // get apply jobs information
-  const {
-    data: applyInfo,
-    isLoading: getApplyInfoLoading,
-    isSuccess: isSuccessLoading,
-  } = useGetApplyQuery();
   // find the applied jobs
-  const currentJobSeekersApplied = applyInfo?.filter(
-    (job) => job?.applyUserId === loggedInJobSeeker?._id
-  );
-  // find the applied jobs information from the jobs array
-
-  const currentJobSeekersAppliedJobs = allJob?.filter((job) =>
-    currentJobSeekersApplied?.some((jobObj) => job?._id === jobObj?.applyJobId)
+  const appliedJob = allJob?.filter((applicant) =>
+    applicant?.applicants?.filter((j) => j?.userId === user?._id)
   );
 
   /* ===============================
   Loading state of Getting all jobs
   =================================*/
   let content;
-  if (isLoading && getApplyInfoLoading) {
+  if (isLoading) {
     content = <JobCardSkeleton></JobCardSkeleton>;
   }
   if (isError) {
     toast.error(error, { id: "jobske" });
   }
-  if (isSuccess && isSuccessLoading) {
+  if (isSuccess) {
     content = (
       <>
         <div className="grid grid-cols-1 md:grid-cols-2  lg:grid-cols-1  xl:grid-cols-2 gap-4 w-full py-16 px-5 ">
-          {currentJobSeekersAppliedJobs?.reverse()?.map((job) => (
+          {appliedJob?.map((job) => (
             <div
               className="  border-[.08rem] p-6 rounded-lg  bg-secondary relative"
               key={job?._id}
@@ -143,13 +124,7 @@ const MyApply = () => {
 
                     {/* All buttons  start*/}
                     <div className="flex justify-start items-center gap-2 flex-wrap">
-                      <Link
-                        to="/job-details"
-                        state={job}
-                        className={`${outlinedButton}`}
-                      >
-                        Job Details
-                      </Link>
+                      <JobDetails job={job}></JobDetails>
                     </div>
                     {/* All buttons end */}
                   </div>

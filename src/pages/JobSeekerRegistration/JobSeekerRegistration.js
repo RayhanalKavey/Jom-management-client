@@ -4,7 +4,10 @@ import { toast } from "react-hot-toast";
 import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import TitleComponent from "../../components/TitleComponent/TitleComponent";
-import { useRegisterJobSeekerMutation } from "../../features/auth/authApi";
+import {
+  useRegisterAsJobSeekerMutation,
+  useRegisterJobSeekerMutation,
+} from "../../features/auth/authApi";
 import { IoIosArrowRoundBack } from "react-icons/io";
 import {
   formInput,
@@ -18,6 +21,7 @@ const JobSeekerRegistration = () => {
   // Get user email from the store
     ================================ */
   const {
+    user,
     email,
     isLoading: authLoading,
     isError: authError,
@@ -34,8 +38,8 @@ const JobSeekerRegistration = () => {
   const navigate = useNavigate();
 
   // Post user to the database and handle its updating state
-  const [registerJobSeeker, { isSuccess, isLoading, isError, error }] =
-    useRegisterJobSeekerMutation();
+  const [registerAsJobSeeker, { isSuccess, isLoading, isError, error }] =
+    useRegisterAsJobSeekerMutation();
 
   const position = [
     "Front End Developer",
@@ -58,8 +62,8 @@ const JobSeekerRegistration = () => {
 // Submit form data...
 ======================= */
   const onSubmit = (data) => {
-    const jobSeeker = { ...data, isJobSeeker: true };
-    registerJobSeeker(jobSeeker);
+    const jobSeeker = { ...data, _id: user?._id };
+    registerAsJobSeeker(jobSeeker);
   };
 
   // Handle different user update state

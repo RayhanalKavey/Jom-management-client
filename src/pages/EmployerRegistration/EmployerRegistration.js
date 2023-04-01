@@ -4,7 +4,10 @@ import { toast } from "react-hot-toast";
 import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import TitleComponent from "../../components/TitleComponent/TitleComponent";
-import { useRegisterEmployerMutation } from "../../features/auth/authApi";
+import {
+  useRegisterAsEmployerMutation,
+  useRegisterEmployerMutation,
+} from "../../features/auth/authApi";
 import { IoIosArrowRoundBack } from "react-icons/io";
 import {
   formInput,
@@ -29,7 +32,7 @@ const EmployerRegistration = () => {
 
   // Get user email from the store
 
-  const { email } = useSelector((state) => state?.auth);
+  const { email, user } = useSelector((state) => state?.auth);
   const navigate = useNavigate();
 
   // React hook form
@@ -41,26 +44,28 @@ const EmployerRegistration = () => {
   } = useForm();
 
   // Post user to the database and handle its updating state
-  const [registerEmployer, { isSuccess, isLoading, isError, error }] =
-    useRegisterEmployerMutation();
+  // const [registerEmployer, { isSuccess, isLoading, isError, error }] =
+  //   useRegisterEmployerMutation();
+  const [registerAsEmployer, { isSuccess, isLoading, isError, error }] =
+    useRegisterAsEmployerMutation();
 
   // React hook form submission
   const onSubmit = (data) => {
-    const employer = { ...data, isEmployer: true };
-    registerEmployer(employer);
+    const employer = { ...data, _id: user?._id };
+    registerAsEmployer(employer);
   };
   // Handle different user update state
   useEffect(() => {
     if (isLoading) {
-      toast.loading("Loading...... Please wait", { id: "addUser" });
+      toast.loading("Loading...... Please wait", { id: "addEmployer" });
     }
     if (isSuccess) {
-      toast.success("Welcome as a Employer.", { id: "addUser" });
+      toast.success("Welcome as a Employer.", { id: "addEmployer" });
       reset();
       navigate("/employer-dashboard");
     }
     if (isError) {
-      toast.error(error, { id: "addUser" });
+      toast.error(error, { id: "addEmployer" });
     }
   }, [isLoading, isSuccess, isError, error, reset, navigate]);
 

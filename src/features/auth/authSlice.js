@@ -87,7 +87,7 @@ const authSlice = createSlice({
       state.isLoading = false;
       // state.isError = false;
       // state.error = "";
-      state.email = payload.userEmail;
+      state.email = payload?.userEmail;
       state.user = payload;
     },
     setEmployerInfo: (state, { payload }) => {},
