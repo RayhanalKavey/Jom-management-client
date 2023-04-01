@@ -45,6 +45,8 @@ const AddJob = () => {
       fresherJob: data?.jobCategory === "Fresher" ? true : false,
       experiencedJob: data?.jobCategory === "Experienced" ? true : false,
       currentDate,
+      applicants: [],
+      queries: [],
     };
     // console.log("JobInfo", jobInfo);
     postAJob(jobInfo);

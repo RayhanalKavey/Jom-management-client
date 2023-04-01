@@ -96,7 +96,7 @@ const JobSeekerProfileUpdate = () => {
     content = (
       <div
         data-aos="fade-up"
-        className="max-w-7xl mx-auto  sm:px-6 lg:px-8  flex items-center justify-center px-5 py-12 dark:bg-accent bg-base-100"
+        className="w-full mx-auto  sm:px-6 lg:px-8  flex items-center justify-center px-5 py-12 dark:bg-accent bg-base-100"
       >
         {" "}
         <div className="w-full bg-secondary  p-10  border-[.08rem]  rounded-lg  ">

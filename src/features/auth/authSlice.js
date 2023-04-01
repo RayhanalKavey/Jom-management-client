@@ -14,6 +14,10 @@ const initialState = {
   isError: false,
   error: "",
   user: {},
+  isEmployer: false,
+  isSeeker: false,
+  employerInfo: {},
+  seekerInfo: {},
 };
 
 // Firebase related functions are basically async function thats why I use async thunk here(with createAsyncThunk)
@@ -86,6 +90,7 @@ const authSlice = createSlice({
       state.email = payload.userEmail;
       state.user = payload;
     },
+    setEmployerInfo: (state, { payload }) => {},
     toggleLoading: (state) => {
       state.isLoading = false;
     },

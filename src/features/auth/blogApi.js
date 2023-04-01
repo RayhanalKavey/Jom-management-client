@@ -13,9 +13,6 @@ const blogApi = apiSlice.injectEndpoints({
         url: "/blogs",
         method: "POST",
         body: data,
-        // headers: {
-        //   "content-type": "application/json",
-        // },
       }),
       invalidatesTags: ["blogs"],
     }),
