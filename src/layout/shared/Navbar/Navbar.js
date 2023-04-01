@@ -14,7 +14,7 @@ const Navbar = () => {
   /* ====================================
      Get information from the REDUX store
      ====================================*/
-  const { email, role } = useSelector((state) => state.auth);
+  const { email } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
   /* ====================================
@@ -49,25 +49,6 @@ const Navbar = () => {
   //-------with redux
 
   const { theme } = useSelector((state) => state.theme);
-
-  // Check the system preference. It will check this once.
-  useEffect(() => {
-    window.matchMedia("prefers-color-scheme:dark").matches
-      ? dispatch(setTheme("dark"))
-      : dispatch(setTheme("light"));
-  }, [dispatch]);
-  // --------normal dark mood
-  // const [theme, setTheme] = useState(null);
-  // --Check the system preference. It will check this once.
-  // useEffect(() => {
-  //   window.matchMedia("prefers-color-scheme:dark").matches
-  //     ? setTheme("dark")
-  //     : setTheme("light");
-  // }, []);
-  // --Handle Switch theme function called when user want to switch theme
-  // const handleSwitchTheme = () => {
-  //   setTheme(theme === "dark" ? "light" : "dark");
-  // };
 
   // Set the theme according the handleThemeSwitch functions theme preference
   useEffect(() => {

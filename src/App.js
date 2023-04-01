@@ -24,10 +24,6 @@ function App() {
   // Get  user from the MongoDB
   =========================== */
   const { data: usersInDatabase } = useGetUserQuery();
-  // console.log(
-  //   "users in the app js",
-  //   usersInDatabase?.some((userObj) => userObj?.uid)
-  // );
 
   /* =========================
   // Post the user to the MongoDB
