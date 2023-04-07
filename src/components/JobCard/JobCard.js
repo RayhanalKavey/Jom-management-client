@@ -75,7 +75,7 @@ const JobCard = ({ job }) => {
   return (
     <div>
       {/* inner content */}
-      <div className="flex  items-start  gap-5   flex-col sm:flex-row md:flex-col lg:flex-row relative">
+      <div className="flex  items-start  gap-5   flex-col sm:flex-row md:flex-col lg:flex-row relative text-accent ">
         {/* logo */}
         <div className=" sm:mt-1.5  flex items-center justify-center h-12 w-12 rounded-md p-2 border-[.5px] bg-success">
           <img src={job?.logo} alt="" />
@@ -85,7 +85,7 @@ const JobCard = ({ job }) => {
         <div className="flex-1 w-full ">
           {/* heading(position)  */}
           <div className="flex justify-between items-center mb-3">
-            <p className="text-lg font-semibold ">{job?.position}</p>
+            <p className="text-lg font-semibold  ">{job?.position}</p>
             {/*  */}
             <div className="group relative">
               <div className="relative group">

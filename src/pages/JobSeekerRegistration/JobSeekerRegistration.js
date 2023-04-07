@@ -340,7 +340,7 @@ const JobSeekerRegistration = () => {
     <>
       <TitleComponent title={"Job Seeker Registration"}></TitleComponent>
 
-      {content}
+      <div className="bg-secondary dark:bg-accent">{content}</div>
     </>
   );
 };

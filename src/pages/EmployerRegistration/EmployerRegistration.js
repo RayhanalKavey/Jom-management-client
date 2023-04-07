@@ -281,7 +281,7 @@ const EmployerRegistration = () => {
     <>
       <TitleComponent title={"Employer Registration"}></TitleComponent>
 
-      {content}
+      <div className="bg-secondary dark:bg-accent">{content}</div>
     </>
   );
 };

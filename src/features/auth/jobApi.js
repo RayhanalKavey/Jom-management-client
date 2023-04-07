@@ -8,6 +8,13 @@ const jobApi = apiSlice.injectEndpoints({
       }),
       providesTags: ["jobs"],
     }),
+    getJobsForQueryPagination: builder.query({
+      query: ({ page, size }) => ({
+        url: `/jobs/pagination?page=${page}&size=${size}`,
+      }),
+      providesTags: ["jobs"],
+      // invalidatesTags: ["jobs"],
+    }),
     postAJob: builder.mutation({
       query: (data) => ({
         url: "/jobs",
@@ -44,6 +51,7 @@ const jobApi = apiSlice.injectEndpoints({
 });
 export const {
   useGetJobsQuery,
+  useGetJobsForQueryPaginationQuery,
   usePostAJobMutation,
   useUpdateAJobMutation,
   useDeleteAJobMutation,
