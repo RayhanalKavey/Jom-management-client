@@ -4,12 +4,12 @@ import { toast } from "react-hot-toast";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import TitleComponent from "../../../components/TitleComponent/TitleComponent";
-import { usePostAJobMutation } from "../../../features/auth/jobApi";
 import {
   formInput,
   formLabel,
   submitButtonClass,
 } from "../../../components/classes/classes";
+import { usePostAJobMutation } from "../../../features/job/jobApi";
 
 const AddJob = () => {
   /* =============================

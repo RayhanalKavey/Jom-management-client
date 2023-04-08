@@ -2,14 +2,14 @@ import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { useSelector } from "react-redux";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import {
   formInput,
   formLabel,
   submitButtonClass,
 } from "../../../components/classes/classes";
 import TitleComponent from "../../../components/TitleComponent/TitleComponent";
-import { useUpdateAJobMutation } from "../../../features/auth/jobApi";
+import { useUpdateAJobMutation } from "../../../features/job/jobApi";
 
 const UpdateJob = () => {
   let { state } = useLocation();

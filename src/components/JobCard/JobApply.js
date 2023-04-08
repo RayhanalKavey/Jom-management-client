@@ -14,8 +14,7 @@ import {
 } from "../classes/classes";
 import { MdOutlineBookmarkAdd } from "react-icons/md";
 import { CiLocationOn, CiTimer } from "react-icons/ci";
-import { useGetUserQuery } from "../../features/auth/authApi";
-import { useApplyAJobMutation } from "../../features/auth/jobApi";
+import { useApplyAJobMutation } from "../../features/job/jobApi";
 
 const JobApply = ({ job }) => {
   //LoggedIn user email

@@ -19,25 +19,29 @@ const BlogCard = ({ blog }) => {
           />
         </div>
         {/* content start */}
-        <div>
-          <div className="mb-8">
-            <div>{blog?.date}</div>
-            {/* <div>8 comment</div> */}
-          </div>
-          <div className="mb-8">
-            <h3 className="text-xl font-semibold mb-5">{blog?.title}</h3>
-            <p className="text-md">{blog?.content.slice(0, 99)}....</p>
-          </div>
-          <Link
-            to={"/blog-details"}
-            state={blog}
-            className="duration-500 text-primary text-xl font-semibold flex gap-2 items-center hover:translate-x-1"
-          >
-            <span className="hover:translate-x-0 ">Read More</span>
-            <div className="transform-gpu transition-transform mt-[2px]">
-              <AiOutlineRight className="" />
+        <div className="flex flex-col gap-8">
+          {/* Date */}
+          <div>{blog?.date}</div>
+          <div className="flex flex-col   gap-8">
+            {/* Title + description */}
+            <div>
+              <h3 className="text-xl font-semibold mb-5">{blog?.title}</h3>
+              <p className="text-md">{blog?.content.slice(0, 99)}....</p>
             </div>
-          </Link>
+            {/* Read mode button */}
+            <div>
+              <Link
+                to={"/blog-details"}
+                state={blog}
+                className=" duration-500 text-primary text-xl font-semibold flex gap-2 items-center hover:translate-x-1"
+              >
+                <span className="hover:translate-x-0 ">Read More</span>
+                <div className="transform-gpu transition-transform mt-[2px]">
+                  <AiOutlineRight className="" />
+                </div>
+              </Link>
+            </div>
+          </div>
         </div>
         {/* content end */}
       </div>

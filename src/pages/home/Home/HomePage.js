@@ -1,21 +1,21 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { toast } from "react-hot-toast";
-import { useSelector } from "react-redux";
 import { bottomBorder, topBorder } from "../../../components/classes/classes";
 import SectionHeading from "../../../components/SectionHeading/SectionHeading";
 import SectionSubHeading from "../../../components/SectionSubHeading/SectionSubHeading";
 import Spinner from "../../../components/Spinner/Spinner";
-import { useGetBlogsQuery } from "../../../features/auth/blogApi";
 import useTitle from "../../../hooks/useTitle/useTitle";
 import BlogCard from "../BlogCard/BlogCard";
 import BrandSection from "../BrandSection/BrandSection";
-import ExperiencedJobHome from "../ExperiencedJobHome/ExperiencedJobHome";
 import FresherJobHome from "../FresherJobHome/FresherJobHome";
 import HeroSection from "../HeroSection/HeroSection";
 import HowItWorks from "../HowItWorks/HowItWorks";
 import Newsletter from "../Newsletter/Newsletter";
 import PopularJobCategory from "../PopularJobCategory/PopularJobCategory";
 import UserOpinion from "../UserOpinion/UserOpinion";
+import { useSelector } from "react-redux";
+import ExperiencedJobHome from "../ExperiencedJobHome/ExperiencedJobHome";
+import { useGetBlogsQuery } from "../../../features/blog/blogApi";
 
 const HomePage = () => {
   useTitle("Home");

@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import JobCard from "../../components/JobCard/JobCard";
 import JobCardSkeleton from "../../components/JobCardSkeleton/JobCardSkeleton";
 import TitleComponent from "../../components/TitleComponent/TitleComponent";
-import { useGetJobsForQueryPaginationQuery } from "../../features/auth/jobApi";
+import { useGetJobsForQueryPaginationQuery } from "../../features/job/jobApi";
 import { setPage, setSize } from "../../features/pagination/paginationSlice";
 import useTitle from "../../hooks/useTitle/useTitle";
 import { BiChevronLeft, BiChevronRight } from "react-icons/bi";
@@ -22,8 +22,9 @@ const AllJob = () => {
   //Pagination states
   // ==================
 
-  const { data, isLoading, isSuccess, isError, error } =
-    useGetJobsForQueryPaginationQuery({ page, size });
+  const { data, isLoading, isError, error } = useGetJobsForQueryPaginationQuery(
+    { page, size }
+  );
 
   // Handle loading states of getting the job...
   if (isError) {

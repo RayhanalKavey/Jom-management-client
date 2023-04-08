@@ -1,9 +1,8 @@
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
-import { IoIosArrowRoundBack } from "react-icons/io";
 import { useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
   formInput,
   formLabel,
@@ -30,11 +29,7 @@ const EmployerProfileUpdate = () => {
   /* ===============================
   // get all users from the database
     ================================ */
-  const {
-    data,
-    isLoading: userLoading,
-    isError: userIsError,
-  } = useGetUserQuery();
+  const { isLoading: userLoading, isError: userIsError } = useGetUserQuery();
 
   /* =================
   // React hook form

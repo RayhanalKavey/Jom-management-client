@@ -1,11 +1,9 @@
 import React from "react";
-import { toast } from "react-hot-toast";
 import { FaBriefcase, FaUser } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import SeekerOrPosterSkeleton from "../../components/SeekerOrPosterSkeleton/SeekerOrPosterSkeleton";
 import TitleComponent from "../../components/TitleComponent/TitleComponent";
-import { useGetUserQuery } from "../../features/auth/authApi";
 import useTitle from "../../hooks/useTitle/useTitle";
 
 const JobPosterOrJobSeeker = () => {

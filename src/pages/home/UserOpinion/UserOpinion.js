@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/solid";
-import { useGetReviewQuery } from "../../../features/auth/reviewApi";
 import { AiOutlineDoubleRight, AiOutlineDoubleLeft } from "react-icons/ai";
 import { iconButton } from "../../../components/classes/classes";
 import OpinionCard from "./OpinionCard";
 import { toast } from "react-hot-toast";
 import Spinner from "../../../components/Spinner/Spinner";
+import { useGetReviewQuery } from "../../../features/review/reviewApi";
 
 const UserOpinion = () => {
   // get reviews from the database

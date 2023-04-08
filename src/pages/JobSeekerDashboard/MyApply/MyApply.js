@@ -7,12 +7,12 @@ import {
 } from "../../../components/classes/classes";
 import TitleComponent from "../../../components/TitleComponent/TitleComponent";
 
-import { useGetJobsQuery } from "../../../features/auth/jobApi";
 import { MdOutlineBookmarkAdd } from "react-icons/md";
 import { toast } from "react-hot-toast";
 import { CiLocationOn, CiTimer } from "react-icons/ci";
 import JobCardSkeleton from "../../../components/JobCardSkeleton/JobCardSkeleton";
 import JobDetails from "../../AllJob/JobDetails";
+import { useGetJobsQuery } from "../../../features/job/jobApi";
 
 const MyApply = () => {
   //LoggedIn user email

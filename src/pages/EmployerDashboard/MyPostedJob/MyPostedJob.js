@@ -10,14 +10,15 @@ import {
   scaleButtonClass,
 } from "../../../components/classes/classes";
 import TitleComponent from "../../../components/TitleComponent/TitleComponent";
-import {
-  useDeleteAJobMutation,
-  useGetJobsQuery,
-} from "../../../features/auth/jobApi";
+
 import { MdOutlineBookmarkAdd } from "react-icons/md";
 import { CiLocationOn, CiTimer } from "react-icons/ci";
 import DeleteModal from "../../../components/DeleteModal/DeleteModal";
 import JobCardSkeleton from "../../../components/JobCardSkeleton/JobCardSkeleton";
+import {
+  useDeleteAJobMutation,
+  useGetJobsQuery,
+} from "../../../features/job/jobApi";
 
 const MyPostedJob = () => {
   // Get current user email from the store

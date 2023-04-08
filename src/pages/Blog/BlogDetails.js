@@ -1,9 +1,5 @@
 import React from "react";
-import { useGetBlogsQuery } from "../../features/auth/blogApi";
-import { AiOutlineRight } from "react-icons/ai";
 import { Link, useLocation } from "react-router-dom";
-import BlogCard from "../home/BlogCard/BlogCard";
-import TitleComponent from "../../components/TitleComponent/TitleComponent";
 import userImg from "../../assets/images/rayhan-al-kavey.png";
 import { IoIosArrowRoundBack } from "react-icons/io";
 import { scaleButtonClass } from "../../components/classes/classes";

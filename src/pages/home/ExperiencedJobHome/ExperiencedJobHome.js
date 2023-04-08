@@ -3,7 +3,7 @@ import { toast } from "react-hot-toast";
 import { Link } from "react-router-dom";
 import JobCard from "../../../components/JobCard/JobCard";
 import JobCardSkeleton from "../../../components/JobCardSkeleton/JobCardSkeleton";
-import { useGetJobsQuery } from "../../../features/auth/jobApi";
+import { useGetJobsQuery } from "../../../features/job/jobApi";
 
 const ExperiencedJobHome = () => {
   const { data, isLoading, isSuccess, isError, error } = useGetJobsQuery();

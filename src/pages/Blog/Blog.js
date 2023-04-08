@@ -2,12 +2,11 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { scaleButtonClass } from "../../components/classes/classes";
 import TitleComponent from "../../components/TitleComponent/TitleComponent";
-import { useGetBlogsQuery } from "../../features/auth/blogApi";
 import BlogCard from "../home/BlogCard/BlogCard";
 import { IoIosArrowRoundBack } from "react-icons/io";
-import Spinner from "../../components/Spinner/Spinner";
 import useTitle from "../../hooks/useTitle/useTitle";
 import BlogCardSkeleton from "../../components/BlogCardSkeleton/BlogCardSkeleton";
+import { useGetBlogsQuery } from "../../features/blog/blogApi";
 
 const Blog = () => {
   useTitle("Blogs");

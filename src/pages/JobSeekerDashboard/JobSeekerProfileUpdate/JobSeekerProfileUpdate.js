@@ -30,11 +30,7 @@ const JobSeekerProfileUpdate = () => {
   /* ===============================
   // get all users from the database
     ================================ */
-  const {
-    data,
-    isLoading: userLoading,
-    isError: userIsError,
-  } = useGetUserQuery();
+  const { isLoading: userLoading, isError: userIsError } = useGetUserQuery();
 
   /* =================
   // React hook form
