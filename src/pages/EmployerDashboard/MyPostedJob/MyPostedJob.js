@@ -17,7 +17,7 @@ import DeleteModal from "../../../components/DeleteModal/DeleteModal";
 import JobCardSkeleton from "../../../components/JobCardSkeleton/JobCardSkeleton";
 import {
   useDeleteAJobMutation,
-  useGetJobsQuery,
+  useGetPostedJobsQuery,
 } from "../../../features/job/jobApi";
 
 const MyPostedJob = () => {
@@ -25,12 +25,15 @@ const MyPostedJob = () => {
   const { email } = useSelector((state) => state?.auth);
 
   /* ===============================
-  //  Get data of All jobs from the database using redux
+  //  Get data of All posted jobs from the database using redux for the current user (as job poster)
      ===============================*/
-  const { data, isLoading, isSuccess, isError, error } = useGetJobsQuery();
-
-  // Get currently logged in user
-  const loggedInUserPost = data?.filter((job) => job?.email === email);
+  const {
+    data: loggedInUserPost,
+    isLoading,
+    isSuccess,
+    isError,
+    error,
+  } = useGetPostedJobsQuery({ email });
 
   /* ===============================
   // Redux action for deleting a job
@@ -65,7 +68,7 @@ const MyPostedJob = () => {
     content = content = <JobCardSkeleton></JobCardSkeleton>;
   }
   if (isError) {
-    toast.error(error, { id: "jobaPost" });
+    toast.error(error, { id: "jobAPost" });
   }
   if (isSuccess) {
     content = (

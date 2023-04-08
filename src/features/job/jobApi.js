@@ -14,6 +14,12 @@ const jobApi = apiSlice.injectEndpoints({
       }),
       providesTags: ["jobs"],
     }),
+    getPostedJobs: builder.query({
+      query: ({ email }) => ({
+        url: `/jobs/posted-jobs?email=${email}`,
+      }),
+      providesTags: ["jobs"],
+    }),
     getJobsForQueryPagination: builder.query({
       query: ({ page, size }) => ({
         url: `/jobs/pagination?page=${page}&size=${size}`,
@@ -57,6 +63,7 @@ const jobApi = apiSlice.injectEndpoints({
 export const {
   useGetJobsQuery,
   useGetAppliedJobsQuery,
+  useGetPostedJobsQuery,
   useGetJobsForQueryPaginationQuery,
   usePostAJobMutation,
   useUpdateAJobMutation,

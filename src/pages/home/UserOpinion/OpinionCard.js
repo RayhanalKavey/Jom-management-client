@@ -17,7 +17,7 @@ const OpinionCard = ({ currentReview }) => {
         {/* img */}
         <div className="w-20 h-20 border-[0.08rem] border-accent rounded-full overflow-hidden">
           <img
-            src={userImg}
+            src={currentReview?.userImg}
             alt=""
             className=" rounded-full object-cover w-full h-full "
           />
