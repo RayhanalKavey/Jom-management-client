@@ -56,7 +56,7 @@ const EmployerDashLayout = () => {
   return (
     <>
       <Navbar />
-      <div className="flex">
+      <div className="flex bg-secondary dark:bg-accent">
         <div
           className={`hidden lg:block  w-64 min-h-screen border-r-[.5px] ${commonDashboardClass}`}
         >

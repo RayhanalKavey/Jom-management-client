@@ -5,7 +5,6 @@ import {
   activeButtonDashboard,
   commonDashboardClass,
   dashboardDrawerButton,
-  dashboardLinkStyle,
   scaleButtonClass,
 } from "../../components/classes/classes";
 import Footer from "../shared/Footer/Footer";
@@ -13,10 +12,7 @@ import Navbar from "../shared/Navbar/Navbar";
 import { MdOutlineDashboardCustomize } from "react-icons/md";
 import { TbGitPullRequestClosed } from "react-icons/tb";
 import { IoIosArrowRoundBack } from "react-icons/io";
-import {
-  commonLinkClass,
-  activeButtonClass,
-} from "../../components/classes/classes";
+import { commonLinkClass } from "../../components/classes/classes";
 
 const JobSeekerDashboardLayout = () => {
   useTitle("Job Seeker");
@@ -52,7 +48,7 @@ const JobSeekerDashboardLayout = () => {
     <>
       <Navbar />
 
-      <div className="flex">
+      <div className="flex bg-secondary dark:bg-accent">
         <div
           className={` hidden lg:block  w-64 min-h-screen border-r-[.5px] ${commonDashboardClass}`}
         >

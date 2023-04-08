@@ -12,27 +12,23 @@ import { toast } from "react-hot-toast";
 import { CiLocationOn, CiTimer } from "react-icons/ci";
 import JobCardSkeleton from "../../../components/JobCardSkeleton/JobCardSkeleton";
 import JobDetails from "../../AllJob/JobDetails";
-import { useGetJobsQuery } from "../../../features/job/jobApi";
+import { useGetAppliedJobsQuery } from "../../../features/job/jobApi";
 
 const MyApply = () => {
   //LoggedIn user email
   const { user } = useSelector((state) => state?.auth);
-
+  const userId = user?._id;
   /* ===============================
-  //  Get data of All jobs from the database using redux
+  //  Get data of All applied jobs from the database using redux
      ===============================*/
+
   const {
-    data: allJob,
+    data: appliedJobs,
     isLoading,
     isSuccess,
     isError,
     error,
-  } = useGetJobsQuery();
-
-  // find the applied jobs
-  const appliedJob = allJob?.filter((applicant) =>
-    applicant?.applicants?.filter((j) => j?.userId === user?._id)
-  );
+  } = useGetAppliedJobsQuery({ userId });
 
   /* ===============================
   Loading state of Getting all jobs
@@ -48,7 +44,7 @@ const MyApply = () => {
     content = (
       <>
         <div className="grid grid-cols-1 md:grid-cols-2  lg:grid-cols-1  xl:grid-cols-2 gap-4 w-full py-16 px-5 ">
-          {appliedJob?.map((job) => (
+          {appliedJobs?.map((job) => (
             <div
               className="  border-[.08rem] p-6 rounded-lg  bg-secondary relative"
               key={job?._id}

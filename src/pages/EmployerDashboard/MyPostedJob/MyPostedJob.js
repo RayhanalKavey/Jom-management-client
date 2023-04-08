@@ -184,6 +184,7 @@ const MyPostedJob = () => {
   return (
     <>
       <TitleComponent title={"Latest Posted Job"} />
+
       {content}
     </>
   );
