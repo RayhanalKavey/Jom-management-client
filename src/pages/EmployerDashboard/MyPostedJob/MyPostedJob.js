@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { toast } from "react-hot-toast";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   badgeClass,
   buttonClass,
@@ -21,6 +21,7 @@ import {
 } from "../../../features/job/jobApi";
 
 const MyPostedJob = () => {
+  const navigate = useNavigate();
   // Get current user email from the store
   const { email } = useSelector((state) => state?.auth);
 
@@ -74,10 +75,10 @@ const MyPostedJob = () => {
     content = (
       <>
         <div className="grid grid-cols-1 md:grid-cols-2  lg:grid-cols-1  xl:grid-cols-2 gap-4 w-full py-16 px-5 ">
-          {loggedInUserPost?.reverse()?.map((job) => (
+          {loggedInUserPost?.map((job) => (
             <div
               data-aos="fade-up"
-              className="  border-[.08rem] p-6 rounded-lg  bg-secondary relative"
+              className="border-[.08rem] p-6 rounded-lg  bg-secondary relative"
               key={job?._id}
             >
               {/* ----*/}
@@ -146,8 +147,20 @@ const MyPostedJob = () => {
                       {/* ---job  info end--- */}
                     </div>
 
-                    {/* All buttons  start*/}
+                    {/*  buttons  start*/}
                     <div className="flex justify-start items-center gap-2 flex-wrap">
+                      <button
+                        onClick={() =>
+                          navigate(
+                            `/employer-dashboard/applicant-job/${job?._id}`
+                          )
+                        }
+                        // state={job}
+                        className={`${outlinedButton}`}
+                      >
+                        Applicants
+                      </button>
+                      {/* {console.log(job?._id)} */}
                       <Link
                         to="/employer-dashboard/my-posted-job/details"
                         state={job}
@@ -170,7 +183,7 @@ const MyPostedJob = () => {
                         actionKey={job?._id}
                       ></DeleteModal>
                     </div>
-                    {/* All buttons end */}
+                    {/*  buttons end */}
                   </div>
                   {/* content end*/}
                 </div>

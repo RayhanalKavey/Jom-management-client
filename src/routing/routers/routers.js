@@ -25,6 +25,7 @@ import Blog from "../../pages/Blog/Blog";
 import BlogDetails from "../../pages/Blog/BlogDetails";
 import JobDetails from "../../pages/AllJob/JobDetails";
 import PostedJobDetails from "../../pages/EmployerDashboard/MyPostedJob/PostedJobDetails";
+import Applicants from "../../pages/EmployerDashboard/Applicants/Applicants";
 
 const { createBrowserRouter } = require("react-router-dom");
 
@@ -94,6 +95,10 @@ const router = createBrowserRouter([
         element: <PostedJobDetails />,
       },
 
+      {
+        path: "/employer-dashboard/applicant-job/:id",
+        element: <Applicants />,
+      },
       { path: "/employer-dashboard/add-job", element: <AddJob /> },
       { path: "/employer-dashboard/update-job", element: <UpdateJob /> },
       {

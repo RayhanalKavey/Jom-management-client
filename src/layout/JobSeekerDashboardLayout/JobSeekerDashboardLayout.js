@@ -57,13 +57,13 @@ const JobSeekerDashboardLayout = () => {
 
         <div className="w-full h-full bg-base-100 dark:bg-accent flex-1 relative z-30 ">
           {/* back */}
-          <Link to={"/poster-seeker"}>
+          {/* <Link to={"/poster-seeker"}>
             <div
               className={`${scaleButtonClass}  absolute top-28 left-3 text-accent dark:text-secondary `}
             >
               <IoIosArrowRoundBack style={{ fontSize: "1.8em" }} />
             </div>
-          </Link>
+          </Link> */}
           {/* back end */}
           <Outlet />
           <div className="relative lg:hidden">

@@ -8,6 +8,12 @@ const jobApi = apiSlice.injectEndpoints({
       }),
       providesTags: ["jobs"],
     }),
+    getApplicantJobById: builder.query({
+      query: (id) => ({
+        url: `/jobs/applicant-job/${id}`,
+      }),
+      providesTags: ["jobs"],
+    }),
     getAppliedJobs: builder.query({
       query: ({ userId }) => ({
         url: `/jobs/applied-jobs?userId=${userId}`,
@@ -42,6 +48,7 @@ const jobApi = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ["jobs"],
     }),
+
     deleteAJob: builder.mutation({
       query: (id) => ({
         url: `/jobs/${id}`,
@@ -62,6 +69,7 @@ const jobApi = apiSlice.injectEndpoints({
 });
 export const {
   useGetJobsQuery,
+  useGetApplicantJobByIdQuery,
   useGetAppliedJobsQuery,
   useGetPostedJobsQuery,
   useGetJobsForQueryPaginationQuery,

@@ -1,5 +1,4 @@
 import React from "react";
-import userImg from "../../../assets/images/rayhan-al-kavey.png";
 
 const OpinionCard = ({ currentReview }) => {
   return (

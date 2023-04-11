@@ -8,23 +8,30 @@ import auth from "./firebase/firebase.config";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser, toggleLoading } from "./features/auth/authSlice";
 import { toast, Toaster } from "react-hot-toast";
-import { useGetUserQuery, usePostUserMutation } from "./features/auth/authApi";
+import {
+  useGetCurrentUserQuery,
+  useGetUserQuery,
+  usePostUserMutation,
+} from "./features/auth/authApi";
 
 function App() {
   /* ============================= 
   //======= For checking if the firebase configured properly
   // console.log(process.env);
   // console.log(document.documentElement);
-
-  const { isLoading } = useSelector((state) => state.auth);
-  // console.log(isLoading);
   ============================ */
+
+  //LoggedIn user email
+  const { email } = useSelector((state) => state?.auth);
 
   /* =========================
   // Get  user from the MongoDB
   =========================== */
   const { data: usersInDatabase } = useGetUserQuery();
-
+  const { data } = useGetCurrentUserQuery({ email });
+  // console.log(data);
+  // const userInDatabase = data[0];
+  // console.log("use Get Current User Query", userInDatabase);
   /* =========================
   // Post the user to the MongoDB
   =========================== */
@@ -60,6 +67,7 @@ function App() {
             "===============the user we just registered is not exists in the mongodb"
           );
           //  True means :- the user we just registered is not exists in the mongodb
+          // console.log("POST USER to DATABASE");
           postUser(userInfo);
         } else {
           // "get the current user user",
