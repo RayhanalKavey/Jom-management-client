@@ -8,6 +8,14 @@ const authApi = apiSlice.injectEndpoints({
       }),
       providesTags: ["users"],
     }),
+
+    getApplicant: builder.query({
+      query: (id) => ({
+        url: `/user/applicant/${id}`,
+      }),
+      providesTags: ["users"],
+    }),
+
     getCurrentUser: builder.query({
       query: ({ email }) => ({
         url: `/user/current?email=${email}`,
@@ -43,6 +51,7 @@ const authApi = apiSlice.injectEndpoints({
 });
 export const {
   useGetUserQuery,
+  useGetApplicantQuery,
   useGetCurrentUserQuery,
   usePostUserMutation,
   useRegisterAsEmployerMutation,

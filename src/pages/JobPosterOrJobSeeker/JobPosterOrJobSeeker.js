@@ -11,7 +11,7 @@ const JobPosterOrJobSeeker = () => {
 
   //LoggedIn user
   const { user } = useSelector((state) => state?.auth);
-
+  console.log("user form poster/seeker", user);
   /*CSS Class  */
 
   const iconClass =
