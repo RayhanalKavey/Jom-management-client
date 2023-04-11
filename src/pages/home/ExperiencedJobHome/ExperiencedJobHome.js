@@ -23,7 +23,6 @@ const ExperiencedJobHome = () => {
         <div className="grid md:grid-cols-2 gap-4 w-full">
           {data
             ?.filter((j) => j?.experiencedJob)
-            ?.reverse()
             ?.slice(0, 6)
             ?.map((job) => (
               <div

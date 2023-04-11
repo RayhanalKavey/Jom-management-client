@@ -1,7 +1,6 @@
 import React from "react";
 import { toast } from "react-hot-toast";
 import { Link } from "react-router-dom";
-import { buttonClass, homeButton } from "../../../components/classes/classes";
 import JobCard from "../../../components/JobCard/JobCard";
 import JobCardSkeleton from "../../../components/JobCardSkeleton/JobCardSkeleton";
 import { useGetJobsQuery } from "../../../features/job/jobApi";
@@ -22,7 +21,6 @@ const FresherJobHome = () => {
       <div className=" grid md:grid-cols-2 gap-4 w-full">
         {data
           ?.filter((j) => j?.fresherJob)
-          ?.reverse()
           ?.slice(0, 6)
           ?.map((job) => (
             <div

@@ -19,14 +19,18 @@ import { useApplyAJobMutation } from "../../features/job/jobApi";
 const JobApply = ({ job }) => {
   //LoggedIn user email
   const { user, email } = useSelector((state) => state?.auth);
+  console.log("user from jobApply", user);
+  console.log("job from jobApply", job);
   // Post apply information. If the user is logged in and register as job seeker
   const [applyAJobs, { isLoading, isSuccess, isError, error }] =
     useApplyAJobMutation();
 
   // If the jobSeeker apply this job
   let isJobApplied;
+  let isTheUserIsTheCreatorOfThisJob;
   if (job) {
     isJobApplied = job?.applicants?.some((app) => app?.userId === user?._id);
+    isTheUserIsTheCreatorOfThisJob = email === job?.email;
   }
   let applyInformation;
   if (job?._id && user?.isJobSeeker) {
@@ -70,6 +74,7 @@ const JobApply = ({ job }) => {
       </Link>
     );
   }
+
   // 2
   if (!user?.isJobSeeker) {
     applyButton = (
@@ -85,7 +90,7 @@ const JobApply = ({ job }) => {
   }
   // 3
   if (email && user?.isJobSeeker && isJobApplied) {
-    applyButton = <button className={`${buttonApplied} `}> Applied</button>;
+    applyButton = <button className={`${buttonApplied}`}> Applied</button>;
   }
   // 4
   if (email && user?.isJobSeeker && !isJobApplied) {
@@ -99,11 +104,21 @@ const JobApply = ({ job }) => {
       </Link>
     );
   }
+  //  5
+  console.log("isTheUserIsTheCreatorOfThisJob", isTheUserIsTheCreatorOfThisJob);
+
+  if (isTheUserIsTheCreatorOfThisJob) {
+    applyButton = (
+      <button className={`${buttonApplied}`}>
+        You are the creator of this job.
+      </button>
+    );
+  }
   /*--------------------------------------------
    Check if the current user applied in this job, and Buttons class end
    -------------------------------------------- */
   return (
-    <div className="">
+    <div>
       <div
         className={`${bottomBorder} pb-10 flex  items-center justify-center  gap-5   flex-col relative `}
       >
