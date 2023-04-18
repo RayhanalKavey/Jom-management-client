@@ -28,7 +28,12 @@ const MyApply = () => {
     isSuccess,
     isError,
     error,
-  } = useGetAppliedJobsQuery({ userId });
+  } = useGetAppliedJobsQuery(
+    { userId },
+    {
+      pollingInterval: 500,
+    }
+  );
 
   /* ===============================
   Loading state of Getting all jobs

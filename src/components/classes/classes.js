@@ -98,3 +98,5 @@ export const jobDetailsListStyle = "ml-4 mb-5 text-sm";
 export const formLabel = "block mb-2 text-lg font-medium";
 export const formInput =
   "appearance-none block w-full bg-white text-gray-700 border border-gray-300 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:border-primary";
+export const formMessageInput =
+  "appearance-none block w-full bg-white text-gray-700 border border-gray-300 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:border-primary";

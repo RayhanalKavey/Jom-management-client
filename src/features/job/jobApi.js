@@ -65,6 +65,22 @@ const jobApi = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ["jobs"],
     }),
+    employerMessage: builder.mutation({
+      query: (data) => ({
+        url: "/jobs/employerMessage",
+        method: "PATCH",
+        body: data,
+      }),
+      invalidatesTags: ["jobs"],
+    }),
+    jobSeekerMessage: builder.mutation({
+      query: (data) => ({
+        url: "/jobs/jobSeekerMessage",
+        method: "PATCH",
+        body: data,
+      }),
+      invalidatesTags: ["jobs"],
+    }),
   }),
 });
 export const {
@@ -77,4 +93,6 @@ export const {
   useUpdateAJobMutation,
   useDeleteAJobMutation,
   useApplyAJobMutation,
+  useEmployerMessageMutation,
+  useJobSeekerMessageMutation,
 } = jobApi;

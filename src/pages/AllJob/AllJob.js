@@ -37,7 +37,6 @@ const AllJob = () => {
   ========================= */
     // total number of pages
     pages = Math.ceil(data?.count / size);
-    console.log("pages", pages);
 
     /* =======================
 Pagination end

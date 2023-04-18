@@ -14,13 +14,16 @@ import {
 } from "../classes/classes";
 import { MdOutlineBookmarkAdd } from "react-icons/md";
 import { CiLocationOn, CiTimer } from "react-icons/ci";
-import { useApplyAJobMutation } from "../../features/job/jobApi";
+import {
+  useApplyAJobMutation,
+  useJobSeekerMessageMutation,
+} from "../../features/job/jobApi";
+import ConversationModal from "../ConversationModal/ConversationModal";
 
 const JobApply = ({ job }) => {
   //LoggedIn user email
   const { user, email } = useSelector((state) => state?.auth);
-  console.log("user from jobApply", user);
-  console.log("job from jobApply", job);
+
   // Post apply information. If the user is logged in and register as job seeker
   const [applyAJobs, { isLoading, isSuccess, isError, error }] =
     useApplyAJobMutation();
@@ -33,11 +36,14 @@ const JobApply = ({ job }) => {
     isTheUserIsTheCreatorOfThisJob = email === job?.email;
   }
   let applyInformation;
+
+  const currentDate = new Date();
   if (job?._id && user?.isJobSeeker) {
     applyInformation = {
       applyUserId: user?._id,
       applyUserEmail: user?.userEmail,
       applyJobId: job?._id,
+      currentDate,
     };
   }
   // Handle job posting loading, success and error
@@ -89,8 +95,23 @@ const JobApply = ({ job }) => {
     );
   }
   // 3
+  //send job Seeker  message to the database
+  const [jobSeekerMessage] = useJobSeekerMessageMutation();
+  // Current applicant
+  const currentApplicant = job?.applicants?.find(
+    (ap) => ap?.userEmail === email
+  );
   if (email && user?.isJobSeeker && isJobApplied) {
-    applyButton = <button className={`${buttonApplied}`}> Applied</button>;
+    applyButton = (
+      <>
+        <button className={`${buttonApplied}`}> Applied</button>
+        <ConversationModal
+          name={user?.fullName}
+          action={jobSeekerMessage}
+          applicant={currentApplicant}
+        />
+      </>
+    );
   }
   // 4
   if (email && user?.isJobSeeker && !isJobApplied) {
@@ -105,7 +126,6 @@ const JobApply = ({ job }) => {
     );
   }
   //  5
-  console.log("isTheUserIsTheCreatorOfThisJob", isTheUserIsTheCreatorOfThisJob);
 
   if (isTheUserIsTheCreatorOfThisJob) {
     applyButton = (

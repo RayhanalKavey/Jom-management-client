@@ -12,11 +12,9 @@ const paginationSlice = createSlice({
     setSize: (state, action) => {
       state.size = action.payload;
       state.page = 0;
-      console.log("action in the pagination slice (size)", action.payload);
     },
     setPage: (state, action) => {
       state.page = action.payload;
-      console.log("action in the pagination slice (page)", action.payload);
     },
   },
 });

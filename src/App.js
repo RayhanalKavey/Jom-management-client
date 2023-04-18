@@ -22,14 +22,13 @@ function App() {
   ============================ */
 
   //LoggedIn user email
-  const { email } = useSelector((state) => state?.auth);
+  const { email, user } = useSelector((state) => state?.auth);
 
   /* =========================
   // Get  user from the MongoDB
   =========================== */
   const { data: usersInDatabase } = useGetUserQuery();
   const { data } = useGetCurrentUserQuery({ email });
-  // console.log(data);
   // const userInDatabase = data[0];
   // console.log("use Get Current User Query", userInDatabase);
   /* =========================
@@ -67,7 +66,6 @@ function App() {
             "===============the user we just registered is not exists in the mongodb"
           );
           //  True means :- the user we just registered is not exists in the mongodb
-          // console.log("POST USER to DATABASE");
           postUser(userInfo);
         } else {
           // "get the current user user",
@@ -85,7 +83,7 @@ function App() {
         dispatch(toggleLoading());
       }
     });
-  }, [usersInDatabase, postUser, dispatch]);
+  }, [usersInDatabase, postUser, dispatch, user]);
 
   return (
     <div>

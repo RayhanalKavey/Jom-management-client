@@ -8,10 +8,10 @@ import ApplicantCard from "./ApplicantCard";
 
 const Applicants = () => {
   const { id } = useParams();
-  const { data: job } = useGetApplicantJobByIdQuery(id);
-  console.log("job in applicants", job?.applicants);
-  // const { position, applicants } = data || {};
-  // console.log(applicants?.length);
+  const { data: job } = useGetApplicantJobByIdQuery(id, {
+    pollingInterval: 500,
+  });
+  const { applicants } = job || {};
 
   return (
     <>
@@ -34,15 +34,12 @@ const Applicants = () => {
           <div className="py-16">
             <div className=" text-center text-2xl font-semibold mb-5 ">
               Number of applicants:
-              <span className="text-2xl font-bold">
-                {" "}
-                {job?.applicants?.length}
-              </span>
+              <span className="text-2xl font-bold"> {applicants?.length}</span>
             </div>
 
-            <div className="grid gap-5 md:grid-cols-1 grid-cols-2 relative text-accent">
-              {job?.applicants?.length &&
-                job?.applicants?.map((applicant) => (
+            <div className="grid gap-5 md:grid-cols-2 grid-cols-1 relative text-accent">
+              {applicants?.length &&
+                applicants?.map((applicant) => (
                   <ApplicantCard
                     key={applicant?.userId}
                     applicant={applicant}
