@@ -11,6 +11,7 @@ import {
   formInput,
   formLabel,
   googleButton,
+  rightBorder,
   submitButtonClass,
 } from "../../../components/classes/classes";
 
@@ -89,15 +90,55 @@ const Registration = () => {
       <TitleComponent title={"Registration"}></TitleComponent>
 
       <div className="flex items-center justify-center px-5 py-12 dark:bg-accent bg-base-100">
-        <div className="w-[80%] bg-secondary  p-10  border-[.08rem]  rounded-lg flex items-center justify-center flex-col lg:flex-row">
-          <div className="w-full md:w-1/2">
-            <img src={`${logInImg}`} alt="" />
+        <div className="w-[80%] bg-secondary  p-8 border-[.08rem]  rounded-lg  grid  justify-center items-center grid-cols-1 xl:grid-cols-2 gap-8">
+          {/* Introduction start */}
+
+          <div className="flex flex-col   ">
+            <h2 className="text-2xl md:text-3xl font-semibold mb-8 text-center">
+              Join Our Job Portal Today
+            </h2>
+            <div className="flex flex-col gap-4 text-center  text-sm md:text-lg  ">
+              <p>
+                Welcome!! We connect job seekers with their dream jobs and
+                employers with the appropriate candidate. Our platform is home
+                to thousands of companies offering a wide range of job
+                opportunities in various industries.
+              </p>
+              <p>
+                By creating an account, you can register both as employer and
+                job seeker, access exclusive job listings, chat between job
+                seeker and employer, job searches and blog reading, and show new
+                positions at the top.
+              </p>
+              <p>
+                Join our community of job seekers and employers today, and take
+                the first step towards either landing your dream job! or finding
+                the appropriate candidate!
+              </p>
+            </div>
           </div>
+
+          {/* Introduction end */}
           <form
-            className="w-full md:w-1/2  md:px-5"
+            className="w-full pt-8 xl:pt-0 xl:pl-8 border-t-[.5px] xl:border-t-0  xl:border-l-[.5px]  border-gray-600  "
             onSubmit={handleSubmit(handleOnSubmit)}
           >
-            <div className="form-control w-full ">
+            <div className="form-control w-full">
+              <label htmlFor="fullName" className={`${formLabel}`}>
+                Full Name
+              </label>
+              <input
+                type="text"
+                id="fullName"
+                {...register("fullName", { required: true })}
+                className={`${formInput}`}
+                placeholder="Rayhan Al Kavey"
+              />
+              {errors.fullName && (
+                <span className="text-red-500 text-sm">
+                  This field is required !
+                </span>
+              )}
               {/* -----Email--- */}
               <label className={`${formLabel}`}>Email</label>
               <input

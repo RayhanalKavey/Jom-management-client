@@ -10,119 +10,102 @@ const Footer = () => {
       className={`bg-secondary dark:bg-accent text-accent dark:secondary ${topBorder}`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+        <div className="grid  grid-cols-1 sm:grid-cols-2 md:grid-cols-3 justify-between gap-4">
+          {/* Location */}
           <div className="mb-8 sm:mb-0">
-            <h2 className="font-bold text-xl mb-4">Company</h2>
-            <ul className="list-none">
-              <li className="mb-2">
-                <Link href="#" className={`${commonLinkClass}`}>
-                  About us
-                </Link>
-              </li>
-              <li className="mb-2">
-                <Link href="#" className={`${commonLinkClass}`}>
-                  Contact us
-                </Link>
-              </li>
-              <li className="mb-2">
-                <Link href="#" className={`${commonLinkClass}`}>
-                  Privacy policy
-                </Link>
-              </li>
-              <li className="mb-2">
-                <Link href="#" className={`${commonLinkClass}`}>
-                  Terms and conditions
-                </Link>
-              </li>
-            </ul>
+            <h2 className="font-bold text-xl mb-4 text:accent dark:text-secondary">
+              Location
+            </h2>
+            <div className="text:accent dark:text-secondary">
+              <h3>Hasnabad Housing,</h3>
+              <p>Dream Memorial Road-5,</p>
+              <p>South Keraniganj,</p>
+              <p>Dhaka.</p>
+            </div>
           </div>
-          <div className="mb-8 sm:mb-0">
-            <h2 className="font-bold text-xl mb-4">Products</h2>
+
+          {/* Resources */}
+          <div className="mb-8 sm:mb-0 justify-self-center text-end">
+            <h2 className="font-bold text-xl mb-4 text:accent dark:text-secondary">
+              Resources
+            </h2>
             <ul className="list-none">
               <li className="mb-2">
-                <Link href="#" className={`${commonLinkClass}`}>
-                  Product 1
+                <Link to="/home" className={`${commonLinkClass} pr-0`}>
+                  Home{" "}
                 </Link>
               </li>
               <li className="mb-2">
-                <Link href="#" className={`${commonLinkClass}`}>
-                  Product 2
-                </Link>
-              </li>
-              <li className="mb-2">
-                <Link href="#" className={`${commonLinkClass}`}>
-                  Product 3
-                </Link>
-              </li>
-              <li className="mb-2">
-                <Link href="#" className={`${commonLinkClass}`}>
-                  Product 4
-                </Link>
-              </li>
-            </ul>
-          </div>
-          <div className="mb-8 sm:mb-0">
-            <h2 className="font-bold text-xl mb-4">Resources</h2>
-            <ul className="list-none">
-              <li className="mb-2">
-                <Link href="#" className={`${commonLinkClass}`}>
+                <Link to="/blog" className={`${commonLinkClass} pr-0`}>
                   Blog
                 </Link>
               </li>
               <li className="mb-2">
-                <Link href="#" className={`${commonLinkClass}`}>
-                  Case studies
+                <Link to="/poster-seeker" className={`${commonLinkClass} pr-0`}>
+                  Job Poster/Seeker{" "}
                 </Link>
               </li>
               <li className="mb-2">
-                <Link href="#" className={`${commonLinkClass}`}>
-                  Whitepapers
-                </Link>
-              </li>
-              <li className="mb-2">
-                <Link href="#" className={`${commonLinkClass}`}>
-                  FAQs
+                <Link to="/all-job" className={`${commonLinkClass} pr-0`}>
+                  Find Job
                 </Link>
               </li>
             </ul>
           </div>
-          <div>
-            <h2 className="font-bold text-xl mb-4">Connect</h2>
+          {/* Connect */}
+          <div className=" justify-self-end text-end ">
+            <h2 className="font-bold text-xl mb-4 text:accent dark:text-secondary">
+              Connect
+            </h2>
             <ul className="list-none">
               <li className="mb-2">
-                <Link href="#" className={`${commonLinkClass}`}>
+                <Link
+                  to="https://www.facebook.com/rayhan.kavey"
+                  target="blank"
+                  className={`${commonLinkClass} pr-0`}
+                >
                   Facebook
                 </Link>
               </li>
               <li className="mb-2">
-                <Link href="#" className={`${commonLinkClass}`}>
-                  Twitter
+                <Link
+                  to="https://www.linkedin.com/in/rayhanalkavey/"
+                  target="blank"
+                  className={`${commonLinkClass} pr-0`}
+                >
+                  LinkedIn
                 </Link>
               </li>
               <li className="mb-2">
-                <Link href="#" className={`${commonLinkClass}`}>
-                  LinkedIn
+                <Link
+                  to="https://github.com/RayhanalKavey"
+                  target="blank"
+                  className={`${commonLinkClass} pr-0`}
+                >
+                  GitHub
                 </Link>
               </li>
             </ul>
           </div>
         </div>
         <div className={`flex justify-between mt-8 ${topBorder} pt-8`}>
-          <p>&copy; 2023 Job Management. All rights reserved.</p>
+          <p className="text:accent dark:text-secondary">
+            &copy; 2023 Job Management. All rights reserved.
+          </p>
           <ul className="flex space-x-4">
             <li>
-              <Link href="#" className={`${commonLinkClass}`}>
-                Privacy
+              <Link to="/home" className={`${commonLinkClass} pr-0`}>
+                Home
               </Link>
             </li>
             <li>
-              <Link href="#" className={`${commonLinkClass}`}>
-                Terms
+              <Link to="/all-job" className={`${commonLinkClass} pr-0`}>
+                Jobs
               </Link>
             </li>
             <li>
-              <Link href="#" className={`${commonLinkClass}`}>
-                Sitemap
+              <Link to="/blog" className={`${commonLinkClass} pr-0`}>
+                Blog
               </Link>
             </li>
           </ul>

@@ -62,9 +62,9 @@ function App() {
         ================================ */
         // dispatch(setUser(userInfo));
         if (!usersInDatabase?.some((userObj) => userObj?.uid === user?.uid)) {
-          console.log(
-            "===============the user we just registered is not exists in the mongodb"
-          );
+          // console.log(
+          //   "===============the user we just registered is not exists in the mongodb"
+          // );
           //  True means :- the user we just registered is not exists in the mongodb
           postUser(userInfo);
         } else {
@@ -73,10 +73,10 @@ function App() {
             (userObj) => userObj?.uid === user?.uid
           );
           dispatch(setUser(currentUser));
-          console.log(
-            "================the user we just registered is  exists in the mongodb",
-            currentUser
-          );
+          // console.log(
+          //   "================the user we just registered is  exists in the mongodb",
+          //   currentUser
+          // );
         }
         // Interactions with the mongodb ends
       } else {

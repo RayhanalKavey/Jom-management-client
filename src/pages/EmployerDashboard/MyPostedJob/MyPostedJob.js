@@ -76,7 +76,6 @@ const MyPostedJob = () => {
       <>
         <div className="grid grid-cols-1 md:grid-cols-2  lg:grid-cols-1  xl:grid-cols-2 gap-4 w-full py-16 px-5 ">
           {loggedInUserPost?.map((job) => {
-            console.log("dont delete", job);
             return (
               <div
                 data-aos="fade-up"
