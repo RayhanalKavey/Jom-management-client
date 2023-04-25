@@ -12,6 +12,7 @@ const initialState = {
   role: "",
   isLoading: true,
   isError: false,
+  isCreateSuccess: false,
   error: "",
   user: {},
   isEmployer: false,
@@ -26,13 +27,12 @@ export const createUser = createAsyncThunk(
   "auth/createUser",
   async ({ email, password }) => {
     const data = await createUserWithEmailAndPassword(auth, email, password);
-
-    const { displayName, emailVerified, photoUrl, uid } = data.user;
+    const { displayName, emailVerified, photoURL, uid } = data.user;
     const user = {
       displayName,
       userEmail: data.user.email,
       emailVerified,
-      photoUrl,
+      photoURL,
       uid,
     };
     // We get this returned data in addCase's action.payload
@@ -44,28 +44,29 @@ export const loginUser = createAsyncThunk(
   "auth/loginUser",
   async ({ email, password }) => {
     const data = await signInWithEmailAndPassword(auth, email, password);
-    const { displayName, emailVerified, photoUrl, uid } = data.user;
+    const { displayName, emailVerified, photoURL, uid } = data.user;
     const user = {
       displayName,
       userEmail: data.user.email,
       emailVerified,
-      photoUrl,
+      photoURL,
       uid,
     };
     return user;
   }
 );
+
 // Create async thunk for google login
 export const googleLogin = createAsyncThunk("auth/googleLogin", async () => {
   const googleProvider = new GoogleAuthProvider();
   const data = await signInWithPopup(auth, googleProvider);
 
-  const { displayName, emailVerified, photoUrl, uid } = data.user;
+  const { displayName, emailVerified, photoURL, uid } = data.user;
   const user = {
     displayName,
     userEmail: data.user.email,
     emailVerified,
-    photoUrl,
+    photoURL,
     uid,
   };
   return user;
@@ -79,18 +80,18 @@ const authSlice = createSlice({
     logOut: (state, action) => {
       state.isLoading = false;
       state.email = "";
-      // state.isError = false;
-      // state.error = "";
       state.user = {};
     },
     setUser: (state, { payload }) => {
       state.isLoading = false;
-      // state.isError = false;
-      // state.error = "";
       state.email = payload?.userEmail;
       state.user = payload;
     },
-    setEmployerInfo: (state, { payload }) => {},
+    // updateUserProfile: (state, action) => {
+    //   console.log("update User Profile action.payload", action?.payload);
+    //   state.displayName = action?.payload?.displayName;
+    //   state.photoURL = action?.payload?.photoURL;
+    // },
     toggleLoading: (state) => {
       state.isLoading = false;
     },
@@ -102,11 +103,13 @@ const authSlice = createSlice({
       //Cases for create user (this values replace the initial state)
       .addCase(createUser.pending, (state) => {
         state.isLoading = true;
+        state.isCreateSuccess = false;
         state.isError = false;
         state.error = "";
       })
       .addCase(createUser.fulfilled, (state, action) => {
         state.isLoading = false;
+        state.isCreateSuccess = true;
         state.isError = false;
         state.error = "";
         state.email = action.payload.userEmail;
@@ -114,6 +117,7 @@ const authSlice = createSlice({
       })
       .addCase(createUser.rejected, (state, action) => {
         state.isLoading = false;
+        state.isCreateSuccess = false;
         state.email = "";
         state.isError = true;
         state.error = action.error.message;
@@ -140,11 +144,14 @@ const authSlice = createSlice({
       //Cases for Login user (this values replace the initial state)
       .addCase(googleLogin.pending, (state) => {
         state.isLoading = true;
+        state.isCreateSuccess = false;
         state.isError = false;
         state.error = "";
       })
       .addCase(googleLogin.fulfilled, (state, action) => {
         state.isLoading = false;
+        state.isCreateSuccess = true;
+
         state.isError = false;
         state.error = "";
         state.email = action.payload.userEmail;
@@ -152,6 +159,7 @@ const authSlice = createSlice({
       })
       .addCase(googleLogin.rejected, (state, action) => {
         state.isLoading = false;
+        state.isCreateSuccess = false;
         state.email = "";
         state.isError = true;
         state.error = action.error.message;

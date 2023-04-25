@@ -36,6 +36,8 @@ export const googleButton =
 
 export const submitButtonClass =
   "duration-500 w-full  hover:scale-40 transition-all text-xs uppercase font-semibold  px-2 py-2 text-secondary bg-primary border rounded hover:bg-warning";
+export const submitButtonDisabledClass =
+  "duration-500 w-full   transition-all text-xs uppercase font-semibold  px-2 py-2 text-secondary bg-gray-500 border rounded ";
 
 export const disabledButton = "";
 /*=====================
@@ -99,4 +101,4 @@ export const formLabel = "block mb-2 text-lg font-medium";
 export const formInput =
   "appearance-none block w-full bg-white text-gray-700 border border-gray-300 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:border-primary";
 export const formMessageInput =
-  "appearance-none block w-full bg-white text-gray-700 border border-gray-300 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:border-primary";
+  "appearance-none block w-full  bg-white text-gray-700 border border-gray-300 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:border-primary";

@@ -88,7 +88,9 @@ const Footer = () => {
             </ul>
           </div>
         </div>
-        <div className={`flex justify-between mt-8 ${topBorder} pt-8`}>
+        <div
+          className={`flex justify-between mt-8  border-t-[.5px]  border-gray-600 pt-8`}
+        >
           <p className="text:accent dark:text-secondary">
             &copy; 2023 Job Management. All rights reserved.
           </p>

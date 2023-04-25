@@ -6,6 +6,8 @@ import { signOut } from "firebase/auth";
 import auth from "../../../firebase/firebase.config";
 import { setTheme, toggleTheme } from "../../../features/theme/themeSlice";
 import { MdOutlineLightMode, MdDarkMode } from "react-icons/md";
+// import { FaUser } from "react-icons/fa";
+
 import {
   activeButtonClass,
   commonLinkClass,
@@ -123,9 +125,26 @@ const Navbar = () => {
           <Link onClick={handleLogOut} className={`${commonLinkClass} `}>
             Logout
           </Link>
+          {/* <Link
+            className={`border-[.5px] border-gray-600 overflow-hidden rounded-full duration-300 justify-center items-center flex bg-secondary hover:scale-105 text-sm font-semibold`}
+          >
+            {user?.photoURL && user?.displayName ? (
+              <img
+                className="block w-14 h-14 "
+                src={user?.photoURL}
+                alt=""
+                title={user?.displayName}
+              />
+            ) : (
+              <div title={user?.displayName}>
+                <FaUser size="1.5rem" />
+              </div>
+            )}
+          </Link> */}
         </>
       ) : (
         <>
+          {/* /// /// /// */}
           <NavLink
             to="/login"
             className={({ isActive }) =>

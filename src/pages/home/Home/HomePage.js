@@ -27,12 +27,7 @@ const HomePage = () => {
   /* =========================
      Fetched data of all BLOGs
      =========================*/
-  const {
-    data: blogs,
-    isLoading: blogLoading,
-    isError: blogError,
-    isSuccess: blogSuccess,
-  } = useGetBlogsQuery();
+  const { data: blogs } = useGetBlogsQuery();
 
   /*================================
   Loading state of logged In user

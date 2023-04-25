@@ -6,18 +6,28 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import TitleComponent from "../../../components/TitleComponent/TitleComponent";
 import { createUser, googleLogin } from "../../../features/auth/authSlice";
 import useTitle from "../../../hooks/useTitle/useTitle";
-import logInImg from "../../../assets/images/sign_up.png";
 import {
   formInput,
   formLabel,
   googleButton,
-  rightBorder,
   submitButtonClass,
+  submitButtonDisabledClass,
 } from "../../../components/classes/classes";
+// import auth from "../../../firebase/firebase.config";
+// import { updateProfile } from "firebase/auth";
+// import { usePostUserMutation } from "../../../features/auth/authApi";
 
 const Registration = () => {
   // Title of the page
   useTitle("Registration");
+  // Update user after register successfully
+  // const [userName, setUserName] = useState("");
+  // const [userPhoto, setUserPhoto] = useState("");
+  // console.log("userName and User Photo", userName, userPhoto);
+  /* =========================
+  // Post the user to the MongoDB
+  =========================== */
+  // const [postUser, postResult] = usePostUserMutation();
 
   // This state is used for password confirmation
   const [disabled, setDisabled] = useState(true);
@@ -60,10 +70,79 @@ const Registration = () => {
 
   //------- From data will come up here....
   const handleOnSubmit = (data) => {
+    // const { fullName: name, photoURL, email, password } = data;
     const { email, password } = data;
-    // Create user with email and password in the firebase
+    // setUserName(name);
+    // setUserPhoto(photoURL);
     dispatch(createUser({ email, password }));
+    // Create user with email and password in the firebase
   };
+
+  //image bb image hosting key
+  // const imageHostKey = process.env.REACT_APP_imagebb_key;
+  // function updatePhoto(name, photoURL) {
+  //   const image = photoURL[0];
+  //   const formData = new FormData();
+  //   formData.append("image", image);
+
+  // // send image to the dedicated image hosting server imgbb
+  //   const url = `https://api.imgbb.com/1/upload?key=${imageHostKey}`;
+  //   image !== undefined &&
+  //     fetch(url, {
+  //       method: "POST",
+  //       body: formData,
+  //     })
+  //       .then((res) => res.json())
+  //       .then((imgData) => {
+  //         if (imgData.success) {
+  //           const photoURL = imgData?.data.url;
+  //           console.log("after image update", photoURL);
+  //           handleUpdateUserProfile(name, photoURL);
+  //         }
+  //       })
+  //       .catch((error) => {
+  //         toast.error(error.message);
+  //       });
+  // }
+
+  // /// /// /// Update user profile.
+  // const handleUpdateUserProfile = (name, photoURL) => {
+  //   const profile = {
+  //     displayName: name,
+  //     photoURL,
+  //   };
+  //   console.log(
+  //     "handleUpdateUserProfile updater er ag muhurto",
+  //     profile,
+  //     auth?.currentUser
+  //   );
+  // auth?.curerrent user asar age e somossa hocche
+  //   auth?.currentUser &&
+  //     updateProfile(auth?.currentUser, profile)
+  //       .then(() => {
+  //         console.log("User profile updated successfully.", auth?.currentUser);
+
+  //         const { emailVerified, uid, email, displayName, photoURL } =
+  //           auth?.currentUser;
+  //         const userInfo = {
+  //           displayName,
+  //           userEmail: email,
+  //           emailVerified,
+  //           photoURL,
+  //           uid,
+  //         };
+  //         // =============================
+  //      //  Set the user to  the mongodb
+  //       //================================ //
+  //         postUser(userInfo);
+  //       })
+  //       .catch((error) => {
+  //         console.log("Error updating user profile:", error);
+  //       });
+  // };
+  // if (postResult?.isError) {
+  //   toast.error(postResult?.error, { id: "postUsr" });
+  // }
 
   //-------- Google login
   const handleGoogleLogin = () => {
@@ -75,7 +154,7 @@ const Registration = () => {
       navigate(from, { replace: true });
       reset();
     }
-  }, [isLoading, email]);
+  }, [isLoading, email, navigate, from, reset]);
 
   // If failed to register then error message
   useEffect(() => {
@@ -83,6 +162,30 @@ const Registration = () => {
       toast.error(error, { id: "registration" });
     }
   }, [isError, error]);
+
+  // ////// If user created successfully the update photo
+  // console.log("isCreateSuccess", isCreateSuccess);
+  // console.log("isLoading", isLoading);
+  // useEffect(() => {
+  //   if (!isError && auth?.currentUser) {
+  //     const { emailVerified, uid, email, displayName, photoURL } =
+  //       auth?.currentUser;
+  //     const userInfo = {
+  //       displayName,
+  //       userEmail: email,
+  //       emailVerified,
+  //       photoURL,
+  //       uid,
+  //     };
+
+  //   /* =============================
+  //  //  Set the user to  the mongodb
+  //   ================================ */
+  // postUser(userInfo);
+  // If the user created the update profile
+  // updatePhoto(userName, userPhoto);
+  // }
+  // }, [auth?.currentUser]);
 
   // ----------------------------///--------------------------------//
   return (
@@ -124,10 +227,10 @@ const Registration = () => {
             onSubmit={handleSubmit(handleOnSubmit)}
           >
             <div className="form-control w-full">
-              <label htmlFor="fullName" className={`${formLabel}`}>
+              {/* <label htmlFor="fullName" className={`${formLabel}`}>
                 Full Name
-              </label>
-              <input
+              </label> */}
+              {/* <input
                 type="text"
                 id="fullName"
                 {...register("fullName", { required: true })}
@@ -138,7 +241,25 @@ const Registration = () => {
                 <span className="text-red-500 text-sm">
                   This field is required !
                 </span>
-              )}
+              )} */}
+              {/* Photo URL */}
+
+              {/* <label htmlFor="fullName" className={`${formLabel}`}>
+                Your Image
+              </label>
+              <input
+                type="file"
+                {...register("photoURL", { required: true })}
+                placeholder="Upload Image"
+                className={`appearance-none cursor-pointer block w-full bg-white text-gray-700 border border-gray-300 rounded  mb-3  leading-tight focus:outline-none focus:border-primary py-3 px-4`}
+                accept="image/*"
+              />
+              {errors.photoURL && (
+                <span className="text-red-500 text-sm">
+                  This field is required !
+                </span>
+              )} */}
+
               {/* -----Email--- */}
               <label className={`${formLabel}`}>Email</label>
               <input
@@ -197,7 +318,9 @@ const Registration = () => {
               {/* ----Submit button----  */}
             </div>
             <input
-              className={`${submitButtonClass}`}
+              className={`${
+                disabled ? submitButtonDisabledClass : submitButtonClass
+              }`}
               // className="w-full px-4 py-2 mt-5 mb-1 text-white bg-blue-500 rounded cursor-pointer"
               type="submit"
               value="Register"

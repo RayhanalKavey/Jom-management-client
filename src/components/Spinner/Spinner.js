@@ -2,7 +2,7 @@ import React from "react";
 
 const Spinner = () => {
   return (
-    <div className="flex justify-center items-center h-[50vh]">
+    <div className="flex justify-center items-center h-[50vh] bg-secondary dark:bg-accent">
       <div className="animate-spin rounded-full h-20 w-20 border-t-2 border-b-2 border-gray-600 dark:border-gray-100  "></div>
     </div>
   );

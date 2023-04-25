@@ -10,7 +10,6 @@ import { setUser, toggleLoading } from "./features/auth/authSlice";
 import { toast, Toaster } from "react-hot-toast";
 import {
   useGetCurrentUserQuery,
-  useGetUserQuery,
   usePostUserMutation,
 } from "./features/auth/authApi";
 
@@ -20,70 +19,67 @@ function App() {
   // console.log(process.env);
   // console.log(document.documentElement);
   ============================ */
-
-  //LoggedIn user email
-  const { email, user } = useSelector((state) => state?.auth);
-
-  /* =========================
-  // Get  user from the MongoDB
-  =========================== */
-  const { data: usersInDatabase } = useGetUserQuery();
-  const { data } = useGetCurrentUserQuery({ email });
-  // const userInDatabase = data[0];
-  // console.log("use Get Current User Query", userInDatabase);
   /* =========================
   // Post the user to the MongoDB
   =========================== */
   const [postUser, postResult] = usePostUserMutation();
-
-  if (postResult?.isError) {
-    toast.error(postResult?.error, { id: "postUsr" });
-  }
-
+  /* ====================================
+     Get information from the REDUX store
+     ====================================*/
+  const { email, user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
+  const {
+    data: userFromDb,
+    isSuccess,
+    isError,
+  } = useGetCurrentUserQuery({ email });
 
   // OnAuthChang .// we have to do this task where the application load in every change. App.js is the place which is loaded every time when anything change
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
+    onAuthStateChanged(auth, (currentUser) => {
       // Get the current user from the firebase and Get the user from the database
-      if (user && usersInDatabase) {
-        const { displayName, emailVerified, photoUrl, uid } = user;
+      if (currentUser && isSuccess) {
+        const { emailVerified, uid, email, displayName, photoURL } =
+          currentUser;
         const userInfo = {
           displayName,
-          userEmail: user?.email,
+          userEmail: email,
           emailVerified,
-          photoUrl,
+          photoURL,
           uid,
         };
 
-        // console.log("Logged in user from onAuthStateChange", userInfo);
-        /* =============================
-       //  If the user new user not exists in the mongodb the set the user to  the mongodb
-        ================================ */
-        // dispatch(setUser(userInfo));
-        if (!usersInDatabase?.some((userObj) => userObj?.uid === user?.uid)) {
-          // console.log(
-          //   "===============the user we just registered is not exists in the mongodb"
-          // );
-          //  True means :- the user we just registered is not exists in the mongodb
-          postUser(userInfo);
-        } else {
-          // "get the current user user",
-          const currentUser = usersInDatabase?.find(
-            (userObj) => userObj?.uid === user?.uid
+        if (!userFromDb?.status && !isError) {
+          console.log(
+            "================the user we just registered is not exists in the mongodb, update user in mongodb",
+            userFromDb?.user
           );
-          dispatch(setUser(currentUser));
-          // console.log(
-          //   "================the user we just registered is  exists in the mongodb",
-          //   currentUser
-          // );
+          /* =============================
+          //  Set the user to  the mongodb
+          ================================ */
+          postUser(userInfo);
+          dispatch(setUser(userInfo));
+        } else {
+          console.log(
+            "================the user we just registered is exists in the mongodb, update user in ui from mongodb",
+            userFromDb?.user
+          );
+          dispatch(setUser(userFromDb?.user));
         }
+
         // Interactions with the mongodb ends
       } else {
         dispatch(toggleLoading());
       }
     });
-  }, [usersInDatabase, postUser, dispatch, user]);
+  }, [
+    dispatch,
+    userFromDb?.user,
+    userFromDb?.status,
+    isSuccess,
+    isError,
+    postUser,
+  ]);
 
   return (
     <div>
