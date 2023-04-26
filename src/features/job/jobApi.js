@@ -77,6 +77,20 @@ const jobApi = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ["jobs"],
     }),
+    closeAJob: builder.mutation({
+      query: (id) => ({
+        url: `/jobs/closeAJob/${id}`,
+        method: "PATCH",
+      }),
+      invalidatesTags: ["jobs"],
+    }),
+    reopenAJob: builder.mutation({
+      query: (id) => ({
+        url: `/jobs/reopenAJob/${id}`,
+        method: "PATCH",
+      }),
+      invalidatesTags: ["jobs"],
+    }),
     employerMessage: builder.mutation({
       query: (data) => ({
         url: "/jobs/employerMessage",
@@ -96,6 +110,8 @@ const jobApi = apiSlice.injectEndpoints({
   }),
 });
 export const {
+  useCloseAJobMutation,
+  useReopenAJobMutation,
   useGetJobsQuery,
   useGetFresherJobsQuery,
   useGetExperiencedJobsQuery,

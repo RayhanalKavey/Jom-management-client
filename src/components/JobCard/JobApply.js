@@ -127,6 +127,12 @@ const JobApply = ({ job }) => {
   }
   //  5
 
+  if (job?.isApplied === true) {
+    applyButton = <button className={`${buttonApplied}`}>Closed</button>;
+  }
+
+  //  5
+
   if (isTheUserIsTheCreatorOfThisJob) {
     applyButton = (
       <button className={`${buttonApplied}`}>

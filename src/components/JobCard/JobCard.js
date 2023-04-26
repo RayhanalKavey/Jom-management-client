@@ -19,8 +19,11 @@ const JobCard = ({ job }) => {
 
   // If the jobSeeker apply this job
   let isJobApplied;
+  let isClosed;
   if (job) {
     isJobApplied = job?.applicants?.some((app) => app?.userId === user?._id);
+    isClosed = job?.isClosed;
+    console.log("isclosed", isClosed);
   }
   // /*--------------------------------------------
   //  Check if the current user applied in this job, and Buttons class start
@@ -67,6 +70,10 @@ const JobCard = ({ job }) => {
 
   if (user?.isJobSeeker && !isJobApplied) {
     applyButton = <ApplyModal job={job} />;
+  }
+  // 5
+  if (isClosed) {
+    applyButton = <button className={`${buttonApplied} `}> Closed</button>;
   }
   /*--------------------------------------------
    Check if the current user applied in this job, and Buttons class end

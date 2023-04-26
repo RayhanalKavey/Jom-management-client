@@ -16,15 +16,20 @@ import { CiLocationOn, CiTimer } from "react-icons/ci";
 import DeleteModal from "../../../components/DeleteModal/DeleteModal";
 import JobCardSkeleton from "../../../components/JobCardSkeleton/JobCardSkeleton";
 import {
+  useCloseAJobMutation,
   useDeleteAJobMutation,
   useGetPostedJobsQuery,
+  useReopenAJobMutation,
 } from "../../../features/job/jobApi";
 
 const MyPostedJob = () => {
   const navigate = useNavigate();
+
   // Get current user email from the store
   const { email } = useSelector((state) => state?.auth);
 
+  const [closeAJob, closeJobResult] = useCloseAJobMutation();
+  const [reopenAJob, reopenJobResult] = useReopenAJobMutation();
   /* ===============================
   //  Get data of All posted jobs from the database using redux for the current user (as job poster)
      ===============================*/
@@ -59,6 +64,41 @@ const MyPostedJob = () => {
     deleteResult?.isSuccess,
     deleteResult?.isError,
     deleteResult?.error,
+  ]);
+
+  // Handle job closing loading, success and error
+  useEffect(() => {
+    if (closeJobResult?.isLoading) {
+      toast.loading("Loading...... Please wait", { id: "closeJob" });
+    }
+    if (closeJobResult?.isSuccess) {
+      toast.success("Job closed successfully", { id: "closeJob" });
+    }
+    if (closeJobResult?.isError) {
+      toast.success(closeJobResult?.error, { id: "closeJob" });
+    }
+  }, [
+    closeJobResult?.isLoading,
+    closeJobResult?.isSuccess,
+    closeJobResult?.isError,
+    closeJobResult?.error,
+  ]);
+  // Handle job reopen loading, success and error
+  useEffect(() => {
+    if (reopenJobResult?.isLoading) {
+      toast.loading("Loading...... Please wait", { id: "reopenJob" });
+    }
+    if (reopenJobResult?.isSuccess) {
+      toast.success("Job reopened successfully", { id: "reopenJob" });
+    }
+    if (reopenJobResult?.isError) {
+      toast.success(reopenJobResult?.error, { id: "reopenJob" });
+    }
+  }, [
+    reopenJobResult?.isLoading,
+    reopenJobResult?.isSuccess,
+    reopenJobResult?.isError,
+    reopenJobResult?.error,
   ]);
 
   /* ===============================
@@ -153,41 +193,74 @@ const MyPostedJob = () => {
                       </div>
 
                       {/*  buttons  start*/}
-                      <div className="flex justify-start items-center gap-2 flex-wrap">
-                        <button
-                          onClick={() =>
-                            navigate(
-                              `/employer-dashboard/applicant-job/${job?._id}`
-                            )
-                          }
-                          className={`${outlinedButton} flex items-center gap-2`}
-                        >
-                          <span className="font-bold">
-                            {job?.applicants?.length}
-                          </span>
-                          Person Applied
-                        </button>
-                        <Link
-                          to="/employer-dashboard/my-posted-job/details"
-                          state={job}
-                          className={`${outlinedButton}`}
-                        >
-                          Job Details
-                        </Link>
-                        <Link
-                          to={"/employer-dashboard/update-job"}
-                          state={job}
-                          className={`${buttonClass}`}
-                        >
-                          {" "}
-                          Edit
-                        </Link>
-                        {/* Delete modal */}
-                        <DeleteModal
-                          mainObj={job}
-                          action={deleteAJob}
-                          actionKey={job?._id}
-                        ></DeleteModal>
+                      <div className="flex flex-col   gap-2 ">
+                        <div className="flex gap-2 flex-wrap">
+                          <button
+                            onClick={() =>
+                              navigate(
+                                `/employer-dashboard/applicant-job/${job?._id}`
+                              )
+                            }
+                            className={`${outlinedButton} flex items-center gap-2`}
+                          >
+                            <span className="font-bold">
+                              {job?.applicants?.length}
+                            </span>
+                            Person Applied
+                          </button>
+                          <Link
+                            to="/employer-dashboard/my-posted-job/details"
+                            state={job}
+                            className={`${outlinedButton}`}
+                          >
+                            Job Details
+                          </Link>
+                        </div>
+                        <div className="flex gap-2 flex-wrap ">
+                          <Link
+                            to={"/employer-dashboard/update-job"}
+                            state={job}
+                            className={`${buttonClass}`}
+                          >
+                            {" "}
+                            Edit
+                          </Link>
+
+                          {/* close the job */}
+                          {job?.isClosed === true ? (
+                            <>
+                              <button className={`${buttonClass} bg-warning`}>
+                                {" "}
+                                Closed
+                              </button>
+                              <div className="flex justify-start items-center gap-2 flex-wrap">
+                                <Link
+                                  className={`${buttonClass}`}
+                                  onClick={() => reopenAJob(job?._id)}
+                                >
+                                  {" "}
+                                  Reopen
+                                </Link>
+                              </div>
+                            </>
+                          ) : (
+                            <div className="flex justify-start items-center gap-2 flex-wrap">
+                              <Link
+                                className={`${buttonClass}`}
+                                onClick={() => closeAJob(job?._id)}
+                              >
+                                {" "}
+                                Close the job
+                              </Link>
+                            </div>
+                          )}
+                          {/* Delete modal */}
+                          <DeleteModal
+                            mainObj={job}
+                            action={deleteAJob}
+                            actionKey={job?._id}
+                          ></DeleteModal>
+                        </div>
                       </div>
                       {/*  buttons end */}
                     </div>
