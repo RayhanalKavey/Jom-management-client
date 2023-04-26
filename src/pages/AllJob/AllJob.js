@@ -1,13 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { toast } from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import JobCard from "../../components/JobCard/JobCard";
 import JobCardSkeleton from "../../components/JobCardSkeleton/JobCardSkeleton";
 import TitleComponent from "../../components/TitleComponent/TitleComponent";
 import { useGetJobsForQueryPaginationQuery } from "../../features/job/jobApi";
-import { setPage, setSize } from "../../features/pagination/paginationSlice";
+import {
+  setFilteredJob,
+  setPage,
+  setSize,
+} from "../../features/pagination/paginationSlice";
 import useTitle from "../../hooks/useTitle/useTitle";
 import { BiChevronLeft, BiChevronRight } from "react-icons/bi";
+import Spinner from "../../components/Spinner/Spinner";
 
 const AllJob = () => {
   useTitle("All Jobs");
@@ -15,16 +20,14 @@ const AllJob = () => {
   /* ====================================
      Get information from the REDUX store
      ====================================*/
-  const { size, page } = useSelector((state) => state?.pagination);
+  const { size, page, jobTypes } = useSelector((state) => state?.pagination);
   const dispatch = useDispatch();
-
   // ==================
   //Pagination states
   // ==================
 
-  const { data, isLoading, isError, error } = useGetJobsForQueryPaginationQuery(
-    { page, size }
-  );
+  const { data, isLoading, isError, error, isSuccess } =
+    useGetJobsForQueryPaginationQuery({ page, size, jobTypes });
   // Handle loading states of getting the job...
   if (isError) {
     toast.success(error, { id: "jobss" });
@@ -41,15 +44,24 @@ const AllJob = () => {
 Pagination end
 ========================= */
   }
+  let content;
+  // useEffect(() => {}, [isSuccess, isSuccess]);
+  if (isLoading) {
+    content = <Spinner />;
+  }
+  // if (isSuccess) {
+  //   content = <Spinner />;
+  // }
 
   return (
     <>
       <TitleComponent title={"Find Job"}></TitleComponent>
 
-      {data?.jobs?.length ? (
+      {/* {data?.jobs?.length ? ( */}
+      {!isLoading && !isError ? (
         <section className="dark:bg-accent text-accent dark:text-secondary py-28 ">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
-            {!isLoading && !isError ? (
+            {isSuccess && !isError && data?.jobs?.length ? (
               <>
                 {" "}
                 <div className="grid md:grid-cols-2 gap-4 w-full">
@@ -99,29 +111,45 @@ Pagination end
                     <BiChevronRight />
                   </button>
                   {/* Pagination buttons end */}
+                </div>
+                <div className="mt-6 text-center flex flex-col gap-2 justify-center items-center ">
                   <select
                     className="  bg-secondary text-gray-700 border border-gray-300 rounded py-1 px-3   focus:outline-none focus:border-primary "
                     name=""
                     id=""
                     onChange={(event) => dispatch(setSize(event.target.value))}
                   >
+                    <option value="">Items Per Page: {size}</option>
                     <option value="4">4</option>
                     <option value="6">6</option>
                     <option value="8">8 </option>
                   </select>
+                  <select
+                    className="  bg-secondary text-gray-700 border border-gray-300 rounded py-1 px-3   focus:outline-none focus:border-primary "
+                    name=""
+                    id=""
+                    onChange={(event) =>
+                      dispatch(setFilteredJob(event.target.value))
+                    }
+                  >
+                    <option value="">Job Type: {jobTypes}</option>
+                    <option value="All Jobs">All Jobs</option>
+                    <option value="Fresher Jobs">Fresher Jobs</option>
+                    <option value="Experienced Jobs">Experienced Jobs</option>
+                  </select>
                 </div>
               </>
             ) : (
-              <>
-                <JobCardSkeleton></JobCardSkeleton>
-              </>
+              <div className="text-center font-semibold text-2xl">
+                No Job Posted Yet!!
+              </div>
             )}
           </div>
         </section>
       ) : (
         <section className="dark:bg-accent text-accent dark:text-secondary py-28 ">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-2xl font-bold">
-            No Job Posted Yet!!
+            <JobCardSkeleton></JobCardSkeleton>
           </div>
         </section>
       )}

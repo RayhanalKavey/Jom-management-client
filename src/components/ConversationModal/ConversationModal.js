@@ -16,7 +16,7 @@ const ConversationModal = ({ action, applicant }) => {
     setIsOpen(!isOpen);
   }
   const { data: job } = useGetApplicantJobByIdQuery(applicant?.jobId);
-  const { applicants } = job || {};
+  // console.log("jobmmmmm ", job);
   //------- React hook form user form and error
   const {
     register,

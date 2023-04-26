@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
+  jobTypes: "All Jobs",
   size: 4,
   page: 0,
 };
@@ -10,15 +11,18 @@ const paginationSlice = createSlice({
   initialState,
   reducers: {
     setSize: (state, action) => {
-      state.size = action.payload;
+      state.size = Math.ceil(action.payload);
       state.page = 0;
     },
     setPage: (state, action) => {
-      state.page = action.payload;
+      state.page = Math.ceil(action.payload);
+    },
+    setFilteredJob: (state, action) => {
+      state.jobTypes = action.payload;
     },
   },
 });
 
-export const { setPage, setSize } = paginationSlice.actions;
+export const { setPage, setSize, setFilteredJob } = paginationSlice.actions;
 
 export default paginationSlice.reducer;

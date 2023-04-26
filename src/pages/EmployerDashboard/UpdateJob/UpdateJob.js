@@ -81,15 +81,15 @@ const UpdateJob = () => {
   =====================================*/
   useEffect(() => {
     if (isLoading) {
-      toast.loading("Loading...... Please wait", { id: "addJob" });
+      toast.loading("Loading...... Please wait!!", { id: "addJob" });
     }
     if (isSuccess) {
-      toast.success("Welcome as a Employer.", { id: "addJob" });
+      toast.success("Job updated!!", { id: "addJob" });
       // reset();
       navigate("/employer-dashboard/my-posted-job");
     }
     if (isError) {
-      toast.error({ id: "addJob" });
+      toast.error(error, { id: "addJob" });
     }
   }, [isLoading, isSuccess, isError, error, reset, navigate]);
 

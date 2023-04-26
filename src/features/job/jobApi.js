@@ -27,8 +27,8 @@ const jobApi = apiSlice.injectEndpoints({
       providesTags: ["jobs"],
     }),
     getJobsForQueryPagination: builder.query({
-      query: ({ page, size }) => ({
-        url: `/jobs/pagination?page=${page}&size=${size}`,
+      query: ({ page, size, jobTypes }) => ({
+        url: `/jobs/pagination?page=${page}&size=${size}&jobTypes=${jobTypes}`,
       }),
       providesTags: ["jobs"],
     }),

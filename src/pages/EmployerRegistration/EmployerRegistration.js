@@ -60,7 +60,7 @@ const EmployerRegistration = () => {
       toast.loading("Loading...... Please wait", { id: "addEmployer" });
     }
     if (isSuccess) {
-      toast.success("Welcome as a Employer.", { id: "addEmployer" });
+      toast.success("Welcome as  Employer.", { id: "addEmployer" });
       reset();
       navigate("/employer-dashboard");
     }

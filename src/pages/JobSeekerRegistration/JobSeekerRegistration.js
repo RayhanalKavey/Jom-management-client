@@ -311,7 +311,7 @@ const JobSeekerRegistration = () => {
               {/* ================= about me================== */}
               <div className="mt-4">
                 <label htmlFor="aboutMe" className={`${formLabel}`}>
-                  Company Detail
+                  About Myself
                 </label>
                 <textarea
                   type="text"
