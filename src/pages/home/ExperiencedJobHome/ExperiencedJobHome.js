@@ -3,11 +3,14 @@ import { toast } from "react-hot-toast";
 import { Link } from "react-router-dom";
 import JobCard from "../../../components/JobCard/JobCard";
 import JobCardSkeleton from "../../../components/JobCardSkeleton/JobCardSkeleton";
-import { useGetJobsQuery } from "../../../features/job/jobApi";
+import { useGetExperiencedJobsQuery } from "../../../features/job/jobApi";
 
 const ExperiencedJobHome = () => {
-  const { data, isLoading, isSuccess, isError, error } = useGetJobsQuery();
-
+  let jobType = "experienced";
+  const { data, isLoading, isSuccess, isError, error } =
+    useGetExperiencedJobsQuery({
+      jobType,
+    });
   let content;
   if (isLoading) {
     content = <JobCardSkeleton></JobCardSkeleton>;

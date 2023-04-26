@@ -8,6 +8,18 @@ const jobApi = apiSlice.injectEndpoints({
       }),
       providesTags: ["jobs"],
     }),
+    getFresherJobs: builder.query({
+      query: ({ jobType }) => ({
+        url: `/jobs/fresherJobs?jobType=${jobType}`,
+      }),
+      providesTags: ["jobs"],
+    }),
+    getExperiencedJobs: builder.query({
+      query: ({ jobType }) => ({
+        url: `/jobs/experiencedJobs?jobType=${jobType}`,
+      }),
+      providesTags: ["jobs"],
+    }),
     getApplicantJobById: builder.query({
       query: (id) => ({
         url: `/jobs/applicant-job/${id}`,
@@ -85,6 +97,8 @@ const jobApi = apiSlice.injectEndpoints({
 });
 export const {
   useGetJobsQuery,
+  useGetFresherJobsQuery,
+  useGetExperiencedJobsQuery,
   useGetApplicantJobByIdQuery,
   useGetAppliedJobsQuery,
   useGetPostedJobsQuery,
