@@ -23,7 +23,6 @@ const JobCard = ({ job }) => {
   if (job) {
     isJobApplied = job?.applicants?.some((app) => app?.userId === user?._id);
     isClosed = job?.isClosed;
-    console.log("isclosed", isClosed);
   }
   // /*--------------------------------------------
   //  Check if the current user applied in this job, and Buttons class start

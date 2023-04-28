@@ -8,7 +8,13 @@ import { useGetReviewQuery } from "../../../features/review/reviewApi";
 
 const UserOpinion = () => {
   // get reviews from the database
-  const { data: reviews, isLoading, isError, error } = useGetReviewQuery();
+  const {
+    data: reviews,
+    isLoading,
+    isError,
+    error,
+    isSuccess,
+  } = useGetReviewQuery();
 
   // Get the reviews by dynamic index(changed by an interval)
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -58,7 +64,7 @@ const UserOpinion = () => {
     toast.error(error, { id: "error" });
   }
 
-  if (!isLoading && !isError) {
+  if (!isLoading && !isError && isSuccess) {
     content = (
       <div className="relative">
         {/* card */}

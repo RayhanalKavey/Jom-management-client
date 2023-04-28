@@ -16,6 +16,8 @@ import UserOpinion from "../UserOpinion/UserOpinion";
 import { useSelector } from "react-redux";
 import ExperiencedJobHome from "../ExperiencedJobHome/ExperiencedJobHome";
 import { useGetBlogsQuery } from "../../../features/blog/blogApi";
+import PricingCard from "../PricingCard/PricingCard";
+import Instruction from "../Instruction/Instruction";
 
 const HomePage = () => {
   useTitle("Home");
@@ -116,18 +118,40 @@ const HomePage = () => {
             </div>
           </div>
         </section>
+        {/* Popular job Category */}
+        {/* <section className={`  dark:bg-accent pt-28 `}>
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
+            <SectionHeading>Pricing</SectionHeading>
+            <SectionSubHeading>
+              Choose a plan that’s right for you
+            </SectionSubHeading>
+            <Instruction></Instruction>
+          </div>
+        </section> */}
+        {/* Popular job Category */}
+        <section className={`  dark:bg-accent py-28 `}>
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
+            <SectionHeading>Pricing</SectionHeading>
+            <SectionSubHeading>
+              Choose a plan that’s right for you
+            </SectionSubHeading>
+            <PricingCard></PricingCard>
+          </div>
+        </section>
+        {/* newsletter Section */}
+        <section className={` dark:bg-accent`}>
+          <div className="sm:ml-20 mx-aut px-4 sm:px-6 lg:px-8 bg-success  py-20 sm:rounded-l-[2.5rem]">
+            <SectionHeading>Newsletter</SectionHeading>
+            <div className="text-3xl font-semibold text-center mt-6 mb-16 text-accent ">
+              Subscribe to Our Newsletter
+            </div>
+            <Newsletter></Newsletter>
+          </div>
+        </section>
         {/* Brand Section */}
         <section className={` dark:bg-accent py-20 `}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
             <BrandSection />
-          </div>
-        </section>
-        {/* newsletter Section */}
-        <section className={` ${topBorder} bg-success dark:bg-accent py-20 `}>
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
-            <SectionHeading>Newsletter</SectionHeading>
-            <SectionSubHeading>Subscribe to Our Newsletter</SectionSubHeading>
-            <Newsletter></Newsletter>
           </div>
         </section>
       </>

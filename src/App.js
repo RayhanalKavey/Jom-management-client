@@ -50,20 +50,20 @@ function App() {
         };
 
         if (!userFromDb?.status && !isError) {
-          console.log(
-            "================the user we just registered is not exists in the mongodb, update user in mongodb",
-            userFromDb?.user
-          );
+          // console.log(
+          //   "================the user we just registered is not exists in the mongodb, update user in mongodb",
+          //   userFromDb?.user
+          // );
           /* =============================
           //  Set the user to  the mongodb
           ================================ */
           postUser(userInfo);
           dispatch(setUser(userInfo));
         } else {
-          console.log(
-            "================the user we just registered is exists in the mongodb, update user in ui from mongodb",
-            userFromDb?.user
-          );
+          // console.log(
+          //   "================the user we just registered is exists in the mongodb, update user in ui from mongodb",
+          //   userFromDb?.user
+          // );
           dispatch(setUser(userFromDb?.user));
         }
 

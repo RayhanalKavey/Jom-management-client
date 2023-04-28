@@ -12,11 +12,7 @@ const Newsletter = () => {
               type="text"
               placeholder="Enter your email address"
             />
-            <button
-              className={`${buttonClass} flex-shrink-0 `}
-              // className="flex-shrink-0 bg-gray-500 hover:bg-gray-700 border-gray-500 hover:border-gray-700 text-sm border-4 text-white py-1 px-2 rounded"
-              type="button"
-            >
+            <button className={`${buttonClass} flex-shrink-0 `} type="button">
               Sign up
             </button>
           </div>
